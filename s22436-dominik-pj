@@ -1,0 +1,38 @@
+Drogi pamiętniczku z dzisiejszych ćwiczeń nauczyłem się że:
+
+Pod ścieżką "/" na linuxie kryją się następujące foldery:
+bin -> wszystkie executable, binary files, albo skróty do nich
+boot -> uruchamianie systemu itd.
+dev -> skrypty/pliki itd developerskie, np. random, null 
+	sda -> dysk
+	sda1 -> partycja
+etc -> pliki conf, ogólnie pliki konfiguracyjne
+home -> katalog domowy użytkownika
+lib -> biblioteki
+lost+found -> po uszkodzeniu, przy starcie, będziesz szukać tam zgubione pliki
+media -> dysk zewnętrzny, pendrive, ogólnie urządzenia zewnętrzne (ich etykiety, dane), montowanie automatyczne
+mnt (mount) -> tu się ręcznie montuje rzeczy (podobne do media, ale ręczne)
+opt(opt) -> wypakowanie z paczki 
+proc -> informacja o działających procesach (cpuinfo <- informacje o procesorze, każdy rdzeń jest widziany jako osobny procesor, meminfo <- informacje o pamięci)
+root -> katalog domowy użytkownika root
+run -> tutaj wpisują się id procesów działających programów (otwierasz notatnik, który działa na na procesie 11423, to w run będzie plik tekstowy z numerem 11423), Przeważnie
+sbin ->system bin, rzeczy związane z administracją systemu, programy binarki, bardzo wrażliwe
+srv -> server, jak masz zainstalowane to tam są jego rzeczy
+swapfile -> przestrzeń wymiany
+sys -> pliki systemowe
+usr -> rzeczy użytkowe, np dane bazy danych, rzeczy związane z zainstalowanymi rzeczami
+var -> variable, strony internetowe
+
+Nowymi rzeczami dla mnie były niektóre właściwości konsoli w bashu:
+Dwa razy tab daje podpowiedź ścieżki/pliku
+Zaznaczanie tekstu w terminalu automatycznie kopjuje zawartość zaznaczenia
+SHIFT+INSERT wkleja skopiowany tekst
+
+Pozatym dowiedziałem się iż są dwa rodzaje ścieżek:
+Jak zaczyna się od “/” <- ścieżka absolutna
+Jak się zaczyna od “./” <- ścieżka relatywna
+
+Co więcej zostałem poinformowany o czychającej na mnie pułapce, którą można naprawić kombinacją ALT+F7, która przełączy mnie z powrotem na terminal graficzny.
+
+To tyle, bardzo dziękuje za rozwijające ćwiczenia.
+
