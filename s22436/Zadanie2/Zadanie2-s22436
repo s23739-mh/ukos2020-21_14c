@@ -1,0 +1,25 @@
+Uprawnienia danego zasobu definiuje dziewięć bitów, które dzielą się na 3 grupy po trzy opowiednio dla właściciela, grupy i innch.
+Każdy z tych trzech bitów odpowiada za inną formę interakcji z plikiem, kolejno odczytu, zapisu i wykonywania.
+Ciekawym jest uprawnienie wykonywania w kontekście folderów, jego brak spowoduje niemożność przeniesienia się do danej ścieżki, 
+natomiast w dalszym ciągu będziemy mogli wyświetlić znajdujące się tam pliki (same nazwy, bez szczegółów).
+Podbnie interesujące jest zachowanie jeżeli chodzi o bit odczytu, jego brak spowoduje niemożność wyświetlenia zawartości danego folderu,
+nie przeszkodzi to jednak w interakcji ze znajdującymi się tam plikami, jeżeli tylko zna się ich nazwę.
+
+Do ustawienia uprawnień danego pliku/folderu służy komenda chmod.
+Należy ją wywołać z odpowiednimi parametrami:
+-> Nadpisanie wszystkich bitów w systemie ósemkowym np. chmod 755
+-> Nadpisanie tylko bitów wybranej grupy np. chmod u=rw
+-> Przełączenie pojedyńczych bitów zostawiając inne bez zmian np. chmod o+r
+
+W sytuacji kiedy w kilku następujących po sobie folderach nie mamy dostępu do wejścia do jednego z pierwszych, 
+to automatycznie nie jesteśmy w stanie dostać się to następujących po nim. 
+Wyjątkiem jest sytuacja kiedy będąc już w środku jednego z nich odbierzemy sobie uprawinienia do któregoś z wyżej postawionych folderów,
+wtedy jednak sytuacja się odwróci i nie będziemy mogli się wydostać, trzeba wtedy skorzystać ze ścieżki absolutniej.
+Ważnym jest aby nie dawać opcji zapisu nieporządanym osobą, należy unikać ustawiania np. 777 bez wyraźnego powodu,
+gdyż może się to skończyć tzw. "kukułczym jajem", które w zależności od ważności plików, potrafi wygenerować później sporo problemów.
+
+Istnieje umask, która jest opowiedzialna za domyślne uprawnienia folderów i plików. Jej domyślna wartość to 022.
+Przy tworzeniu pliku brane jest 666 i odejmowana jest wartość umask, podobnie przy katalogach przy czym tam brane jest 777. 
+Dlatego domyślnie przy utworzeniu katalogu jego bity wynoszą 755, 7-0 7-2 7-2 => 7 5 5.
+
+Na szuflandii jest możliwość wystawienia pliku HTML.
