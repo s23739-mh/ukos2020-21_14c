@@ -22,4 +22,4 @@ Istnieje umask, która jest opowiedzialna za domyślne uprawnienia folderów i p
 Przy tworzeniu pliku brane jest 666 i odejmowana jest wartość umask, podobnie przy katalogach przy czym tam brane jest 777. 
 Dlatego domyślnie przy utworzeniu katalogu jego bity wynoszą 755, 7-0 7-2 7-2 => 7 5 5.
 
-Na szuflandii jest możliwość wystawienia pliku HTML.
+Na szuflandii jest możliwość wystawienia pliku HTML. Poprzez własną nieuwagę dowiedziałem się iż link do tego musi zaczynać się od http zamiast https.
