@@ -1,0 +1,6 @@
+ 
+My diary, after today's UKOS lectures (07-11-2020), I've learned:
+-How to set default permissions and edit them with cmask and chmod
+-How to get to Szuflandia with terminal and create directories in there
+-About Text Browsers like w3m or links
+I am slowly getting used to linux, but it is still pretty difficult, also lectures today were great!
