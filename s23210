@@ -1,4 +1,13 @@
 2020.10.17.
 Mój kochany pamiętniczku, na dzisiejszych zajęciach z uko nauczyłem się:
+-instalowania i podstawowej obsługi maszyny wirtualnej
 -czym różni się ścieżka względna od bezwzględnej
--podstawowych poleceń gita add status commi
+-podstawowych poleceń gita add status commit
+
+2020.11.07.
+Mój kochany pamiętniczku, na dzisiejszych zajęciach z uko nauczyłem się:
+-ustawiania uprawnień pliku poleceniem chmod
+-że NIGDY NIE WOLNO USTAWIĆ CHMOD 777 (chyba, że na prawdę jest taka potrzeba)
+-ustawiania uprawnień domyślnych poleceniem umask
+-o istnieniu oraz wykorzystaniu tekstowych przeglądarek internetowych (w3m lynks)
+
