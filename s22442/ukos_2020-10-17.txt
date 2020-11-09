@@ -1,0 +1,20 @@
+UKOS ćwiczenia 2020-10-17 (notatka sporządzona 2020-11-09)
+Mój kochany pamiętniczku,
+na dzisiejszych zajęciach odświeżyłem sobie wiedzę w zakresie poruszania się po strukturze plików w systemie operacyjnym Linux, a także tworzenia/usuwania plików/folderów.
+
+Ważne polecenia:
+man
+ls
+cd
+pwd
+mkdir
+touch
+rmdir
+rm
+cat
+head
+tail
+whoami
+su
+
+Jak coś nie działa, to trzeba dopisać na początku "sudo" i już działa.
