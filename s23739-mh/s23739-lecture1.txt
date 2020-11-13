@@ -1,0 +1,9 @@
+My diary, after today's UKOS lectures (17-10-2020), I've learned:
+-About all of the system folders and their contents
+For example: bin - Contains all of the most important binaries (windows equivalent for executables)
+- How to use Git repositories
+- About relative and absolute paths
+- About using basic terminal commands
+- This is shebang: #!
+- About Differences between Windows and Linux
+Overall, the lecture was great!
