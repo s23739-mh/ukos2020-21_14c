@@ -21,4 +21,4 @@ chmod
 umask
 	odejmuje podane liczby od praw do pliku na odpowiadajacym miejscu w stworzonych plikach.
 	umask 012
-	umast u=rwx,g=rw,o=w
+	umask u=rwx,g=rw,o=w
