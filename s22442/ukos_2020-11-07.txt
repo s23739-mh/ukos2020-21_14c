@@ -1,0 +1,19 @@
+UKOS ćwiczenia 2020-11-07 (notatka sporządzona 2020-11-09)
+Mój kochany pamiętniczku,
+na dzisiejszych zajęciach odświeżyłem sobie wiedzę w zakresie praw dostępu w systemie operacyjnym Linux.
+
+Wyświetlić pliki/katalogi wraz z ich prawami dostępu można za pomocą polecenia: ls -l
+
+r - read
+w - write
+x - execute
+
+Uprawnienia są ułożone w kolejności: user (właściciel) -> group (grupa) -> other (inni użytkownicy)
+
+Przykładowe użycia polecenia chmod:
+chmod 755 plik
+chmod u-r,g=rx,o+w plik
+
+Przykładowe użycia polecenia umask:
+umask 002
+umask u=rwx,g=rx,o=x
