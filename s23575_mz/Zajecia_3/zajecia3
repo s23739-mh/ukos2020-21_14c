@@ -1,0 +1,442 @@
+2020/11/21 ZAJĘCIA NR 3
+
+https://szuflandia.pjwstk.edu.pl:9000/, 03 Procesy i strumienie, ćwiczenia:
+
+0.0.  Przejdź do swojego katalogu domowego i wydaj taką komendę: ls -a . Zobacz ile plików wypisało. Teraz wykonaj komendę: ls -a | grep D . Ile teraz jest wyników? Co się stało?
+
+	W rezultacie zastosowania komendy ls z parametrem -a zostanie zwrócona lista wszystkich plików w danym katalogu (paramter -a, --all, zgodnie z pomocą (ls --help) powoduje, że nie są pomijane ukryte pliki lub foldery (z kropką na początku):
+
+	ubuntu@bss-ubu1804:~$ ls -a
+	.              Desktop     .local    repo                       .ukoskatalogkatalog2         .vim
+	..             .dmrc       mkdir     .ssh                       .ukoskatalogkatalog3         .viminfo
+	Backup         Documents   .mozilla  .sudo_as_admin_successful  .ukosklamka                  .Xauthority
+	.	bash_history  .dosbox     Music     Templates                  .vboxclient-clipboard.pid    .xscreensaver
+	.bash_logout   Downloads   Pictures  .test                      .vboxclient-display.pid      .xsession-errors
+	.bashrc        .gitconfig  .pki      .testtest                  .vboxclient-draganddrop.pid  .xsession-errors.old
+	.cache         .gnupg      .profile  .thumbnails                .vboxclient-seamless.pid
+	.config        .links2     Public    ukos                       Videos
+
+	W rezultacie wykonania komendy ls -a | grep D zostają zwrócone tylko pliki lub katalogi, które pasują do wzorca, tj. do litery "D" (rozpoczynające się na literę "D"):
+
+	ubuntu@bss-ubu1804:~$ ls -a | grep D
+	Desktop
+	Documents
+	Downloads
+
+	Zastosowanie te komendy w postaci ls -a | grep De spowoduje, że zwrocony zostanie tylko katalog Desktop:
+
+	ubuntu@bss-ubu1804:~$ ls -a | grep De
+	Desktop
+
+0.1. A teraz wykonaj taką komendę: ls -a | grep D > ListaPlikówZLiterkąD.txt Zobacz czy utworzył się jakiś plik? Jaka jest jego treść? Co znaczy | oraz co znaczy >? 
+
+	W wyniku zastosowania komendy ls -a | grep D > ListaPlikówZLiterkąD.txt został utworzony plik tekstowy ListaPlikówZLiterkąD.txt, w którym został zapisany rezultat poprzedzających komend, czyli zwrócenia listy plików i folderów w katalogu (la -a) oraz jej przefiltowania (grep D):
+
+	ubuntu@bss-ubu1804:~$ ls -a | grep D > ListaPlikówZLiterkąD.txt
+	ubuntu@bss-ubu1804:~$ cat ListaPlikówZLiterkąD.txt 
+	Desktop
+	Documents
+	Downloads
+	ListaPlikówZLiterkąD.txt
+
+	Znak pionowej linii | (tzw. "Pipe") służy wymianie danych pomiędzy dwoma procesami, tzn. "wyjście" (output) jednego procesu (po lewej stronie linii) jest przekazywane jako "wejście" (input) drugiego procesu (po prawej stronie linii).
+
+	Przykładowo, rezultat zastosowania polecenia  ls -a (lista plików i katalogów) jest przekazywany do polecenia grep jako dane wejściowe, której zostają następnie przefiltrowane (przy pomocy polecenia grep). 
+
+	Natomiast znak > pozwala na przekierowanie standardwego wyjścia do pliku - zapisanie określonego rezultatu procesu we wskazanym pliku (chcąc dopisać określony rezultat do pliku - a nie nadpisywać go - należy zastosować znaki >> ).
+
+1.0. Program ps służy do wyświetlania listy procesów. Zobacz co się stanie jeśli wpiszemy w terminalu:
+- ps
+- ps -a
+- ps x
+- ps aux
+
+	Poniżej przedstawiam rezultaty zastosowania poszczególnych funkcji:
+	
+	Sama komenda ps (bez żadnej opcji) pokazuje procesy danej powłoki (shella):
+
+	ubuntu@bss-ubu1804:~$ ps
+	  PID TTY          TIME CMD
+	  1146 pts/1    00:00:00 bash
+	  1212 pts/1    00:00:00 ps
+
+	Komenda ps z opcją -a pokazuje procesy (zgodnie z pomocą: ps --help a ) "all with tty, except session leaders":
+
+	ubuntu@bss-ubu1804:~$ ps -a
+	  PID TTY          TIME CMD
+	  1131 pts/0    00:00:07 vim
+	  1213 pts/1    00:00:00 ps
+	
+	Komenda ps z opcją x pokazuje procesy "processes without controlling ttys":
+
+	ubuntu@bss-ubu1804:~$ ps x
+	  PID TTY      STAT   TIME COMMAND
+	  641 ?        Ss     0:00 /lib/systemd/systemd --user
+	  642 ?        S      0:00 (sd-pam)
+	  653 ?        Ssl    0:00 /usr/bin/lxsession -s Lubuntu -e LXDE
+	  668 ?        Ss     0:00 /usr/bin/dbus-daemon --session --address=systemd: --nofork --nopidfile --systemd-activation
+	  704 ?        S      0:00 /usr/bin/VBoxClient --clipboard
+	  705 ?        Sl     0:00 /usr/bin/VBoxClient --clipboard
+	  715 ?        S      0:00 /usr/bin/VBoxClient --display
+	  716 ?        S      0:00 /usr/bin/VBoxClient --display
+	  721 ?        S      0:00 /usr/bin/VBoxClient --seamless
+	  722 ?        Sl     0:00 /usr/bin/VBoxClient --seamless
+	  727 ?        S      0:00 /usr/bin/VBoxClient --draganddrop
+	  728 ?        Sl     0:06 /usr/bin/VBoxClient --draganddrop
+	  737 ?        Ss     0:00 /usr/bin/ssh-agent /usr/bin/lxsession -s Lubuntu -e LXDE
+	  746 ?        S      0:02 openbox --config-file /home/ubuntu/.config/openbox/lubuntu-rc.xml
+	  750 ?        Sl     0:03 lxpanel --profile Lubuntu
+	  753 ?        Sl     0:05 pcmanfm --desktop --profile lubuntu
+	  754 ?        Sl     0:00 lxpolkit
+	  760 ?        Ss     0:00 /usr/bin/ssh-agent -s
+	  804 ?        Sl     0:00 /usr/lib/menu-cache/menu-cached /run/user/1000/menu-cached-:0
+	  816 ?        Sl     0:43 /usr/lib/firefox/firefox
+	  860 ?        Sl     0:03 /usr/lib/firefox/firefox -contentproc -childID 1 -isForBrowser -prefsLen 1 -prefMapSize 181
+	  933 ?        Sl     0:01 /usr/lib/firefox/firefox -contentproc -childID 3 -isForBrowser -prefsLen 5972 -prefMapSize 
+	  972 ?        Sl     0:13 /usr/lib/firefox/firefox -contentproc -childID 4 -isForBrowser -prefsLen 6026 -prefMapSize 
+	 1011 ?        Sl     0:00 /usr/lib/firefox/firefox -contentproc -childID 5 -isForBrowser -prefsLen 7576 -prefMapSize 
+	 1070 ?        Sl     0:31 lxterminal
+	 1071 pts/0    Ss     0:00 bash
+	 1131 pts/0    S+     0:07 vim zajecia3
+	 1141 ?        S      0:01 leafpad /home/ubuntu/repo/ukos2020-21_14c/s23575/Zajecia_2/zajecia2
+	 1146 pts/1    Ss     0:00 bash
+	 1214 pts/1    R+     0:00 ps x
+
+	Komenda ps z opcjami aux pokazuje procesy:
+	- a - "all with tty, including other users",
+	- u - "user-oriented format",
+	- x - "processes without controlling ttys".
+
+	ubuntu@bss-ubu1804:~$ ps aux
+	USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+	root         1  0.0  0.4  77452  8656 ?        Ss   17:22   0:01 /sbin/init
+	root         2  0.0  0.0      0     0 ?        S    17:22   0:00 [kthreadd]
+	root         4  0.0  0.0      0     0 ?        I<   17:22   0:00 [kworker/0:0H]
+	root         6  0.0  0.0      0     0 ?        I<   17:22   0:00 [mm_percpu_wq]
+	root         7  0.0  0.0      0     0 ?        S    17:22   0:00 [ksoftirqd/0]
+	root         8  0.0  0.0      0     0 ?        I    17:22   0:00 [rcu_sched]
+	root         9  0.0  0.0      0     0 ?        I    17:22   0:00 [rcu_bh]
+	root        10  0.0  0.0      0     0 ?        S    17:22   0:00 [migration/0]
+	root        11  0.0  0.0      0     0 ?        S    17:22   0:00 [watchdog/0]
+	root        12  0.0  0.0      0     0 ?        S    17:22   0:00 [cpuhp/0]
+	root        13  0.0  0.0      0     0 ?        S    17:22   0:00 [kdevtmpfs]
+	root        14  0.0  0.0      0     0 ?        I<   17:22   0:00 [netns]
+	root        15  0.0  0.0      0     0 ?        S    17:22   0:00 [rcu_tasks_kthre]
+	root        16  0.0  0.0      0     0 ?        S    17:22   0:00 [kauditd]
+	root        17  0.0  0.0      0     0 ?        S    17:22   0:00 [khungtaskd]
+	root        18  0.0  0.0      0     0 ?        S    17:22   0:00 [oom_reaper]
+	root        19  0.0  0.0      0     0 ?        I<   17:22   0:00 [writeback]
+	root        20  0.0  0.0      0     0 ?        S    17:22   0:00 [kcompactd0]
+	root        21  0.0  0.0      0     0 ?        SN   17:22   0:00 [ksmd]
+	root        22  0.0  0.0      0     0 ?        SN   17:22   0:00 [khugepaged]
+	root        23  0.0  0.0      0     0 ?        I<   17:22   0:00 [crypto]
+	root        24  0.0  0.0      0     0 ?        I<   17:22   0:00 [kintegrityd]
+	root        25  0.0  0.0      0     0 ?        I<   17:22   0:00 [kblockd]
+	root        26  0.0  0.0      0     0 ?        I<   17:22   0:00 [ata_sff]
+	root        27  0.0  0.0      0     0 ?        I<   17:22   0:00 [md]
+	root        28  0.0  0.0      0     0 ?        I<   17:22   0:00 [edac-poller]
+	root        29  0.0  0.0      0     0 ?        I<   17:22   0:00 [devfreq_wq]
+	root        30  0.0  0.0      0     0 ?        I<   17:22   0:00 [watchdogd]
+	root        32  0.0  0.0      0     0 ?        I    17:22   0:01 [kworker/0:1]
+	root        34  0.0  0.0      0     0 ?        S    17:22   0:00 [kswapd0]
+	root        35  0.0  0.0      0     0 ?        I<   17:22   0:00 [kworker/u3:0]
+	root        36  0.0  0.0      0     0 ?        S    17:22   0:00 [ecryptfs-kthrea]
+	root        78  0.0  0.0      0     0 ?        I<   17:22   0:00 [kthrotld]
+	root        79  0.0  0.0      0     0 ?        I<   17:22   0:00 [acpi_thermal_pm]
+	root        80  0.0  0.0      0     0 ?        S    17:22   0:00 [scsi_eh_0]
+	root        81  0.0  0.0      0     0 ?        I<   17:22   0:00 [scsi_tmf_0]
+	root        82  0.0  0.0      0     0 ?        S    17:22   0:00 [scsi_eh_1]
+	root        83  0.0  0.0      0     0 ?        I<   17:22   0:00 [scsi_tmf_1]
+	root        89  0.0  0.0      0     0 ?        I<   17:22   0:00 [ipv6_addrconf]
+	root        98  0.0  0.0      0     0 ?        I<   17:22   0:00 [kstrp]
+	root       115  0.0  0.0      0     0 ?        I<   17:22   0:00 [charger_manager]
+	root       152  0.0  0.0      0     0 ?        I    17:22   0:00 [kworker/0:2]
+	root       166  0.0  0.0      0     0 ?        I<   17:22   0:00 [kworker/0:1H]
+	root       167  0.0  0.0      0     0 ?        S    17:22   0:00 [scsi_eh_2]
+	root       168  0.0  0.0      0     0 ?        I<   17:22   0:00 [scsi_tmf_2]
+	root       190  0.0  0.0      0     0 ?        S    17:22   0:00 [jbd2/sda1-8]
+	root       191  0.0  0.0      0     0 ?        I<   17:22   0:00 [ext4-rsv-conver]
+	root       235  0.0  0.6  94856 14100 ?        S<s  17:22   0:00 /lib/systemd/systemd-journald
+	root       269  0.0  0.2  45636  4232 ?        Ss   17:22   0:00 /lib/systemd/systemd-udevd
+	systemd+   272  0.0  0.2  80044  5172 ?        Ss   17:22   0:00 /lib/systemd/systemd-networkd
+	root       287  0.0  0.0      0     0 ?        I<   17:22   0:00 [iprt-VBoxWQueue]
+	root       356  0.0  0.0      0     0 ?        I<   17:22   0:00 [ttm_swap]
+	systemd+   357  0.0  0.3  70760  6156 ?        Ss   17:22   0:00 /lib/systemd/systemd-resolved
+	root       359  0.0  0.0      0     0 ?        S    17:22   0:00 [irq/18-vmwgfx]
+	root       438  0.0  0.3 287644  6848 ?        Ssl  17:22   0:00 /usr/lib/accountsservice/accounts-daemon
+	root       445  0.0  0.8 170436 17296 ?        Ssl  17:22   0:00 /usr/bin/python3 /usr/bin/networkd-dispatcher --run-s
+	root       447  0.0  0.1  31320  3076 ?        Ss   17:22   0:00 /usr/sbin/cron -f
+	root       450  0.0  0.6 265344 12508 ?        Ss   17:22   0:00 /usr/sbin/nmbd --foreground --no-process-group
+	message+   451  0.0  0.2  50176  4348 ?        Ss   17:22   0:00 /usr/bin/dbus-daemon --system --address=systemd: --no
+	syslog     453  0.0  0.2 263036  4248 ?        Ssl  17:22   0:00 /usr/sbin/rsyslogd -n
+	root       454  0.0  0.2  70604  5888 ?        Ss   17:22   0:00 /lib/systemd/systemd-logind
+	root       466  0.0  0.3 289168  6820 ?        Ssl  17:22   0:00 /usr/lib/policykit-1/polkitd --no-debug
+	root       482  0.0  0.9 356676 20404 ?        Ss   17:22   0:00 /usr/sbin/smbd --foreground --no-process-group
+	root       490  0.0  0.0  16180  1912 tty1     Ss+  17:22   0:00 /sbin/agetty -o -p -- \u --noclear tty1 linux
+	root       491  0.0  0.2 344936  6016 ?        S    17:22   0:00 /usr/sbin/smbd --foreground --no-process-group
+	root       492  0.0  0.2 344928  4724 ?        S    17:22   0:00 /usr/sbin/smbd --foreground --no-process-group
+	root       505  0.0  0.3 356676  6912 ?        S    17:22   0:00 /usr/sbin/smbd --foreground --no-process-group
+	root       588  0.0  0.0 131240   384 ?        S    17:23   0:00 VBoxClient --vmsvga
+	root       589  0.0  0.1 131240  2232 ?        S    17:23   0:00 VBoxClient --vmsvga
+	root       598  0.0  0.3 364328  6668 ?        Ssl  17:23   0:00 /usr/sbin/lightdm
+	root       615  0.0  0.1 248368  2492 ?        Sl   17:23   0:00 /usr/sbin/VBoxService --pidfile /var/run/vboxadd-serv
+	root       624  1.4  4.7 375812 97760 tty7     Ssl+ 17:23   0:37 /usr/lib/xorg/Xorg -core :0 -seat seat0 -auth /var/ru
+	root       637  0.0  0.3 246396  7068 ?        Sl   17:23   0:00 lightdm --session-child 12 15
+	ubuntu     641  0.0  0.3  76760  7848 ?        Ss   17:23   0:00 /lib/systemd/systemd --user
+	ubuntu     642  0.0  0.1 111436  2076 ?        S    17:23   0:00 (sd-pam)
+	ubuntu     653  0.0  0.6 355056 12788 ?        Ssl  17:23   0:00 /usr/bin/lxsession -s Lubuntu -e LXDE
+	ubuntu     668  0.0  0.2  49924  4232 ?        Ss   17:23   0:00 /usr/bin/dbus-daemon --session --address=systemd: --n
+	ubuntu     704  0.0  0.0  51988   324 ?        S    17:23   0:00 /usr/bin/VBoxClient --clipboard
+	ubuntu     705  0.0  0.2 120376  4364 ?        Sl   17:23   0:00 /usr/bin/VBoxClient --clipboard
+	ubuntu     715  0.0  0.0  51988   324 ?        S    17:23   0:00 /usr/bin/VBoxClient --display
+	ubuntu     716  0.0  0.1  52124  2812 ?        S    17:23   0:00 /usr/bin/VBoxClient --display
+	ubuntu     721  0.0  0.0  51988   324 ?        S    17:23   0:00 /usr/bin/VBoxClient --seamless
+	ubuntu     722  0.0  0.1 118172  2072 ?        Sl   17:23   0:00 /usr/bin/VBoxClient --seamless
+	ubuntu     727  0.0  0.0  51988   320 ?        S    17:23   0:00 /usr/bin/VBoxClient --draganddrop
+	ubuntu     728  0.2  0.1 118688  2168 ?        Sl   17:23   0:06 /usr/bin/VBoxClient --draganddrop
+	ubuntu     737  0.0  0.0  11304   316 ?        Ss   17:23   0:00 /usr/bin/ssh-agent /usr/bin/lxsession -s Lubuntu -e L
+	ubuntu     746  0.1  0.9 238632 19468 ?        S    17:23   0:02 openbox --config-file /home/ubuntu/.config/openbox/lu
+	ubuntu     750  0.1  1.3 656456 28312 ?        Sl   17:23   0:03 lxpanel --profile Lubuntu
+	ubuntu     753  0.2  2.3 619852 48292 ?        Sl   17:23   0:05 pcmanfm --desktop --profile lubuntu
+	ubuntu     754  0.0  0.5 297248 12136 ?        Sl   17:23   0:00 lxpolkit
+	ubuntu     760  0.0  0.0  11304   320 ?        Ss   17:23   0:00 /usr/bin/ssh-agent -s
+	ubuntu     804  0.0  0.2 113884  4560 ?        Sl   17:23   0:00 /usr/lib/menu-cache/menu-cached /run/user/1000/menu-c
+	ubuntu     816  2.0 16.4 3188976 335060 ?      Sl   17:31   0:43 /usr/lib/firefox/firefox
+	ubuntu     860  0.1  6.9 2581872 140948 ?      Sl   17:31   0:03 /usr/lib/firefox/firefox -contentproc -childID 1 -isF
+	ubuntu     933  0.0  4.9 2536336 101684 ?      Sl   17:31   0:01 /usr/lib/firefox/firefox -contentproc -childID 3 -isF
+	ubuntu     972  0.6  7.1 2576784 146744 ?      Sl   17:31   0:13 /usr/lib/firefox/firefox -contentproc -childID 4 -isF
+	ubuntu    1011  0.0  3.5 2514096 72972 ?       Sl   17:31   0:00 /usr/lib/firefox/firefox -contentproc -childID 5 -isF
+	ubuntu    1070  1.6  1.6 468832 33180 ?        Rl   17:33   0:31 lxterminal
+	ubuntu    1071  0.0  0.2  22792  5392 pts/0    Ss   17:33   0:00 bash
+	ubuntu    1131  0.4  0.4  55356  9080 pts/0    S+   17:36   0:07 vim zajecia3
+	ubuntu    1141  0.0  1.1 189332 23260 ?        S    17:36   0:01 leafpad /home/ubuntu/repo/ukos2020-21_14c/s23575/Zaje
+	ubuntu    1146  0.0  0.2  22788  5336 pts/1    Ss   17:37   0:00 bash
+	root      1180  0.0  0.0      0     0 ?        I    17:44   0:00 [kworker/u2:1]
+	root      1205  0.0  0.0      0     0 ?        I    17:59   0:00 [kworker/u2:0]
+	root      1211  0.0  0.0      0     0 ?        I    18:06   0:00 [kworker/u2:2]
+	ubuntu    1215  0.0  0.1  37364  3340 pts/1    R+   18:06   0:00 ps aux
+
+1.0. [...] Jak myślisz, co oznacza znak zapytania w kolumnie numer 2? Nie wiesz? Zapytaj prowadzącego, albo przeczytaj manual.
+
+	TTY oznacza terminal - sposób komunikacji z komputerem; niektóre procesy mogą mieć w tej kolumnie wskazany znak zapytania ( ? ), bo nie mają takiego terminala.
+
+1.1. Wyświetl wszystkie procesy bash.
+
+	Wyświetlenie wszystkich procesów bash jest możliwe przy pomocy polecenia ps aux | grep bash | grep -v grep :
+	- polecenie ps aux pozwala na wyświelenie procesów,
+	- polecenie grep bash pozwala na wyfiltrowanie spośród nich procesów bash,
+	- polecenie grep -v grep pozwala na odfiltrowanie spośród wyfiltrowanych procesów procesu grep poszukującego wyrażeń ze słowem bash.
+
+	ubuntu@bss-ubu1804:~$ ps aux | grep bash | grep -v grep
+	ubuntu    1071  0.0  0.2  22792  5392 pts/0    Ss   17:33   0:00 bash
+	ubuntu    1146  0.0  0.2  22788  5336 pts/1    Ss   17:37   0:00 bash
+
+1.2. Wyświetl wszystkie procesy należące do użytkownika root.
+
+	Wyświetlenie wszystkich procesów należących do użytkownika root jest możliwe przy zastosowaniu polecenia ps wraz z opcjami -F ("output formats:" "-F extra full") -u ("Selection by list:" "-u, U, --user <UID> effective user id or name") i parametrem root:
+
+	ubuntu@bss-ubu1804:~$ ps -F -u root
+	UID        PID  PPID  C    SZ   RSS PSR STIME TTY          TIME CMD
+	root         1     0  0 19363  8656   0 17:22 ?        00:00:01 /sbin/init
+	root         2     0  0     0     0   0 17:22 ?        00:00:00 [kthreadd]
+	root         4     2  0     0     0   0 17:22 ?        00:00:00 [kworker/0:0H]
+	root         6     2  0     0     0   0 17:22 ?        00:00:00 [mm_percpu_wq]
+	root         7     2  0     0     0   0 17:22 ?        00:00:00 [ksoftirqd/0]
+	root         8     2  0     0     0   0 17:22 ?        00:00:01 [rcu_sched]
+	root         9     2  0     0     0   0 17:22 ?        00:00:00 [rcu_bh]
+	root        10     2  0     0     0   0 17:22 ?        00:00:00 [migration/0]
+	root        11     2  0     0     0   0 17:22 ?        00:00:00 [watchdog/0]
+	root        12     2  0     0     0   0 17:22 ?        00:00:00 [cpuhp/0]
+	root        13     2  0     0     0   0 17:22 ?        00:00:00 [kdevtmpfs]
+	root        14     2  0     0     0   0 17:22 ?        00:00:00 [netns]
+	root        15     2  0     0     0   0 17:22 ?        00:00:00 [rcu_tasks_kthre]
+	root        16     2  0     0     0   0 17:22 ?        00:00:00 [kauditd]
+	root        17     2  0     0     0   0 17:22 ?        00:00:00 [khungtaskd]
+	root        18     2  0     0     0   0 17:22 ?        00:00:00 [oom_reaper]
+	root        19     2  0     0     0   0 17:22 ?        00:00:00 [writeback]
+	root        20     2  0     0     0   0 17:22 ?        00:00:00 [kcompactd0]
+	root        21     2  0     0     0   0 17:22 ?        00:00:00 [ksmd]
+	root        22     2  0     0     0   0 17:22 ?        00:00:00 [khugepaged]
+	root        23     2  0     0     0   0 17:22 ?        00:00:00 [crypto]
+	root        24     2  0     0     0   0 17:22 ?        00:00:00 [kintegrityd]
+	root        25     2  0     0     0   0 17:22 ?        00:00:00 [kblockd]
+	root        26     2  0     0     0   0 17:22 ?        00:00:00 [ata_sff]
+	root        27     2  0     0     0   0 17:22 ?        00:00:00 [md]
+	root        28     2  0     0     0   0 17:22 ?        00:00:00 [edac-poller]
+	root        29     2  0     0     0   0 17:22 ?        00:00:00 [devfreq_wq]
+	root        30     2  0     0     0   0 17:22 ?        00:00:00 [watchdogd]
+	root        32     2  0     0     0   0 17:22 ?        00:00:04 [kworker/0:1]
+	root        34     2  0     0     0   0 17:22 ?        00:00:00 [kswapd0]
+	root        35     2  0     0     0   0 17:22 ?        00:00:00 [kworker/u3:0]
+	root        36     2  0     0     0   0 17:22 ?        00:00:00 [ecryptfs-kthrea]
+	root        78     2  0     0     0   0 17:22 ?        00:00:00 [kthrotld]
+	root        79     2  0     0     0   0 17:22 ?        00:00:00 [acpi_thermal_pm]
+	root        80     2  0     0     0   0 17:22 ?        00:00:00 [scsi_eh_0]
+	root        81     2  0     0     0   0 17:22 ?        00:00:00 [scsi_tmf_0]
+	root        82     2  0     0     0   0 17:22 ?        00:00:00 [scsi_eh_1]
+	root        83     2  0     0     0   0 17:22 ?        00:00:00 [scsi_tmf_1]
+	root        89     2  0     0     0   0 17:22 ?        00:00:00 [ipv6_addrconf]
+	root        98     2  0     0     0   0 17:22 ?        00:00:00 [kstrp]
+	root       115     2  0     0     0   0 17:22 ?        00:00:00 [charger_manager]
+	root       152     2  0     0     0   0 17:22 ?        00:00:00 [kworker/0:2]
+	root       166     2  0     0     0   0 17:22 ?        00:00:00 [kworker/0:1H]
+	root       167     2  0     0     0   0 17:22 ?        00:00:00 [scsi_eh_2]
+	root       168     2  0     0     0   0 17:22 ?        00:00:00 [scsi_tmf_2]
+	root       190     2  0     0     0   0 17:22 ?        00:00:00 [jbd2/sda1-8]
+	root       191     2  0     0     0   0 17:22 ?        00:00:00 [ext4-rsv-conver]
+	root       235     1  0 23714 14116   0 17:22 ?        00:00:00 /lib/systemd/systemd-journald
+	root       269     1  0 11409  4232   0 17:22 ?        00:00:00 /lib/systemd/systemd-udevd
+	root       287     2  0     0     0   0 17:22 ?        00:00:00 [iprt-VBoxWQueue]
+	root       356     2  0     0     0   0 17:22 ?        00:00:00 [ttm_swap]
+	root       359     2  0     0     0   0 17:22 ?        00:00:00 [irq/18-vmwgfx]
+	root       438     1  0 71911  6848   0 17:22 ?        00:00:00 /usr/lib/accountsservice/accounts-daemon
+	root       445     1  0 42609 17296   0 17:22 ?        00:00:00 /usr/bin/python3 /usr/bin/networkd-dispatcher --run-st
+	root       447     1  0  7830  3076   0 17:22 ?        00:00:00 /usr/sbin/cron -f
+	root       450     1  0 66336 12508   0 17:22 ?        00:00:00 /usr/sbin/nmbd --foreground --no-process-group
+	root       454     1  0 17651  5888   0 17:22 ?        00:00:00 /lib/systemd/systemd-logind
+	root       466     1  0 72292  6820   0 17:22 ?        00:00:00 /usr/lib/policykit-1/polkitd --no-debug
+	root       482     1  0 89169 20404   0 17:22 ?        00:00:00 /usr/sbin/smbd --foreground --no-process-group
+	root       490     1  0  4045  1912   0 17:22 tty1     00:00:00 /sbin/agetty -o -p -- \u --noclear tty1 linux
+	root       491   482  0 86234  6016   0 17:22 ?        00:00:00 /usr/sbin/smbd --foreground --no-process-group
+	root       492   482  0 86232  4724   0 17:22 ?        00:00:00 /usr/sbin/smbd --foreground --no-process-group
+	root       505   482  0 89169  6912   0 17:22 ?        00:00:00 /usr/sbin/smbd --foreground --no-process-group
+	root       588     1  0 32810   384   0 17:23 ?        00:00:00 VBoxClient --vmsvga
+	root       589   588  0 32810  2232   0 17:23 ?        00:00:00 VBoxClient --vmsvga
+	root       598     1  0 91082  6668   0 17:23 ?        00:00:00 /usr/sbin/lightdm
+	root       615     1  0 62092  2492   0 17:23 ?        00:00:01 /usr/sbin/VBoxService --pidfile /var/run/vboxadd-servi
+	root       624   598  1 94065 97912   0 17:23 tty7     00:01:40 /usr/lib/xorg/Xorg -core :0 -seat seat0 -auth /var/run
+	root       637   598  0 61599  7068   0 17:23 ?        00:00:00 lightdm --session-child 12 15
+	root      1348     2  0     0     0   0 19:07 ?        00:00:00 [kworker/u2:1]
+	root      1373     2  0     0     0   0 19:13 ?        00:00:00 [kworker/u2:0]
+	root      1381     2  0     0     0   0 19:20 ?        00:00:00 [kworker/u2:2]
+
+2.1. i 2.2.  Uruchom wybrany przez Ciebie edytor tekstowy za pomocą menu "start" (menu aplikacji). Zobacz, jaki ma on PID - przyda się do tego komenda ps 
+
+	Po uruchomieniu edytora (Start -> Accessories -> Text Editor), przy pomocy komendy ps aux i przefiltrowania wyników za pomocą grep gedit uzyskałem numer PID uruchomionego edytora tekstu:
+
+	ubuntu@bss-ubu1804:~$ ps aux | grep gedit
+	ubuntu    1429  4.6  1.8 564420 36752 ?        Sl   19:30   0:00 gedit
+	ubuntu    1435  0.0  0.0  14428  1108 pts/1    S+   19:30   0:00 grep --color=auto gedit
+
+2.3. Wydaj komendę kill w taki sposób, aby ten edytor się wyłączył. Zobacz czy to działa. Uwaga - niektóre programy przechwytują sygnały i mogą je częściowo blokować. Jeśli program nie wyłącza się, to zobacz jaka jest jego reakcja. Zobacz czy możesz wysłać do niego SIGKILL (zerknij do man). 
+
+	Znając numer PID edytora tekstu można zakończyć jego działanie przy pomocy polecenia kill z parametrem - numerem procesu.
+
+	ubuntu@bss-ubu1804:~$ kill 1429
+
+	Wysłanie SIGKILL (komenda kill -9 ) powoduje, że proces nie może go zignorować - jest to wymuszone unicestwienie procesu. Przykładowo, chcąc wysłać polecenie kill do basha nic się nie stanie; natomiast użycie komendy kill -9 spowoduje zakończenie procesu (zamkniećie terminala):
+
+	ubuntu@bss-ubu1804:~$ ps
+	  PID TTY          TIME CMD
+	 1645 pts/1    00:00:00 bash
+	 1660 pts/1    00:00:00 ps
+	ubuntu@bss-ubu1804:~$ kill 1645
+	ubuntu@bss-ubu1804:~$ kill -9 1645
+
+2.4. Zobacz działanie komendy killall shell.
+
+	Wpisanie komendy killall shell skuktuje komunikatem "Shell: no process found".
+
+	ubuntu@bss-ubu1804:~$ killall shell
+	shell: no process found
+
+2.5. Zobacz czy kill zadziała dla dowolnego procesu.
+
+	Przykładowo, kill nie działa w stosunku do procesów użytkownika root (ze względu na brak uprawnień do ich zakończenia).
+
+	ubuntu@bss-ubu1804:~$ ps -F -u root
+	[...]
+	root      1677     2  0     0     0   0 21:51 ?        00:00:00 [kworker/u2:0]
+	ubuntu@bss-ubu1804:~$ kill 1677
+	bash: kill: (1677) - Operation not permitted
+
+3.1. i 3.2. Uruchamiamy komendę cat bez parametrów. Wciśnij Ctrl+C i zobacz co się stanie.
+
+	ubuntu@bss-ubu1804:~$ cat
+	^C
+	ubuntu@bss-ubu1804:~$ 
+
+	Naciśnięcie CTRL+C spowodowało zakończenie i wyjście z programu.
+
+3.1.-3.4. Wydaj komendę cat > wynik1.txt . Wpisz tekst witaj bez wciskania klawisza Enter. Wciśnij Ctrl+C . Zobacz co się znalazło w pliku wynik1.txt .
+
+	ubuntu@bss-ubu1804:~/ukos$ cat > wynik1.txt
+	Przykładowy tekst^C
+	ubuntu@bss-ubu1804:~/ukos$ cat wynik1.txt
+	ubuntu@bss-ubu1804:~/ukos$ 
+
+	W pliku nie został zapisany żaden tekst.
+
+3.1-3.4. Wydaj komendę cat > wynik2.txt . Wpisz tekst witaj bez wciskania klawisza Enter. Wciśnij Ctrl+D (możliwe że będzie trzeba wcisnąć to dwa razy). Zobacz co się znalazło w pliku wynik2.txt .
+
+	ubuntu@bss-ubu1804:~/ukos$ cat > wynik2.txt
+	Przykładowy tekstubuntu@bss-ubu1804:~/ukos$
+	ubuntu@bss-ubu1804:~/ukos$ cat wynik2.txt
+	Przykładowy tekstubuntu@bss-ubu1804:~/ukos$ 
+ 
+	W pliku został zapisany tekst, po napisaniu którego działanie programu zostało przerwane CTRL+D (zakończenie strumienia wejsciowego).
+
+4.1-4.3. Wpisz komendę gimp. W terminalu w którym się to uruchomiło wciśnij Ctrl+Z. Spróbuj coś wyklikać w gimpie ;) 
+
+	Ze względu na brak zainstalowanego Gimpa użyto program gedit (Text Editor). Po uruchomieniu programu, napisaniu przykładowego tekstu, powróceniu do terminala i kliknięciu CTRL+Z program gedit "zamarzł" - został zatrzymany i przeniesiony w tło (background), wobec czego przestał odpowiadać.
+
+	ubuntu@bss-ubu1804:~$ gedit
+	
+	(gedit:1733): dbind-WARNING **: 22:27:32.793: Error retrieving accessibility bus address: org.freedesktop.DBus.Error.ServiceUnknown: The name org.a11y.Bus was not provided by any .service files
+	^Z
+	[2]+  Stopped                 gedit
+	ubuntu@bss-ubu1804:~$ 
+
+4.1. Wpisz komendę bg.
+
+	Wpisanie komendy bg powoduje uruchomienie zatrzymanego procesu w tle.
+
+	ubuntu@bss-ubu1804:~$ bg
+	[2]+ gedit &
+	ubuntu@bss-ubu1804:~$ 
+	
+4.1. Zobacz co się stanie jeśli wpiszesz: fg :
+
+	Wpisanie komendy fg powoduje przywrócenie procesu - przeniesienie go na pierwszy plan.
+
+	ubuntu@bss-ubu1804:~$ fg
+	gedit
+        
+4.1.-4.3, 4.1. Wykonaj komendę gimp & . Wykonaj komendę gedit & . Wykonaj komendę geany & . Przywróć program gedit z tła na pierwszy plan. Skorzystaj z jobs aby dowiedzieć się jakie mają numery poszczególne procesy działające w tle. 
+
+	Uruchomienie komend gedit lub geany ze znakiem & powoduje ich uruchomienie w tle.
+
+	ubuntu@bss-ubu1804:~$ gedit &
+	[1] 1766
+	ubuntu@bss-ubu1804:~$ 
+	(gedit:1766): dbind-WARNING **: 22:35:07.458: Error retrieving accessibility bus address: org.freedesktop.DBus.Error.ServiceUnknown: The name org.a11y.Bus was not provided by any .service files
+	ubuntu@bss-ubu1804:~$ jobs
+	[1]+  Running                 gedit &
+	ubuntu@bss-ubu1804:~$ geany &
+	[2] 1771
+	ubuntu@bss-ubu1804:~$ 
+	(geany:1771): dbind-WARNING **: 22:35:21.526: Error retrieving accessibility bus address: org.freedesktop.DBus.Error.ServiceUnknown: The name org.a11y.Bus was not provided by any .service files
+	ubuntu@bss-ubu1804:~$ jobs
+	[1]-  Running                 gedit &
+	[2]+  Running                 geany &
+	
+4.1. Przywróć program gedit z tła na pierwszy plan. Skorzystaj z jobs aby dowiedzieć się jakie mają numery poszczególne procesy działające w tle. 
+	
+	ubuntu@bss-ubu1804:~$ jobs
+	[1]-  Running                 gedit &
+	[2]+  Running                 geany &
+	ubuntu@bss-ubu1804:~$ fg 1
+	gedit
+
+5. DOdatkowe polecenia - narzędzia dostępne z linii poleceń.
+
+	tar - służy do zbierania plików, ale sam z siebie niczego nie pakuje; żeby spakować pliki trzeba zastosować kompresor, np. gzip (zasadniczo szybszy, ale gorzej kompresujący pliki) lub bzip2 (zasadniczo wolniejszy, ale lepiej kompresujący pliki). Przykładowa komenda:
+
+	tar -cvjf pliki.tar.bz2 repo/ukos2020-21_14c/
+
+	wget, curl - polecenia pozwalające na ściągnięcie danych ze stron internetowych; przykładowe polecenia:
+
+	wget --no-check-certificate -qO- https://szuflandia.pjwstk.edu.pl:9000 | grep title
+
+	curl -k https://szuflandia.pjwstk.edu.pl:9000
+
