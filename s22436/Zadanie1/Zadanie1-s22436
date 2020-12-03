@@ -1,0 +1,6 @@
+Ciężko mi tutaj opisać jakiś głębszy proces myślowy. 
+Komendy poruszania się po unixie nie są jakoś bardzo skomplikowane, zwłaszcza, że większość pokrywa się z MacOS z którym mam spore doświadczenie. 
+Wszystkie wpisywane przeze mnie komendy dają spodziewane wyniki, 
+jedyne co faktycznie jest dla mnie nowością to kombinacja klawiszy Ctrl+Alt+F1 w kontekście wirtualnej maszyny, 
+ale dzięki wcześniejszemu wyjaśnieniu rozumiem iż przełącza mnie ona na inny (nie graficzny) terminal. 
+Terminali tych jest siedem, z czego ostatni tylko graficzny i aby do niego powrócić należy użyć kombinacji ALT + F7. 
