@@ -1,0 +1,24 @@
+2. ls -al
+3. pwd
+4. cd ./Desktop
+(...)
+7. w konsoli możemy wypisać wszystkie pliki, te ukryte również (ls -al) w interfejsie graficznym defaultowo wyświetlają nam się zwykłe pliki i liczba ukrytych plików
+8. cd lub cd ~
+9. cd ~/Pictures
+11. katalog bieżący
+12. cd /home/ubuntu
+13. "permission denied" - uprawnienia do katalogu (np. read) nie obejmują konta ubuntu
+14. przechodzimy do nowej wirtualnej konsoli
+
+Zadania ciąg dalszy:
+cd ~
+mkdir -p ukos/{katalog/{katalog2,katalog3},klamka}
+cd ukos/klamka
+touch zajecia2.txt zajecia2.log inny.txt nowy.txt
+mkdir -p ukos/to/jest/dluga/nazwa
+touch ukos/to/jest/dluga/nazwa/dane.txt
+rm *.txt
+rm -r katalog/katalog2
+rm -r klamka
+
+FINI :)
