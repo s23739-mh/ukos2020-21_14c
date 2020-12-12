@@ -1,0 +1,31 @@
+My diary, after today's UKOS lectures (21-11-2020), I've learned:
+
+-Meaning and usage of commands:
+	+ps - Shows a list of ongoing processess
+	+grep - Searches for a given phrase
+	+kill - Asks for closing a task
+	+tar - Compresses a file
+	+bg
+	+fg
+Combining these commands with symbols of stream redirection (?) may give interesting results.
+	+">" is used for overwriting. Input>File
+	+">>" is used for adding.
+	+"2>" and "2>>" is the same as the above with the exception of saving the output into the stderr stream.
+	+"<" is used for loading a program with a file as an input. Program<File
+	+"|" is used for using the output of a program as an input for another. output1|input2
+Example: ps -au root | grep n > root_ps_with_n.txt
+
+-Difference between CTRL+D and CTRL+C where first shuts down a program, and second stops the output stream and shuts down a program
+resulting in saving recent changes in a file.
+-Usage of CTRL+Z
+-Difference between gzip and bzip2. gzip is faster but bzip2 reduces the size better
+-I should always update my local git repository before creating a pull request
+
+
+Lectures were really informative and removed any doubts out of my head.
+However, I felt really bad when our group when asked to volunteer, went quiet.
+I know this feeling because i also have been quiet. It is just being terrified of making a mistake but
+this is not how it should look like, we are learning and mistakes are unavoidable.
+This annoyed our lecturer since he gave his best to teach us and we acted really uncooperative.
+Next time I will try to change that.
+The lecture was great!
