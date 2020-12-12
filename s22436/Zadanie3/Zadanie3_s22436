@@ -1,0 +1,23 @@
+DROGI PAMIĘTNICZKU 21.11.2020
+Przekierowania i potoki są dla mnie nową rzeczą, ale dzięki dobremu wyjaśnieniu i późniejszemu wczytaniu się w temat nie ma z nimi problemu.
+
+Polecenie "ps" jest dla mnie dosyć skomplikowane. 
+Rozumiem że wyświetla obecnie działające procesy i że można je wyświetlać w zależności od użytkownika, ale nie wiem co oznaczają różne rodzaje opcji w zależlości ile myśliników jakie poda się przed parametrem, mówię o opcjach UNIX, BSD i GNU.
+W szczególności jeżeli chodzi o różnicę między "ps aux" i "ps -aux", z tego co widzę ten pierwszy zostaje użyty jako fallback w przypadku kiedy user x nie istnieje, ale nie wiem z czego to wynika.
+
+Polecenie kill jest dosyć oczywistę, ale dzięki wytłumaczeniu teraz wiem że ono nie "zabija" bezpośrednio procesu, a wysła sygnał zawiadamiający o takim chęci takiego zamknięcia.
+
+Jeżeli chodzi o skróty klawiszowe to byłem świadomy skrótu CTRL+C, lecz nowością dla mnie jest skrót CTRL+D.
+Dzięki dosyć obrazowemu porównaniu wiem już iż różnica w tych dwóch skrótach polega na tym w jaki sposób wychodzimy z programu.
+CTRL+D w przeciwieństwie do CTRL+C nie wysyła syganału zakończenia (jestem ciekaw ile wspólnego ma ten syganł z poleceniem kill), a zamyka strumień wejściowy, co pozwala programowi na zamknięcie/zapisanie wszystkiego w sposób bezpieczny.
+
+Przenoszenie procesu do "background" i "foreground" też nie jest skomplikowana.
+Rozumiem to w taki sposób iż w momencie przeniesienia procesu do backgound, "odcinany" jest on od procesora, przez co nie jest on updatowany w żaden sposób, co zobaczyć można na przykładnie nie odświeżającego się UI.
+
+Polecenie tar pakuje pliki do archiwum, które można, lecz nie trzeba skompresować.
+Dostępne są dwie metody:
+ - gzip -> szybciej pakuje, ale finalny rozmiar (przeważnie) jest większy
+ - bzip2 -> wolniej pakuje, ale finalny rozmiar jest mniejszy
+
+Na koniec pokazane zostały polecenia wget i curl.
+O ile przykłady pokazane nie były jakoś mega skomplikowane, to chciałbym się więcej dowiedzieć o możliwościach curl, ponieważ często się z nim przy instalacji różnego rodzaju programów.
