@@ -1,0 +1,3 @@
+Aby utworzyć za pomocą jednego polecenia kilka katologów każdy w sobie musiałem użyć polecenia mkdir z parametrem -p.
+Aby usunąć cały katalog z plikiem musiałem użyć polecenia rm z parametrem -r.
+

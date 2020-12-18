@@ -1,0 +1,14 @@
+1. * cd ../../../kot/ma/ale
+   * cd ~/tmp/ukos/kot/ma/ale
+2. mkdir -p jan/kowalski
+3. mv ~/kot/ma/ale ~/ala/i
+4. Poprzez wyczytanie PID programu poleceniem ps aux oraz poleceniem kill numer_PID.
+5. ls -a . | grep '^al'
+6. * chmod u=rwx g=r o=x ala
+   * chmod 741 ala
+7. ls > lista.txt
+8. * Nie mam uprawnień do zapisu
+   * 
+9. Klawisz <tab>
+10. * Uruchamiamy program normalnie, a następnie zatrzymujemy poprzez CTRL+Z i przenosimy go do do tła poprzez polecenie bg.
+    * Uruchamiamy program dopisując na końcu &, co skutkuje, że program od razu uruchomi się w tle.
