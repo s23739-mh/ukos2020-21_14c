@@ -1,0 +1,5 @@
+Przy usuwaniu kukułczego jaja pokazuje się komunikat rm: usunąć zabezpieczony przed zapisem zwykły plik 'kukułcze_jajo'? jednak po wpisaniu y można usunąć plik.
+Po usunięciu wszystkich praw dostępu do katalogu bieżącego nie można wejść do żadnych katalogów w katalogu bieżącym, można jedynie wyjść do katalogu nadrzędnego.
+Po usunięciu wszelkich praw dostępu do katalogu nadrzędnego można dowolnie przemieszczać się pomiędzy katalogami w katalogu nadrzędnym, jednak nie można wejść do katalogu nadrzędnego.
+Mimo posiadania praw dostępu do dalszego katalogu, nie można do niego wejść nie posiadając praw do katalogu nadrzędnego.
+Umask działa na zasadzie odejmowania wartości umaska od pełnych praw dostępu (777). Jest to wykonywane dla każdego nowego pliku lub katalogu.

@@ -1,0 +1,4 @@
+CTRL+C wyłącza program bez zapisania danych wejściowych.
+CTRL+D wyłącza program zapisując jednocześnie dane wejściowe.
+CTRL+Z zatrzymuje proces i przenosi go do tła.
+
