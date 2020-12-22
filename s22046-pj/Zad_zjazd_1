@@ -1,0 +1,69 @@
+19.12.2020
+
+Zadania z pierwszego zjazdu:
+
+1. Uruchom terminal.
+Terminal uruchomiony.
+
+2. Wyświetl zawartość aktualnego katalogu.
+
+Komenda ls. Zawartosc katalogu:
+
+Desktop    Downloads  Pictures  repo       testdir
+Documents  Music      Public    Templates  Videos
+
+3.  Sprawdź gdzie aktualnie się znajdujesz. Porównaj to z tym co możesz zobaczyć w interfejsie graficznym.
+
+Znajduje sie aktualnie w: 
+/home/ubuntu/repo/s22046/ukos2020-21_14c/s22046-pj
+
+4.  Przejdź do katalogu Pulpit za pomocą ścieżki względnej
+
+Komenda do przejscia za pomoca sciezki wzglednej: cd ./Desktop/
+Znajduje sie w: ubuntu@bss-ubu1804:~/Desktop
+
+5. Sprawdź gdzie jesteś.
+
+Sprawdzam gdzie sie znajduje za pomoca komendy pwd.
+Jestem w: /home/ubuntu/Desktop
+
+6. Wyświetl zawartość bieżącego katalogu.
+
+Wyswietlamy zawartosc biezacego katalogu za pomoca komendy ls.
+Zawartosc biezacego katalogu: adding-packages-permanently-info.txt  lxterminal.desktop  passwords-info.txt
+
+7. Zobacz, czy przechodząc do tego katalogu w sposób graficzny (wyklikać) otrzymamy to samo?
+
+Sposob graficzny wydaje sie dawac te same mozliwosci. Poki co wydaje sie prostrzy ale wierze ze oswoje sie jeszcze z konsola.
+
+8. Wyświetl zawartość swojego katalogu domowego bez przechodzenia do niego (ls z odpowiednim parametrem).
+
+Mozna wyswietlic zawartosc katalogu domowego za pomoca komendy: ls~ .
+
+9. Przejdź do katalogu Obrazy w twoim katalogu domowym za pomocą ścieżki względnej.
+
+Przejscie do katalogu obrazy w katalogu domowym za pomoca sciezka wzglednej za pomoca komendy: cd ../Pictures/  .
+
+10. Sprawdź gdzie jesteś.
+
+Komenda: pwd
+Znajduje sie w : /home/ubuntu/Pictures
+
+11. Zobacz do jakiego katalogu przejdziesz za pomocą ścieżki ././././././
+
+Zostalem w tym samym katalogu.
+
+12. Przejdź do swojego katalogu domowego za pomocą ścieżki bezwzględnej.
+
+Komenda: cd /home/ubuntu/
+
+13. Zobacz co się stanie jak wpiszesz komendę 'cd /root'. Jak już to zrobisz, zastanów się co się stało. Proponuję także zapytać prowadzącego.
+
+Po uzyciu komendy cd /root terminal powiadomil mnie ze nie mam dostepu.
+
+14. Zobacz, co się stanie, jeśli wciśniesz kombinację klawiszy: Ctrl+Alt+F1
+
+Przeszedlem do terminala nr 1 i spanikowalem. Udalo mi sie wrocic do poprzedniego trybu za pomoca Ctrl+Alt+F7.
+
+
+
