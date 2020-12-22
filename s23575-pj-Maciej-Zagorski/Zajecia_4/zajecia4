@@ -1,0 +1,189 @@
+2020/12/05 ZAJĘCIA NR 4
+
+https://szuflandia.pjwstk.edu.pl:9000/, 04 Kolokwium Linux - powtórzenie, ćwiczenia:
+
+1. Jest takie drzewo katalogów:
+
+.
+├── ala
+│   ├── i
+│   │   └── as
+│   └── ma
+│       └── kota
+└── kot
+    └── ma
+        └── ale
+
+Znajdujesz się w katalogu kota. Katalog ala, jest w katalogu /tmp/ukos.
+
+Jak przejść do katalogu ale za pomocą:
+
+- ścieżki względnej (relatywnej)
+- ścieżki bezwzględnej (absolutnej) 
+
+	Przejście za pomocą ścieżki względnej (relatywna):
+
+	cd ../../../kot/ma/ale
+
+	Przejście za pomocą ścieżki bezwzględnej (absolutnej):
+
+	cd /tmp/ukos/kot/ma/ale
+
+2. Masz taki układ katalogów, jak wyżej i ciągle jesteś w katalogu kota. Jak utworzyć poddrzewo katalogów jan/kowalski w katalogu ale za pomocą jednej komendy?
+
+	ubuntu@bss-ubu1804:/tmp/ukos/ala/ma/kota$ mkdir -p ../../../kot/ma/ale/jan/kowalski
+	ubuntu@bss-ubu1804:/tmp/ukos$ tree
+	.
+	├── ala
+	│   ├── i
+	│   │   └── as
+	│   └── ma
+	│       └── kota
+	└── kot
+	    └── ma
+	        └── ale
+	            └── jan
+	                └── kowalski
+
+	10 directories, 0 files
+
+3. Masz taki układ katalogów, jak wyżej i ciągle jesteś w katalogu kota. Jak przenieść katalog ale do katalogu i? 
+
+	ubuntu@bss-ubu1804:/tmp/ukos/ala/ma/kota$ mv ../../../kot/ma/ale ../../i
+	ubuntu@bss-ubu1804:/tmp/ukos/ala/ma/kota$ cd ../../..
+	ubuntu@bss-ubu1804:/tmp/ukos$ tree
+	.
+	├── ala
+	│   ├── i
+	│   │   ├── ale
+	│   │   │   └── jan
+	│   │   │       └── kowalski
+	│   │   └── as
+	│   └── ma
+	│       └── kota
+	└── kot
+	    └── ma
+	
+	10 directories, 0 files
+
+4. Jak zamknąć program, który nie odpowiada i nie reaguje na ctrl+c? 
+
+	Za pomocą polecenia kill, wysyłajac do programu odpowiedni sygnał (domyślnie (polecenie kill bez żadnego parametru) jest to sygnał SIGTERM; w przypadku, gdy on nie zadziała istnieje możliwość wysłania innego sygnału, np. SIGKILL - polecenie kill -9).
+
+5. Jak wypisać wszystkie pliki w bieżącym katalogu, których nazwa zaczyna się od al? (tu będzie trochę opisu ode mnie - http://www.robelle.com/smugbook/regexpr.html  
+
+	Jest to możliwe za pomocą następującego polecenia - dla potrzeb ilustracyjnych wylistowano pliki, których nazwa zaczyna się od "te":
+
+	ubuntu@bss-ubu1804:~$ ls -ap | grep -v / | grep -i ^te
+	Testowy
+	testowy_plik
+	Testowy.pub
+
+	Polecenie ls -ap służy wylistowaniu katalogów i plików w bieżącym katalogu, z nazwami katalogów zakończonymi ukośnikiem.
+
+	Polecenie grep -v / służy odfiltrowaniu z otrzymanej w powyższy sposób listy katalogów - przez odfiltrowanie tych wierszy, które zawierają znak ukośnika. W ten sposób sporządzona zostaje lista samych plików.
+
+	Polecenie grep -i ^te służy odfiltrowaniu z otrzymanej w powyższy sposób listy - a więc listy samych plików - tych plików (tych nazw), których nazwa rozpoczyna się od "te" (z ignorowaniem wielkości znaków, czemu służy paramter -i; bez niego wyświetlony zostałby tylko jeden plik: "testowy_plik").
+
+	Znak "potoku" ("pipe", | ) służy przekierowaniu standardowych strumieni wyjścia z poszczególnych poleceń jako standardowych strumieni wejścia do kolejnych poleceń.
+
+6. Nadaj uprawnienia do katalogu <ala> tak, aby:
+
+- każdy mógł do niego wejść
+- tylko grupa mogła wyświetlić co w nim jest
+- właściciel ma pełne prawa 
+
+Skorzystaj raz z notacji ósemkowej, a raz symbolicznej.
+
+	Można to osiągnąć za pomocą polcenia chmod z parametrami a=x,g+r,u+rw :
+
+	ubuntu@bss-ubu1804:/tmp/ukos$ ls -l
+	total 8
+	drwxrwxr-x 4 ubuntu ubuntu 4096 Dec 20 12:40 ala
+	drwxrwxr-x 3 ubuntu ubuntu 4096 Dec 20 12:40 kot
+	ubuntu@bss-ubu1804:/tmp/ukos$ chmod a=x,g+r,u+rw ala
+	ubuntu@bss-ubu1804:/tmp/ukos$ ls -l
+	total 8
+	drwxr-x--x 4 ubuntu ubuntu 4096 Dec 20 12:40 ala
+	drwxrwxr-x 3 ubuntu ubuntu 4096 Dec 20 12:40 kot
+	
+	W przypadku zastosowania notacji ósemkowej:
+
+	ubuntu@bss-ubu1804:/tmp/ukos$ chmod 751 ala
+	ubuntu@bss-ubu1804:/tmp/ukos$ ls -l
+	total 8
+	drwxr-x--x 4 ubuntu ubuntu 4096 Dec 20 12:40 ala
+	drwxrwxr-x 3 ubuntu ubuntu 4096 Dec 20 12:40 kot
+
+7. Jak utworzyć plik z listą plików w bieżącym katalogu? 
+
+	Można to osiągnąć za pomocą polecenia ls -ap | grep -v / > plik_z_lista_plikow
+
+	ubuntu@bss-ubu1804:~$ ls -ap | grep -v / > plik_z_lista_plikow
+	ca: command not found
+	ubuntu@bss-ubu1804:~$ cat plik_z_lista_plikow 
+	.bash_history
+	.bash_logout
+	.bashrc
+	.dmrc
+	.gitconfig
+	.lesshst
+	ListaPlikówZLiterkąD.txt
+	nowy_plik_test
+	plik_z_lista_plikow
+	.profile
+	.sudo_as_admin_successful
+	Testowy
+	testowy_plik
+	Testowy.pub
+	.vboxclient-clipboard.pid
+	.vboxclient-display.pid
+	.vboxclient-draganddrop.pid
+	.vboxclient-seamless.pid
+	.viminfo
+	.Xauthority
+	.xscreensaver
+	.xsession-errors
+	.xsession-errors.old
+
+	Polecenia ls -ap i grep -v / objaśniono w odpowiedzi na pytanie nr 5. Znak > oznaczana przekierowanie standardowego strumienia wyjścia z polecenia grep -v / do (w tym przypadku) nowego pliku "plik_z_lista_plikow".
+
+8. Nie możesz utworzyć żadnego pliku na swoim koncie uczelnianym. Co się mogło stać? (wymień co najmniej 2 opcje). Zakładamy że możesz zalogować się w konsoli i nie masz zaległości w opłatach.
+
+	1) Mogło skończyć się dostępne miejsce na dysku - można to sprawdzić za pomocą polecenia quota .
+	2) Nie posiadam odpowiednich uprawnień (w, write) do  katalogu, w którym chcę utworzyć plik.
+
+9. Jak przyśpieszyć wpisywanie komend w terminalu (jaki klawisz pozwala na uzupełnianie komend?).
+
+	Uzupełnianie komend jest możliwe przy pomocy strzałki w górę - w ten sposób można przejrzeć ostatnio użyte komendy. Można również zobaczyć listę takich komend przy pomocy polecenia history . Natomiast nazwy katalogów i plików można uzupełniać przez wpisanie pierwszych znaków ich nazwy przy pomocy klawisza TAB.
+
+10. Jak uruchomić program, aby nie blokował on terminala? Są dwa sposoby.
+
+	Jest to możliwe przez uruchomienie programu od razu w tle (przy pomocy oznaczenia & ). Sprawdzenie działania tego (i następnego) sposobu jest możliwe przy pomocy polecenia jobs (wskazujacego programy działające w tle):
+
+	ubuntu@bss-ubu1804:~$ gedit &
+	[3] 2661
+	[2]   Done                    gedit
+	ubuntu@bss-ubu1804:~$ 
+	(gedit:2661): dbind-WARNING **: 17:34:06.359: Error retrieving accessibility bus address: org.freedesktop.DBus.Error.ServiceUnknown: The name org.a11y.Bus was not provided by any .service files
+	jobs
+	[3]+  Running                 gedit &
+	ubuntu@bss-ubu1804:~$ 
+
+	Można to również osiągnąć przez uruchomienie programu, zatrzymanie go przy pomocy kombinacji CTRL+Z (i zwolnienie w ten sposób terminala) oraz przeniesienie programu do działania w tle przy pomocy polecenia bg .
+
+	ubuntu@bss-ubu1804:~$ gedit
+
+	(gedit:2668): dbind-WARNING **: 17:34:52.158: Error retrieving accessibility bus address: org.freedesktop.DBus.Error.ServiceUnknown: The name org.a11y.Bus was not provided by any .service files
+	jobs
+	^Z[3]   Done                    gedit
+
+	[4]+  Stopped                 gedit
+	ubuntu@bss-ubu1804:~$ jobs
+	[4]+  Stopped                 gedit
+	ubuntu@bss-ubu1804:~$ bg %4
+	[4]+ gedit &
+	ubuntu@bss-ubu1804:~$ jobs
+	[4]+  Running                 gedit &
+	ubuntu@bss-ubu1804:~$ 
+

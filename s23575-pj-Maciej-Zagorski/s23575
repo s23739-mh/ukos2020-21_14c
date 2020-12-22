@@ -1,0 +1,338 @@
+2020/10/17 ZAJĘCIA NR 1
+
+Wirtualna maszyna – tworzenie wirtualnego komputera, na którym można uruchomić określony system.
+
+Linux a Windows ścieżki dostępowe: 
+WIN: C:\Users\XXX\... 
+LINUX: /home/XXX/...
+
+Lista katalogów w Linuksie:
+bin	– programy („binary”) 
+boot	– bootowanie (uruchamianie) systemu operacyjnego; tam znajdują się dane związane z jądrem systemowym: 
+dev	– urządzenia – wszystko jest plikiem (traktowane jak plik): 
+	null	– „śmietnik”, tam można np. przekierować urządzenie 
+	random	– urządzenie generujące znaki losowe 
+	stdin, stdout, stderr – wejście, wyjście, błąd 
+	ttyXX	– terminale 
+	urandom	– “mi”, mikrorandom 
+	sda	– dysk, sda1 – pierwsza partycja 
+	zero	– generuje same zera 
+etc	– pliki konfiguracyjne (*.conf, *.cfg); tym się zajmuje administrator (root) 
+home	– katalog domowy użytkownika 
+lib, lib64 – biblioteki 
+lost+found – utracone dane, które zostały odnalezione 
+media 	– zewnętrzne dyski, pamięci etc. 
+mnt	– zamontowane, odmontowane (do tego ma dostęp root, nie zwyczajni użytkownicy) 
+opt	– szeroko pojęte rzeczy opcjonalne 
+proc	– procesy – aplikacje działające w systemie; ale też np. informacje o procesorze (cpuinfo) 
+root	– odrębnie od home 
+run	– rzeczy systemowe (pliki pid?) są zapisywane w run 
+sbin	– system bin – rzeczy związane z administracją systemu – wrażliwe, z dostępem administratora 
+srv	– serwer ftp, www 
+swapfile (lub swfile) – plik wymiany, normalnie osobna partycja swap, ale można to w formie pliku 
+sys	– rzeczy systemowe 
+temp	– rzeczy tymczasowe 
+usr	– rzeczy użytkowe, związane z zainstalowanymi programami 
+var	– różne rzeczy, w tym logi
+
+Przy liście plików/katalogów – pierwsza litera oznacza: 
+d	– directory, 
+l	– link (dowiązanie symboliczne), 
+-	– plik
+
+Ścieżki względne i bezwzględne – dokładny adres lub np. „./../” 
+
+History – wyświetla listę użytych poleceń.
+
+Funkcja „dopełniania” – tabulator – dopełnia nazwy.
+
+W Linuksie domyślnie są uruchomione terminale (TTY) oraz środowisko graficzne. 
+
+* * *
+
+2020/11/07 ZAJĘCIA NR 2
+
+Uprawnienia dostępu 
+
+Prawa są do systemu – określonych czynności; uprawnienia – do zasobów, dostępu do określonych plików i folderu.
+
+Wskaźnik – link symboliczny – wskazanie, jaki plik jest naprawdę modyfikowany. 
+
+drwxrwxrwx 
+-rwxrwxrwx 
+
+Pierwszy znak (- lub d) określa, czy mamy do czynienia (w szczególności) z plikiem czy katalogiem (directory). 
+
+Pierwsze trzy znaki (bity) to uprawnienia właściciela, następne dla (domyślnej grupy) użytkowników, a następne to reszta – podmioty niepokryte zakresem „właściciela” oraz grupy użytkowników.
+
+Domyślne uprawnienia: 
+
+Katalog: rwxr-xr-x 
+Plik: rwxr--r-- 
+
+Zmiany uprawnień: 
+
+chmod[spacja konieczna]u[ser]+/-[uprawnienie],[brak spacji]u[ser]+/-[uprawnienie] 
+chmod g[group]+/-[uprawnienie] 
+chmod o[thers]+/-[uprawnienie] 
+
+To można ze sobą łączyć, np.: 
+
+ugo+rwx 
+
+Można to też zapisać w formie 
+
+[podmiot]=[uprawnienia] 
+
+ugo=- <- usunięcie wszystkich bitów 
+a[ll]=rwx 
+
+u[ser]=właściciel, g[roup]=grupa, o[ther]=pozostali użytkownicy, a[ll]=wszyscy.
+
+Grupę bitów można rozpisać w notacji ósemkowej. 
+
+umask – określa, z jakimi uprawnieniami będą tworzone katalogi i pliki – co się odejmuje od 777 (przy katalogach) i od666 (przy plikach) 
+
+Przy umasku pojawiają się cztery cyfry, np. 0002 (to dotyczy np. „sticky bit”). 
+
+Połączenie z „Szuflandią”: ssh s23575@szuflandia.pjwstk.edu.pl
+
+Uprawnienia dostępu do pliku może zmieniać root oraz użytkownik, który go utworzył. 
+
+chmod 777 – wszystkie uprawnienia dla wszystkich 
+
+(mkdir -p a/b – tworzenie strutkury katalogów (katalog b w katalogu a) za pomocą jednego polecenia.
+
+* * *
+
+2020/11/21 ZAJĘCIA NR 3
+
+Procesy i strumienie 
+
+Każdy proces ma trzy strumienie: 
+- standardowy strumień wyjścia	– out	– numer 0, 
+- standardowy strumień wejścia	– in	– numer 1, 
+- standardowy strumień błędu	– err	– numer 2 
+<- te strumienie można ze sobą łączyć. 
+
+Standardowe wyjście i standardowe wyjście błędu są zapisane w dwóch osobnych plikach: 
+
+find / -maxdepth 2 -type > stdout 2> stderr
+
+W jednym pliku, ale najpierw zostanie zapisane jedno, a później drugie: 
+
+find / -maxdepth 2 -type > stdall 2> stdall
+
+Przekierowanie standardowego strumienia wyjścia oraz standardowego wyjścia błędów do standardowego wyjścia: 
+
+> [plik] 2>&1 
+
+przy dopisaniu: 
+
+>> [plik] 2>&1 
+
+W jednym pliku, we właściwiej kolejności:
+
+find / -maxdepth 2 -type > stdall 2>&1
+
+Standardowe wyjście błędu jest przekierowywane na standardowe wyjście, a standardowe wyjście – do pliku. 
+
+Przekierowanie wejścia: 
+
+echo „y” > tak 
+
+cat tak 
+
+y 
+
+cat < tak 
+
+y 
+
+Taki sam rezultat, ale to inne procesy – przy drugim przypadku to bash „podał” plik.
+
+Dodanie czegoś do pliku, „podane” przez basha – to co w pliku „tak”. 
+
+cat > y < tak
+
+(Pomoc – manual: 
+
+man [polecenie] 
+
+Wyjście z pomocy: q )
+
+Procesy
+
+TTY – terminal, sposób komunikacji z komputerem; w przypadku procesów (np. przy poleceniu ps aux) w odpowiedniej kolumnie TTY mogą być wskazane ? – bo niektóre procesy tego (terminalu, komunikacji przez terminal) nie mają.
+
+W Linuxie nie ma service’ów (Windows) tylko deamony – to jest wskazane przez literę „d” na końcu nazwy procesu. 
+
+Procesy użytkownika root: 
+
+ps -F -u root 
+
+Kill służy do wysyłania sygnału – zakończeniu procesu.
+
+Killall 
+
+Filtrowanie według procesów użytkownika 
+
+Ps -F -u [user] | grep [nazwa programu] 
+
+PID – process ID  
+
+CTRL+C – przerywa program, kończy go – CTRL+D – informacja, że nastąpił koniec wprowadzania danych – i dopiero wtedy program jest przerywany. 
+
+CTRL+Z – zatrzymanie programu (nie wykonuje operacji – w tym również przerysowywania tego programu na ekranie) 
+
+jobs – lista programów zawieszonych 
+
+fg %[numer] – to pozwala wskazać, który program (którego program) wznowić.
+
+fg – foreground – działanie na 1. planie.
+
+bg – background – działanie w tle.
+
+[polecenie – nazwa programu]& – uruchamianie go od razu w tle.
+
+tar – sam z siebie niczego nie pakuje, on tylko zbiera pliki; żeby spakować pliki, trzeba zastosować do niego (plików) kompresor – np. gzip (szybsze, gorsze) lub bz2 (wolniejsze, lepsze; ale to nie reguła) 
+
+tar -cvzf plik.tar.gz[ip] /[katalog do spakowania]/ 
+
+tar -cvjf plik.tar.bz2 /[katalog do spakowania]/ 
+
+Pozostałe polecenia: 
+
+wget – ściąga dane ze strony internetowej 
+
+curl – też pozwala na powyższe 
+
+mkfifo 
+
+Git: 
+
+git revert – odkręcenie commitu – odwracanie działania gita 
+git show – wydrukowanie stanu repozytorium 
+
+Sklonowanie repozytorium t0meck.
+
+Sprawdzić jakie rzeczy będą do zmergowania: 
+- git remote i origin z własnego repozytorium,
+- następnie fetch z repozytorium t0meck,
+- wtedy git merge ze wskazaniem t0meck do własnego,
+- następnie push do własnego repozytorium i dopiero wtedy pull request.
+
+git log --oneline --decorate --graph --all  
+git remote set-url [nazwa] [url] 
+git commit --amend 
+git revert --no-commit HEAD lub git revert [nazwa commitu] 
+git reset HEAD 
+git checkout -- [plik] 
+git fetch	– ściągnięcie informacji o zmianach w repozytorium (to widać przy git status) 
+Następnie git pull – żeby mieć to samo w repozytorium lokalnym 
+git mv		– przenoszenie/zmiena nazwy 
+git show [nazwa commitu]:[nazwa pliku] 
+git pull [adres repozytorium] [nazwa branchu] 
+git remote add upstream [adres repozytorium] 
+git fetch upstream 
+git merge upstream/master 
+
+* * *
+
+2020/12/05 ZAJĘCIA NR 4
+
+Powtórzenie:
+
+Polecenie head	– drukuje określoną (n) liczbę wierszy.
+Polecenie sleep	– nic nie robiące przez określoną ilość sekund. 
+
+CTRL+Z – wstrzymuje, +C – przerywa, +D – zakończy strumień wejściowy.
+
+bzip2 – kompresuje wolniej, ale dokładniej niż gzip.
+
+Pierwsza linijka terminalu to shebang.
+
+Uruchomienie programu w tle – uruchomienie, CTRL+Z i bg albo uruchomienie z & 
+
+umask – wszystkie nowoutworzone pliki i katalogi będą miały uprawnienia ustawione według tego polecenia – wartości umask odejmuje się od 777.
+
+	  777
+	- 022
+	-----
+	  755
+
+Filtrowanie kolumn:
+
+ps aux | grep gedit | grep -v grep | cut -d' ' -f2
+
+ps aux | grep -v awk | awk '/gedit/{print $0}'
+
+print $0 – wszystkie kolumny, print $1 – pierwsza kolumna i tak dalej 
+
+W cut domyślnym znakiem rozdzielającym jest tabulator ( \t ), wtedy nie trzeba go określać (bez potrzeby użycia flagi -d). 
+
+tr – służy do zmiany określonych znaków.
+
+tail – wyświetla ostatnie wiersze. 
+
+ls -ltr | tail -nl
+
+Strumienie:
+
+p 2> e || r < e
+
+To musi być tak zapisane (|| - OR), bo gdyby było && (AND), a pierwszy proces kończy się błędem (fałsz), to drugi proces (prawa strona) nie wykona się, bo będzie zawsze fałsz. 
+
+* * *
+
+2020/12/19 ZAJĘCIA NR 5
+
+Linux vs. dystrybucja Linuxa 
+ 
+Linux to jądro systemu operacyjnego – to właściwie GNU z jądrem Linux; GNU to system operacyjny złożony wyłącznie z wolnego oprogramowania (Free Software Fundation); to zostało zainicjowane przez Richarda Stallmana. 
+
+Licencje: 
+GNU GPL		– General Public License 
+GNU LGPL	– Lesser General Public License 
+GNU FDL 	– Free Documentation License 
+
+
+GNU Hurd – zbiór serwerów działających w przestrzeni użytkownika 
+
+Linux – jądro systemu operacyjnego, stworzone z wielu modułów, które mogą być usuwane i dodawane (w Windowsie są sterowniki). 
+
+Linux został stworzony przez Linusa Torvaldsa.
+
+Dystrybucja to gotowy system operacyjny, np. Debian, Ubuntu itp. 
+
+
+GNU GPL – licencja wolnego oprogramowania stworzona przez Richarda Stallmana i Ebena Moglena. 
+
+Cztery podstawowe wolności (liczone od 0): 
+0)	wolność uruchamiania programu w dowolnym celu, 
+1)	wolność analizowania, jak program działa i dostosowywania go do swoich potrzeb, 
+2)	wolność rozpowszechniania niezmodyfikowanej kopii programu, 
+3)	wolność udoskonalania programu i publicznego rozpowszechniania własnych ulepszeń, dzięki czemu może z nich skorzystać cała społeczność 
+<- oprogramowanie, żeby uznane za licencję GNU/GPL, musi spełniać te wszystkie warunki. 
+
+To licencja „wirusowa” – pozwala na opublikowanie i używanie w wolnym oprogramowaniu – w przypadku dołączenia fragmentu kodu, np. biblioteki na licencji GNU/GPL, to jest się zobowiązanym do opublikowania całości oprogramowania korzystającego z tej biblioteki. 
+
+Affero General Public License (Affero GPL) – w przypadku uruchamiania kodu na serwerze (np. w przypadku dynamicznie generowanych treści) wtedy też ten kod musi być opublikowany jako kod źródłowy. 
+
+LGPL – lesser GPL – biblioteka dla biblioteki – możliwość wykorzystywania biblioteki do oprogramowania z zamkniętym kodem.
+
+„Copyleft” =/= "Copyright"
+
+Licencja BSD – Berkeley Software Distribution – licencja wolnego oprogramowania stworzona na uniwersytecie w Berkley, pozwala na udostępnienie oprogramowania bez konieczności ujawniania kodu źródłowego, pod warunkiem poinformowania o autorze i treści; różne wersje – 4-klauzulowa, 3-klauzulowa, 2-klauzulowa. 
+
+Niektóre licencje są ze sobą kompatybilne, a niektóre nie. 
+
+Licencja Apache – przed wersją 2.0 to bardzo podobne do 4-klauzulowej BSD, z zastrzeżeniem nazwy Apache. 
+
+Korzystający np. z bibliotek na tej licencji uzyskuje automatycznie od twórców patenty na korzystanie z tych bibliotek – ale w przypadku wytoczenia powództwa wobec tych twórców te patenty zostają automatycznie odebrane. 
+
+Do whatever the fuck you want to public license.
+
+(ls -lp | grep -v / | cat > nowy_plik 
+
+Bash najpierw interpretuje a później wykonuje – więc widzi przekierowanie do nowego pliku). 
