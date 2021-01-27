@@ -3,6 +3,9 @@ Mój kochany pamiętniczku, na dzisiejszych zajęciach z uko nauczyłem się:
 -instalowania i podstawowej obsługi maszyny wirtualnej
 -czym różni się ścieżka względna od bezwzględnej
 -podstawowych poleceń gita add status commit
+-że aby utworzyć za pomocą jednego polecenia kilka katologów każdy w sobie musiałem użyć polecenia mkdir z parametrem -p.
+-że aby usunąć cały katalog z plikiem musiałem użyć polecenia rm z parametrem -r.
+
 
 2020.11.07.
 Mój kochany pamiętniczku, na dzisiejszych zajęciach z uko nauczyłem się:
@@ -10,12 +13,17 @@ Mój kochany pamiętniczku, na dzisiejszych zajęciach z uko nauczyłem się:
 -że NIGDY NIE WOLNO USTAWIĆ CHMOD 777 (chyba, że na prawdę jest taka potrzeba)
 -ustawiania uprawnień domyślnych poleceniem umask
 -o istnieniu oraz wykorzystaniu tekstowych przeglądarek internetowych (w3m lynks)
+-umask działa na zasadzie odejmowania wartości umaska od pełnych praw dostępu (777)
+-umask jest wykonywany dla każdego nowego pliku lub katalogu.
 
 2020.11.21.
 Mój kochany pamiętniczku, na dzisiejszych zajęciach z uko nauczyłem się:
 -poleceń -ps; -grep; -kill; -tar; -bg; -fg;
 -przekierowywania strumieni operatorami <; >; <<; >>;
 -operatorów logicznych "&&" oraz operatora "test"
+-CTRL+C wyłącza program bez zapisania danych wejściowych.
+-CTRL+D wyłącza program zapisując jednocześnie dane wejściowe.
+-CTRL+Z zatrzymuje proces i przenosi go do tła.
 
 2020.12.05
 Mój kochany pamiętniczku, na dzisiejszych zajęciach z uko było powtórzenie do kolokwium dzięki, któremu przypomniałem sobie:
@@ -31,3 +39,13 @@ Bardzo pomógł rozjaśnić pewne rzeczy dotyczące pracy z gitem. (mam nadziej�
 Jednocześnie przepraszam za tymczasowy brak zaangażowania w nowe commity oraz wykonywanie zadań.
 Nowa praca i nowe obowiązki wymagały ode mnie nauki rozplanowania dnia w inny niż dotychczas sposób.
 Jeszcze raz przepraszam, mam nadzieję, że się poprawię oraz, że Pan nie zrazi się do mnie chwilowym brakiem zaangażowania z mojej strony.
+
+2020.12.19
+Mój kochany pamiętniczku, na dzisiejszych zajęciach z uko nauczyłem się:
+-różnic między systemem operacyjnym (linux), a dystrubycją (ubuntu, mint)
+-o licencjach, takich jak: GNU/GPL, LGPL, BSD, Apache, MIT, dwtfywt
+
+2021.01.16
+Mój kochany pamiętniczku, na dzisiejszych zajęciahc z uko nauczyłem się:
+-kilku sposobów uruchomienia powershella
+-możliwości tworzenia aliasów
