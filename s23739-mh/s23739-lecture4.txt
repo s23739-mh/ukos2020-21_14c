@@ -1,0 +1,25 @@
+1.(Image of a directory tree)
+You are in "ala" directory, will you get into "ale" directory using relative and absolute path?
+-[cd ../kot/ma/ale]
+-[cd ~/kot/ma/ale]
+2.How will you create directory jan/kowalski inside of "ale" directory while being in "kota"?
+-[mkdir -p ~/kot/ma/ale/jan/kowalski]
+3.How will you move a directory "ale" into "i"?
+-[mv ~/kot/ma/ale ~/ala/i]
+4. How to close a program that does not respond and will not close after CTRL+C
+- Use ps to get process ID and then use kill
+5. How to list all files from a directory which name beginswith "al"
+-[ls -a . | grep '^al"]
+6.Give "ala" permissions so everyone can enter, only group is able to see what is in there,
+owner has all permissions
+-[chmod 741 ala] 
+7. How to create a file with names of all files in current directory 
+-[ls > file.txt]
+8. You are unable to create a file on your student account. What are 2 probable causes?
+-I have no permission to create a file.
+-There is a server-side issue. For example no more space to create one more file
+9. How to speed up typing the commands?
+- Just use TAB, its convenient
+10. How to open a file so it does not block a terminal?
+-CTRL+Z  and then bg
+- Type a command opening a file with "&" at the end. For example vim &

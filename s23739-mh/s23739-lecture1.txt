@@ -7,3 +7,42 @@ For example: bin - Contains all of the most important binaries (windows equivale
 - This is shebang: #!
 - About Differences between Windows and Linux
 Overall, the lecture was great!
+
+Exercise no1
+===========
+1. Open a terminal
+2. List contents of current directory 
+- [ls] UKOS passwords-info.txt
+3. Check where you are. 
+- [pwd] /home/ubuntu/Downloads
+4. Get to the desktop directory using relative path 
+- /home/ubuntu/Downloads -> /home/ubuntu/Desktop
+[cd ../Desktop] 
+5. Check where you are
+6. List contents of current directory 
+7. Check if its the same when used a graphic interface
+- Yes, pretty much
+8. List contents of your home catalog.
+- [ls ~]  Desktop Downloads Music Public Videos etc.
+9. Using relative path, get to "Pictures" directory.
+- [cd ../Pictures]
+10. Check where you are
+11. Where will you be after geting to "././././././" directory.
+-In the same place as earlier
+12. Get to home using unrelative (absolute?) path. 
+- [cd ~]
+13. Type cd /root
+- Permission denied!
+14.What will happen after holding CTRL+ALT+F1
+- I went to getty virtual console(?) got away with ALT+F7
+
+
+Exercise no2
+===============
+Using one instruction, create a directory ukos/to/jest/dluga/nazwa
+[mkdir -p /Desktop/ukos/to/jest/dluga/nazwa]
+
+Create here a file called dane.txt
+[touch Dekstop/.../nazwa/dane.txt]
+
+--Unable to read rest of exercises
