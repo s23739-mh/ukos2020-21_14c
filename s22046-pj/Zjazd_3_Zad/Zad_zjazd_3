@@ -1,0 +1,95 @@
+30.12.2020
+
+
+Zadanie: Przejdź do swojego katalogu domowego i wydaj taką komendę: ls -a, zobacz ile plików wypisało. Teraz wykonaj komendę: ls -a | grep D. Ile teraz jest wyników? Co się stało?
+Otóż program grep służy do wyszukiwania wierszy w pliku lub strumieniu wejściowym, które pasują do wzorca. Tu podałem wzorzec jako "D".
+A teraz wykonaj taką komendę: ls -a | grep D > ListaPlikówZLiterkąD.txt. Zobacz czy utworzył się jakiś plik? Jaka jest jego treść? Co znaczy | oraz co znaczy >?
+
+Komenda stworzyla plik z lista plikow z D w nazwie. Zawartosc pliku to przekierowany wynik komendy ls -a | grep D > ListaPlikówZLiterkąD.txt.
+|  to przekierowanie wyjscia ls -a do wejscia grep D., za pomoca > przekierowalismy rezultat do pliku.
+
+1. Program ps służy do wyświetlania listy procesów. Zobacz co się stanie jeśli wpiszemy w terminalu:
+ps
+ps -a
+ps x
+ps aux
+
+Jak myślisz, co oznacza znak zapytania w kolumnie numer 2? Nie wiesz? Zapytaj prowadzącego, albo przeczytaj manual.
+
+Wyświetl wszystkie procesy bash.
+Wyświetl wszystkie procesy należące do użytkownika root.
+
+ps - wyswietla listę procesów danego shella, 
+ps -a - zwraca listę procesów poza session leaders - all with tty, except session leaders
+ps x processes without controlling ttys
+ps aux - listuje procesy, a = dla wszystkich uzytkownikow, u = pokaz wlasciciela procesu, x= procesy poza terminalem
+
+Znak zapytania w kolumnie 2 to procesy, ktore nie potrzebuja terminala.
+
+
+2. PID jest to identyfikator procesu. Za jego pomocą możesz odwoływać się do danego procesu za pomocą różnych mechanizmów systemu.
+Jednym z takich mechanizmów jest wysłanie sygnału (na przykład zakończenia) do procesu. Do tego służy komenda kill (może brzmi ona dość brutalnie, ale cóż, informatyka nie jest dla mięczaków).
+Komenda ta domyślnie wysyła sygnał zakończenia procesu do zadanego procesu.
+
+Uruchom wybrany przez Ciebie edytor tekstowy za pomocą menu "start" (menu aplikacji).
+Zobacz, jaki ma on PID - przyda się do tego komenda ps
+Wydaj komendę kill w taki sposób, aby ten edytor się wyłączył. Zobacz czy to działa. Uwaga - niektóre programy przechwytują sygnały i mogą je częściowo blokować.
+Jeśli program nie wyłącza się, to zobacz jaka jest jego reakcja. Zobacz czy możesz wysłać do niego SIGKILL (zerknij do man).
+zobacz działanie komendy killall shell
+Zobacz czy kill zadziała dla dowolnego procesu
+
+Proces mozna zakonczyc z uzyciem kill z parametrem numeru procesu.
+
+SIGKILL  (-9 ) wymusza unicestwienie procesu. Jest to jedyny całkowicie pewny sposób zakończenia wykonywania procesu, ponieważ proces odbierający ten sygnał nie może go ani zignorować, ani przechwycić.
+Wydaje sie jednak ze nie powinno sie go uzywac w normalnych sytuacjach.
+kill nie działa dla procesów root ( brak uprawnień).
+
+3. W terminalu jest kilka przydatnych skrótów klawiszowych.
+Jednym z nich jest Ctrl+C. Jest to sposób na wyłączenie aktywnego programu w terminalu. Proszę go przetestować w taki sposób, że:
+
+Uruchamiamy komendę cat bez parametrów.
+Wciśnij Ctrl+C i zobacz co się stanie
+Kolejnym fajnym skrótem klawiszowym jest Ctrl+D - służy on do zakończenia strumienia wejściowego.
+Działa to trochę inaczej niż poprzednie rozwiązanie, mimo że na pierwszy rzut oka wygląda tak samo. Tym razem nie wysyła sygnału zakończenia, a jedynie zamyka strumień wejściowy.
+Jest to bardzo przydatne, jeśli chcemy zakończyć działanie jakiegoś programu korzystającego ze standardowego wejścia, ale w sposób możliwie bezpieczny. Zobacz co się stanie, jeśli :
+
+Wydaj komendę cat > wynik1.txt
+Wpisz tekst witaj bez wciskania klawisza Enter.
+Wciśnij Ctrl+C
+Zobacz co się znalazło w pliku wynik1.txt
+Wydaj komendę cat > wynik2.txt
+Wpisz tekst witaj bez wciskania klawisza Enter.
+Wciśnij Ctrl+D (możliwe że będzie trzeba wcisnąć to dwa razy)
+Zobacz co się znalazło w pliku wynik2.txt
+
+Po ctrl+C plik byl pusty, po ctrl+D witaj sie zapisalo.
+
+
+4. Ctrl+Z służy do zatrzymania bieżącego procesu i przeniesienia go do tła. To znaczy program ciągle jest w pamięci, ale się nie wykonuje. Zobacz co się stanie jeśli:
+
+Wpisz komendę gimp
+W terminalu w którym się to uruchomiło wciśnij Ctrl+Z
+Spróbuj coś wyklikać w gimpie ;)
+
+Co się stało? Zatrzymaliśmy program Gimp. Program wstrzymany za pomocą kombinacji Ctrl+Z jest zatrzymywany i przenoszony w tło (background). Efekt jest taki, ze taki program przestaje odpowiadać na cokolwiek.
+Komenda bg służy do uruchomienia zatrzymanego procesu w tle. Zobacz:
+
+Wpisz komendę bg
+Jak widać Gimp ożył (jeśli nie, to zapytaj prowadzącego).
+
+Komenda fg służy do przeniesienia procesu na pierwszy plan. Zobacz co się stanie jeśli wpiszesz:
+
+fg
+Jak widać proces wrócił i można wcisnąć na przykład Ctrl+C aby go zakończyć.
+
+W momencie uruchamiania programu, możemy od razu nakazać wykonanie go w tle. Służy do tego znak & umieszczony na końcu instrukcji. Zobacz:
+Wykonaj komendę gimp &
+Wykonaj komendę gedit &
+Wykonaj komendę geany &
+Zobacz co się stało (domyślam się że uruchomiły się 3 programy, a na terminalu ciągle można coś pisać. Kolejna komenda to jobs. Służy ona do wyświetlenia listy zadań przeniesionych do tła.
+
+Przywróć program gedit z tła na pierwszy plan. Skorzystaj z jobs aby dowiedzieć się jakie mają numery poszczególne procesy działające w tle.
+
+Zrobione :)
+
+
