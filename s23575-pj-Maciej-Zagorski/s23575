@@ -458,4 +458,87 @@ Widnows Management
 Dyski w Powershell 
 
 Notyfikacje. 
+
+* * *
+
+2021/01/30 ZAJĘCIA NR 7
+
+PowerShell (cd.) 
+
+W PS uruchomionym jako administrator: 
+
+Set-ExecutionPolicy – i „Y” (Yes) 
+Update-Help 
+
+Tryb select – wchodzi się przez kliknięcie, a wychodzi przez „esc” 
+
+Get-ChildItem 
+(Get-ChildItem)[4] 
+$(Get-ChildItem)[4] 
+
+Zapisywanie do zmiennej: $z = [polecenie] 
+
+$z | Format-Table 
+$z | Format-List 
+
+Get-Member -InputObject 
+
+Opcja get – tylko odczyt; set – możliwość przypisania wartości do pola 
+
+Metody – struktura z polami wraz z funkcjami, bez konieczności przekazywania do funkcji struktury 
+
+$z.name + spacja + ctrl – przejście do wyboru funkcji w obiekcie – czyli do wyboru metody 
+
+To działa również przy np. wpisaniu stringu w cudzysłowach, dodaniu po nim kropki i spacja + ctrl 
+
+PS C:\> "ala ma kota".ToUpper() 
+ALA MA KOTA 
+
+History – polecenia od początku działania sesji. 
+
+Ściągnięcie pliku: 
+
+Start-BitsTransfer -Source „[adres]” 
+
+% - ForEach-Object, nie While-Object 
+
+Out-GridView – wyświetla listę/tabelkę w nowym okienku, np. 
+
+ls | Out-GridView 
+
+Zapisywanie hasła do zmiennej w bezpieczny sposób: 
+
+PS C:\> $cred = Get-Credential 
+
+cmdlet Get-Credential at command pipeline position 1 
+Supply values for the following parameters: 
+Credential 
+
+PS C:\> $cred.UserName 
+
+s23575@pjwstk.edu.pl 
+
+PS C:\> $cred.Password 
+
+System.Security.SecureString 
+
+Uruchamianie programów: „call” & : 
+
+& C:\Windows\explorer.exe 
+
+W przypadku spacji w ścieżce/nazwie: 
+
+& "C:\Program Files\Mozilla Firefox\firefox.exe" 
+
+Lista aliasów: 
+
+PS C:\> cd Alias:\ 
+
+PS Alias:\> ls 
+
+Lista zmiennych w danej sesji (utworzonych i „domyślnych”): 
+
+PS C:\> cd Variable:\ 
+
+PS Variable:\> ls 
  
