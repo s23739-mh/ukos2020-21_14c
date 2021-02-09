@@ -1,28 +1,30 @@
-#PROCESY I STRUMIENIE
-###ZADANIA
+# PROCESY I STRUMIENIE
+### ZADANIA
 
 
 
 **1. Program** *ps* **służy do wyświetlania listy procesów. Zobacz co sie stanie jeśli wpiszemy w terminalu:**
 
-	`ps a` - wyświetla wszystkie procesy użytkownika
-	`ps -a` - wyświetla wszystkie procesy nie podłączone do żadnego terminala i procesy poza liderami sesji
-	`ps x` - wyświetla wszystkie procesy, których jest się właścicielem lub wyświetlenie wszystkich procesów, jeśli użyte razem z opcją a
-	`ps aux` - wyświetla wszystkie procesy tak jak w przypadku opcji a i x, a także właścicieli procesów
+`ps a` - wyświetla wszystkie procesy użytkownika\
+`ps -a` - wyświetla wszystkie procesy nie podłączone do żadnego terminala i procesy poza liderami sesji\
+`ps x` - wyświetla wszystkie procesy, których jest się właścicielem lub wyświetlenie wszystkich procesów, jeśli użyte razem z opcją a\
+`ps aux` - wyświetla wszystkie procesy tak jak w przypadku opcji a i x, a także właścicieli procesów
 
 **Jak myślisz, co oznacza znak zapytania w kolumnie numer 2? Nie wiesz? Zapytaj prowadzącego, albo przeczytaj manual.**
 
 Znak "?" w kolumnie TTY oznacza, że proces nie jest podpięty do żadnego terminala.
 
-**Wyświetl wszystkie procesy bash.**
-`pc -C bash`
-`ps -C cmdlist` - selects the processes whose executable name is given in *cmdlist*
-**Wyświetl wszystkie procesy należące do użytkownika root.**
+**Wyświetl wszystkie procesy bash.**\
+`pc -C bash`\
+`ps -C cmdlist` - selects the processes whose executable name is given in *cmdlist*\
+**Wyświetl wszystkie procesy należące do użytkownika root.**\
 `ps -U root -u root u`
 
 
 DODATKOWE UWAGI:
+
 ps -e jest identyczne z ps -A
+
 BSD - odmiana systemu operacyjnego Unix.
 
 **2.1 Uruchom wybrany przez Ciebie edytor tekstowy za pomocą menu "start" (menu aplikacji).
