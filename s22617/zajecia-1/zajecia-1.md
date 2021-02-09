@@ -1,12 +1,12 @@
-#Linux - Wstęp do Konsoli
+# Linux - Wstęp do Konsoli
 
-###ZADANIA:
+### ZADANIA:
 
 **1. Uruchom terminal**\
-**2. Wyświetl zawartość aktualnego katalogu**
-`ls -al`
-**3. Sprawdź gdzie aktualnie się znajdujesz. Porównaj to z tym co możesz zobaczyć w interfejsie graficznym**
-`pwd`
+**2. Wyświetl zawartość aktualnego katalogu**\
+`ls -al`\
+**3. Sprawdź gdzie aktualnie się znajdujesz. Porównaj to z tym co możesz zobaczyć w interfejsie graficznym**\
+`pwd`\
 **4.Przejdź do katalogu Pulpit za pomocą ścieżki względnej**
 `cd ./Desktop`
 **5. Sprawdź gdzie jesteś**
