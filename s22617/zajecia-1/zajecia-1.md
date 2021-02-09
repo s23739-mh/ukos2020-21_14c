@@ -2,8 +2,7 @@
 
 ###ZADANIA:
 
-**1. Uruchom terminal**
-
+**1. Uruchom terminal**\
 **2. Wyświetl zawartość aktualnego katalogu**
 `ls -al`
 **3. Sprawdź gdzie aktualnie się znajdujesz. Porównaj to z tym co możesz zobaczyć w interfejsie graficznym**
