@@ -46,7 +46,7 @@ chmod 000 .
 **Sprawdzić, jakie są minimalne prawa dostępu, które trzeba przydzielić do:\
 	- katalogu domowego;\
 	- katalogu** `public_html`;\
-	- **pliku** *strona.html***, aby zawartość pliku była widoczna w przeglądarce internetowej pod adresem** *http://szuflandia.pjwstk.edu.pl/~nazwa_konta/strona.html*
+	- **pliku** *strona.html* **, aby zawartość pliku była widoczna w przeglądarce internetowej pod adresem** *http://szuflandia.pjwstk.edu.pl/~nazwa_konta/strona.html*
 
 Dla katalogu domowego, bit x dla innych użytkowników, aby wejść do katalogu
 Dla *public_html*, bit r i x dla innych użytkowników, aby wejść do katalogu i wyświetlić jego zawartość (plik strona.html)
