@@ -42,15 +42,15 @@ mkdir -p ukos/{katalog/{katalog2,katalog3},klamka}
 cd ukos/klamka
 touch zajecia2.txt zajecia2.log inny.txt nowy.txt
 ```
-**Za pomocą jednego polecenia** *mkdir* **stwórz w katalogu ukos następujący katalog:** *ukos/to/jest/dluga/nazwa*/
-`mkdir -p ukos/to/jest/dluga/nazwa`/
-**następnie umieść w katalogu** *ukos/to/jest/dluga/nazwa* **plik** *dane.txt*/
-`touch ukos/to/jest/dluga/nazwa/dane.txt`/
-**Usuń z katalogu** *ukos/klamka* **wszystkie pliki z rozszerzeniem** *txt*/
-`rm \*.txt`/
-**Usuń katalog** *ukos/katalog/katalog2*/
-`rm -r katalog/katalog2`/
-**Usuń cały katalog** *klamka* **za pomocą jednego polecenia**/
-`rm -r klamka`/
+**Za pomocą jednego polecenia** *mkdir* **stwórz w katalogu ukos następujący katalog:** *ukos/to/jest/dluga/nazwa*\
+`mkdir -p ukos/to/jest/dluga/nazwa`\
+**następnie umieść w katalogu** *ukos/to/jest/dluga/nazwa* **plik** *dane.txt*\
+`touch ukos/to/jest/dluga/nazwa/dane.txt`\
+**Usuń z katalogu** *ukos/klamka* **wszystkie pliki z rozszerzeniem** *txt*\
+`rm \*.txt`\
+**Usuń katalog** *ukos/katalog/katalog2*\
+`rm -r katalog/katalog2`\
+**Usuń cały katalog** *klamka* **za pomocą jednego polecenia**\
+`rm -r klamka`\
 
 FINI :)

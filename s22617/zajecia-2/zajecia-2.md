@@ -1,5 +1,6 @@
-#Prawa dostępu
-###ZADANIA:
+# Prawa dostępu
+
+### ZADANIA:
 
 **1. Utworzyć we własnym katalogu domowym niedużą strukturę podkatalogów i plików tekstowych. Przydzielić różne prawa dostępu, następnie spróbować wejść do katalogów domowych innych uczestników zajęć i sprawdzić, które z obiektów są tam dla nas dostępne (i w jakim sensie). Spróbować utworzyć własny plik w cudzym katalogu ("kukułcze jajko") oraz spróbować usunąć cudzy plik we własnym katalogu (co można zaobserwować ?). Wypróbować powyższe operacje:
 	-  w trybie tekstowym,
@@ -34,11 +35,14 @@ chmod 000 .
 ">>" dopisuje do pliku określoną przez nas w poleceniu zawartość
 
 **Znaleźć w swoim katalogu domowym podkatalog** *public_html* **(jeśli go nie ma, to utworzyć. Umieścić w nim plik o nazwie** *strona.html* **i następującej zawartości:**
-*<HTML>
+```
+<HTML>
 <BODY>
 <H1>To jest moja strona domowa</H1>
-</BODY.
-</HTML>*
+</BODY>
+</HTML>
+```
+
 **Sprawdzić, jakie są minimalne prawa dostępu, które trzeba przydzielić do:
 	- katalogu domowego;
 	- katalogu** *public_html***;
@@ -48,11 +52,11 @@ Dla katalogu domowego, bit x dla innych użytkowników, aby wejść do katalogu
 Dla *public_html*, bit r i x dla innych użytkowników, aby wejść do katalogu i wyświetlić jego zawartość (plik strona.html)
 Dla *strona.html*: bit r dla innych użytkowników, aby wyświetlić zawartość pliku
 
-UWAGI:
+UWAGI:\
 Na maszynie wirtualnej działało, na mojej głównej przeglądarce witryna była nieosiągalna :(
 
 
-###ZADANIA C.D
+### ZADANIA C.D
 **W opisie bash'a (man) przeczytać opis polecenia wewnętrznego umask i wypróbować jego działanie sprawdzając, a następnie zmieniając swoją maskę trybu pliku i tworząc za każdym razem nowe pliki (przy uzyciu polecenia** `touch plik`**), a później sprawdzając uzyskane prawa dostępu do nich (polecenie ls -l). Jaka operacja logiczna na bitach domyślnych praw dostępu oraz maski jest wykonywalna?**
 
 umask (user mask) - polecenie interfejsu POSIX, które odpowiada za ograniczanie praw dostępu do plików.
