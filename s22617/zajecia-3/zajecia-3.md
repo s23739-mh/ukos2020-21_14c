@@ -21,11 +21,9 @@ Znak "?" w kolumnie TTY oznacza, że proces nie jest podpięty do żadnego termi
 `ps -U root -u root u`
 
 
-DODATKOWE UWAGI:
-
-ps -e jest identyczne z ps -A
-
-BSD - odmiana systemu operacyjnego Unix.
+DODATKOWE UWAGI:  
+ps -e jest identyczne z ps -A  
+BSD - odmiana systemu operacyjnego Unix.  
 
 **2.1 Uruchom wybrany przez Ciebie edytor tekstowy za pomocą menu "start" (menu aplikacji).
 2.2. Zobacz, jaki ma on PID - przyda się do tego komenda ps
