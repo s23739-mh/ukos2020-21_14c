@@ -7,7 +7,7 @@
 `ls -al`\
 **3. Sprawdź gdzie aktualnie się znajdujesz. Porównaj to z tym co możesz zobaczyć w interfejsie graficznym**\
 `pwd`\
-**4.Przejdź do katalogu Pulpit za pomocą ścieżki względnej**\
+**4. Przejdź do katalogu Pulpit za pomocą ścieżki względnej**\
 `cd ./Desktop`\
 **5. Sprawdź gdzie jesteś**\
 `pwd`\
@@ -29,7 +29,7 @@ Znajdziemy się w katalogu bieżącym, gdyż za pomocą `./` operujemy na bież�
 **13. Zobacz co się stanie jak wpiszesz komendę 'cd /root'. Jak już to zrobisz, zastanów się co się stało. Proponuję także zapytać prowadzącego**\
 *"permission denied"* - uprawnienia do katalogu (np. read) nie obejmują konta ubuntu\
 **14. Zobacz, co się stanie, jeśli wciśniesz kombinację klawiszy: Ctrl+Alt+F1**\
-Przechodzimy do nowej wirtualnej konsoli nr 1\
+Przechodzimy do nowej wirtualnej konsoli nr 1
 
 ### ZADANIA C.D.:
 **Korzystając z komend** *cd* **oraz** *mkdir* **stwórz następujące drzewo katalogów w swoim katalofu domowym (w dowolnym podkatalogu, albo bezpośrednio w ~):**
@@ -44,13 +44,13 @@ touch zajecia2.txt zajecia2.log inny.txt nowy.txt
 ```
 **Za pomocą jednego polecenia** *mkdir* **stwórz w katalogu ukos następujący katalog:** *ukos/to/jest/dluga/nazwa*\
 `mkdir -p ukos/to/jest/dluga/nazwa`\
-**następnie umieść w katalogu** *ukos/to/jest/dluga/nazwa* **plik** *dane.txt*\
+**następnie umieść w katalogu** *ukos/to/jest/dluga/nazwa* **plik** *dane.txt* **:**\
 `touch ukos/to/jest/dluga/nazwa/dane.txt`\
-**Usuń z katalogu** *ukos/klamka* **wszystkie pliki z rozszerzeniem** *txt*\
+**Usuń z katalogu** *ukos/klamka* **wszystkie pliki z rozszerzeniem** *txt* **:**\
 `rm \*.txt`\
-**Usuń katalog** *ukos/katalog/katalog2*\
+**Usuń katalog** *ukos/katalog/katalog2* **:**\
 `rm -r katalog/katalog2`\
-**Usuń cały katalog** *klamka* **za pomocą jednego polecenia**\
-`rm -r klamka`\
+**Usuń cały katalog** *klamka* **za pomocą jednego polecenia:**\
+`rm -r klamka`
 
 FINI :)
