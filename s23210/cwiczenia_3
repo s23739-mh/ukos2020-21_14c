@@ -1,0 +1,324 @@
+Przejdź do swojego katalogu domowego i wydaj taką komendę: ls -a
+ls -a
+.              .cache     .gitconfig  Pictures  .sudo_as_admin_successful    .vboxclient-seamless.pid  .xsession-errors.old
+..             .config    .gnupg      .pki      Templates                    Videos
+ala            Desktop    kot         .profile  .thumbnails                  .viminfo
+.bash_history  Documents  .local      Public    .vboxclient-clipboard.pid    .Xauthority
+.bash_logout   .dosbox    .mozilla    repo      .vboxclient-display.pid      .xscreensaver
+.bashrc        Downloads  Music       .ssh      .vboxclient-draganddrop.pid  .xsession-errors
+
+zobacz ile plików wypisało. Teraz wykonaj komendę: ls -a | grep D.
+ls -a | grep D
+Desktop
+Documents
+Downloads
+
+Ile teraz jest wyników? Co się stało?
+Ilość wyników została zawężona tylko do tych, zawierających w swojej nazwie literę "D"
+
+Otóż program grep służy do wyszukiwania wierszy w pliku lub strumieniu wejściowym, które pasują do wzorca. Tu podałem wzorzec jako "D".
+
+A teraz wykonaj taką komendę: ls -a | grep D > ListaPlikówZLiterkąD.txt.
+ls -a | grep D > ListaPlikówZLiterkąD.txt
+ls
+ala  Desktop  Documents  Downloads  kot  ListaPlikówZLiterkąD.txt  Music  Pictures  Public  repo  Templates  Videos
+
+Zobacz czy utworzył się jakiś plik? Jaka jest jego treść? Co znaczy | oraz co znaczy >?
+Utworzył się plik o nazwie ListaPlikówZLiterkąD.txt, którego treścią jest:
+Desktop
+Documents
+Downloads
+ListaPlikówZLiterkąD.txt
+
+| to przekierowanie strumienia wyjścia na strumień wejścia (A | B Astdout > Bstdin)
+> to przekierowanie strumienia wyjścia do pliku z nadpisaniem
+
+Program ps służy do wyświetlania listy procesów. Zobacz co się stanie jeśli wpiszemy w terminalu:
+
+ps
+  PID TTY          TIME CMD
+  866 pts/1    00:00:00 bash
+  940 pts/1    00:00:00 ps
+
+ps -a
+  PID TTY          TIME CMD
+  914 pts/0    00:00:00 vim
+  942 pts/1    00:00:00 ps
+
+ps x
+  PID TTY      STAT   TIME COMMAND
+  611 ?        Ss     0:00 /lib/systemd/systemd --user
+  612 ?        S      0:00 (sd-pam)
+  623 ?        Ssl    0:00 /usr/bin/lxsession -s Lubuntu -e LXDE
+  638 ?        Ss     0:00 /usr/bin/dbus-daemon --session --address=systemd: --nofork --nopidfile --systemd-activation --syslog-o
+  673 ?        S      0:00 /usr/bin/VBoxClient --clipboard
+  674 ?        Sl     0:00 /usr/bin/VBoxClient --clipboard
+  683 ?        S      0:00 /usr/bin/VBoxClient --display
+  684 ?        S      0:00 /usr/bin/VBoxClient --display
+  690 ?        S      0:00 /usr/bin/VBoxClient --seamless
+  691 ?        Sl     0:00 /usr/bin/VBoxClient --seamless
+  695 ?        S      0:00 /usr/bin/VBoxClient --draganddrop
+  696 ?        Sl     0:11 /usr/bin/VBoxClient --draganddrop
+  710 ?        Ss     0:00 /usr/bin/ssh-agent /usr/bin/lxsession -s Lubuntu -e LXDE
+  715 ?        S      0:01 openbox --config-file /home/ubuntu/.config/openbox/lubuntu-rc.xml
+  719 ?        Sl     0:02 lxpanel --profile Lubuntu
+  722 ?        Sl     0:03 pcmanfm --desktop --profile lubuntu
+  724 ?        Sl     0:00 lxpolkit
+  739 ?        Ss     0:00 /usr/bin/ssh-agent -s
+  774 ?        Sl     0:00 /usr/lib/menu-cache/menu-cached /run/user/1000/menu-cached-:0
+  790 ?        Sl     0:19 lxterminal
+  791 pts/0    Ss     0:00 bash
+  866 pts/1    Ss     0:00 bash
+  914 pts/0    S+     0:00 vim cwiczenia_3
+  943 pts/1    R+     0:00 ps x
+
+ps aux
+USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+root         1  0.0  0.4  77596  8740 ?        Ss   19:43   0:01 /sbin/init
+root         2  0.0  0.0      0     0 ?        S    19:43   0:00 [kthreadd]
+root         4  0.0  0.0      0     0 ?        I<   19:43   0:00 [kworker/0:0H]
+root         6  0.0  0.0      0     0 ?        I<   19:43   0:00 [mm_percpu_wq]
+root         7  0.0  0.0      0     0 ?        S    19:43   0:00 [ksoftirqd/0]
+root         8  0.0  0.0      0     0 ?        I    19:43   0:00 [rcu_sched]
+root         9  0.0  0.0      0     0 ?        I    19:43   0:00 [rcu_bh]
+root        10  0.0  0.0      0     0 ?        S    19:43   0:00 [migration/0]
+root        11  0.0  0.0      0     0 ?        S    19:43   0:00 [watchdog/0]
+root        12  0.0  0.0      0     0 ?        S    19:43   0:00 [cpuhp/0]
+root        13  0.0  0.0      0     0 ?        S    19:43   0:00 [kdevtmpfs]
+root        14  0.0  0.0      0     0 ?        I<   19:43   0:00 [netns]
+root        15  0.0  0.0      0     0 ?        S    19:43   0:00 [rcu_tasks_kthre]
+root        16  0.0  0.0      0     0 ?        S    19:43   0:00 [kauditd]
+root        17  0.0  0.0      0     0 ?        S    19:43   0:00 [khungtaskd]
+root        18  0.0  0.0      0     0 ?        S    19:43   0:00 [oom_reaper]
+root        19  0.0  0.0      0     0 ?        I<   19:43   0:00 [writeback]
+root        20  0.0  0.0      0     0 ?        S    19:43   0:00 [kcompactd0]
+root        21  0.0  0.0      0     0 ?        SN   19:43   0:00 [ksmd]
+root        22  0.0  0.0      0     0 ?        SN   19:43   0:00 [khugepaged]
+root        23  0.0  0.0      0     0 ?        I<   19:43   0:00 [crypto]
+root        24  0.0  0.0      0     0 ?        I<   19:43   0:00 [kintegrityd]
+root        25  0.0  0.0      0     0 ?        I<   19:43   0:00 [kblockd]
+root        26  0.0  0.0      0     0 ?        I<   19:43   0:00 [ata_sff]
+root        27  0.0  0.0      0     0 ?        I<   19:43   0:00 [md]
+root        28  0.0  0.0      0     0 ?        I<   19:43   0:00 [edac-poller]
+root        29  0.0  0.0      0     0 ?        I<   19:43   0:00 [devfreq_wq]
+root        30  0.0  0.0      0     0 ?        I<   19:43   0:00 [watchdogd]
+root        32  0.0  0.0      0     0 ?        I    19:43   0:01 [kworker/0:1]
+root        34  0.0  0.0      0     0 ?        S    19:43   0:00 [kswapd0]
+root        35  0.0  0.0      0     0 ?        I<   19:43   0:00 [kworker/u3:0]
+root        36  0.0  0.0      0     0 ?        S    19:43   0:00 [ecryptfs-kthrea]
+root        78  0.0  0.0      0     0 ?        I<   19:43   0:00 [kthrotld]
+root        79  0.0  0.0      0     0 ?        I<   19:43   0:00 [acpi_thermal_pm]
+root        80  0.0  0.0      0     0 ?        S    19:43   0:00 [scsi_eh_0]
+root        81  0.0  0.0      0     0 ?        I<   19:43   0:00 [scsi_tmf_0]
+root        82  0.0  0.0      0     0 ?        S    19:43   0:00 [scsi_eh_1]
+root        83  0.0  0.0      0     0 ?        I<   19:43   0:00 [scsi_tmf_1]
+root        89  0.0  0.0      0     0 ?        I<   19:43   0:00 [ipv6_addrconf]
+root        98  0.0  0.0      0     0 ?        I<   19:43   0:00 [kstrp]
+root       115  0.0  0.0      0     0 ?        I<   19:43   0:00 [charger_manager]
+root       152  0.0  0.0      0     0 ?        I    19:43   0:00 [kworker/0:2]
+root       165  0.0  0.0      0     0 ?        S    19:43   0:00 [scsi_eh_2]
+root       166  0.0  0.0      0     0 ?        I<   19:43   0:00 [scsi_tmf_2]
+root       169  0.0  0.0      0     0 ?        I<   19:43   0:00 [kworker/0:1H]
+root       189  0.0  0.0      0     0 ?        S    19:43   0:00 [jbd2/sda1-8]
+root       190  0.0  0.0      0     0 ?        I<   19:43   0:00 [ext4-rsv-conver]
+root       228  0.0  0.6  94864 13452 ?        S<s  19:43   0:00 /lib/systemd/systemd-journald
+root       255  0.0  0.2  46560  5216 ?        Ss   19:43   0:00 /lib/systemd/systemd-udevd
+systemd+   262  0.0  0.2  80044  5288 ?        Ss   19:43   0:00 /lib/systemd/systemd-networkd
+root       286  0.0  0.0      0     0 ?        I<   19:43   0:00 [iprt-VBoxWQueue]
+root       344  0.0  0.0      0     0 ?        I<   19:43   0:00 [ttm_swap]
+root       345  0.0  0.0      0     0 ?        S    19:43   0:00 [irq/18-vmwgfx]
+systemd+   381  0.0  0.2  70628  5328 ?        Ss   19:43   0:00 /lib/systemd/systemd-resolved
+root       438  0.0  0.3  70604  6220 ?        Ss   19:43   0:00 /lib/systemd/systemd-logind
+root       439  0.0  0.6 265344 12440 ?        Ss   19:43   0:00 /usr/sbin/nmbd --foreground --no-process-group
+root       443  0.0  0.1  31320  3152 ?        Ss   19:43   0:00 /usr/sbin/cron -f
+syslog     444  0.0  0.2 263036  4272 ?        Ssl  19:43   0:00 /usr/sbin/rsyslogd -n
+message+   446  0.0  0.2  50212  4416 ?        Ss   19:43   0:00 /usr/bin/dbus-daemon --system --address=systemd: --nofork --nopi
+root       454  0.0  0.3 287632  7000 ?        Ssl  19:43   0:00 /usr/lib/accountsservice/accounts-daemon
+root       460  0.0  0.8 170436 17548 ?        Ssl  19:43   0:00 /usr/bin/python3 /usr/bin/networkd-dispatcher --run-startup-trig
+root       470  0.0  0.0  16180  1992 tty1     Ss+  19:43   0:00 /sbin/agetty -o -p -- \u --noclear tty1 linux
+root       474  0.0  0.3 289052  7028 ?        Ssl  19:43   0:00 /usr/lib/policykit-1/polkitd --no-debug
+root       483  0.0  1.0 356676 20668 ?        Ss   19:43   0:00 /usr/sbin/smbd --foreground --no-process-group
+root       487  0.0  0.2 344936  5952 ?        S    19:43   0:00 /usr/sbin/smbd --foreground --no-process-group
+root       488  0.0  0.2 344928  4748 ?        S    19:43   0:00 /usr/sbin/smbd --foreground --no-process-group
+root       489  0.0  0.3 356676  6820 ?        S    19:43   0:00 /usr/sbin/smbd --foreground --no-process-group
+root       559  0.0  0.0 131240   384 ?        S    19:43   0:00 VBoxClient --vmsvga
+root       560  0.0  0.1 131240  2320 ?        S    19:43   0:00 VBoxClient --vmsvga
+root       565  0.0  0.3 364328  6840 ?        Ssl  19:43   0:00 /usr/sbin/lightdm
+root       585  0.0  0.1 248368  2688 ?        Sl   19:43   0:00 /usr/sbin/VBoxService --pidfile /var/run/vboxadd-service.sh
+root       594  0.6  4.3 368700 89240 tty7     Ssl+ 19:43   0:37 /usr/lib/xorg/Xorg -core :0 -seat seat0 -auth /var/run/lightdm/r
+root       607  0.0  0.3 246396  7212 ?        Sl   19:43   0:00 lightdm --session-child 12 15
+ubuntu     611  0.0  0.3  76756  7904 ?        Ss   19:43   0:00 /lib/systemd/systemd --user
+ubuntu     612  0.0  0.1 111580  2196 ?        S    19:43   0:00 (sd-pam)
+ubuntu     623  0.0  0.6 355052 12724 ?        Ssl  19:43   0:00 /usr/bin/lxsession -s Lubuntu -e LXDE
+ubuntu     638  0.0  0.2  49924  4364 ?        Ss   19:43   0:00 /usr/bin/dbus-daemon --session --address=systemd: --nofork --nop
+ubuntu     673  0.0  0.0  51988   328 ?        S    19:43   0:00 /usr/bin/VBoxClient --clipboard
+ubuntu     674  0.0  0.2 120376  4244 ?        Sl   19:43   0:00 /usr/bin/VBoxClient --clipboard
+ubuntu     683  0.0  0.0  51988   320 ?        S    19:43   0:00 /usr/bin/VBoxClient --display
+ubuntu     684  0.0  0.1  52124  2936 ?        S    19:43   0:00 /usr/bin/VBoxClient --display
+ubuntu     690  0.0  0.0  51988   320 ?        S    19:43   0:00 /usr/bin/VBoxClient --seamless
+ubuntu     691  0.0  0.1 118172  2144 ?        Sl   19:43   0:00 /usr/bin/VBoxClient --seamless
+ubuntu     695  0.0  0.0  51988   324 ?        S    19:43   0:00 /usr/bin/VBoxClient --draganddrop
+ubuntu     696  0.1  0.1 118688  2240 ?        Sl   19:43   0:11 /usr/bin/VBoxClient --draganddrop
+ubuntu     710  0.0  0.0  11304   316 ?        Ss   19:43   0:00 /usr/bin/ssh-agent /usr/bin/lxsession -s Lubuntu -e LXDE
+ubuntu     715  0.0  0.9 238052 18956 ?        S    19:43   0:01 openbox --config-file /home/ubuntu/.config/openbox/lubuntu-rc.xm
+ubuntu     719  0.0  1.6 734920 33020 ?        Sl   19:43   0:02 lxpanel --profile Lubuntu
+ubuntu     722  0.0  2.4 621228 49004 ?        Sl   19:43   0:03 pcmanfm --desktop --profile lubuntu
+ubuntu     724  0.0  0.5 297248 11680 ?        Sl   19:43   0:00 lxpolkit
+ubuntu     739  0.0  0.0  11304   320 ?        Ss   19:43   0:00 /usr/bin/ssh-agent -s
+ubuntu     774  0.0  0.2 113884  4540 ?        Sl   19:43   0:00 /usr/lib/menu-cache/menu-cached /run/user/1000/menu-cached-:0
+ubuntu     790  0.3  2.9 596052 61152 ?        Sl   19:46   0:20 lxterminal
+ubuntu     791  0.0  0.2  22704  5412 pts/0    Ss   19:46   0:00 bash
+ubuntu     866  0.0  0.2  22788  5420 pts/1    Ss   20:16   0:00 bash
+root       910  0.0  0.0      0     0 ?        I    21:03   0:00 [kworker/u2:1]
+ubuntu     914  0.0  0.4  55404  9228 pts/0    S+   21:06   0:00 vim cwiczenia_3
+root       936  0.0  0.0      0     0 ?        I    21:15   0:00 [kworker/u2:0]
+root       941  0.0  0.0      0     0 ?        I    21:21   0:00 [kworker/u2:2]
+ubuntu     944  0.0  0.1  37364  3244 pts/1    R+   21:21   0:00 ps aux
+
+Jak myślisz, co oznacza znak zapytania w kolumnie numer 2? Nie wiesz? Zapytaj prowadzącego, albo przeczytaj manual.
+Znaki zapytania w kolumnie numer 2 oznaczają procesy, któ©e niepotrzebują terminala.
+
+Wyświetl wszystkie procesy bash.
+ps -C bash
+  PID TTY          TIME CMD
+  791 pts/0    00:00:00 bash
+  866 pts/1    00:00:00 bash
+
+Wyświetl wszystkie procesy należące do użytkownika root.
+ps -F -u root
+UID        PID  PPID  C    SZ   RSS PSR STIME TTY          TIME CMD
+root         1     0  0 19399  8740   0 19:43 ?        00:00:01 /sbin/init
+root         2     0  0     0     0   0 19:43 ?        00:00:00 [kthreadd]
+root         4     2  0     0     0   0 19:43 ?        00:00:00 [kworker/0:0H]
+root         6     2  0     0     0   0 19:43 ?        00:00:00 [mm_percpu_wq]
+root         7     2  0     0     0   0 19:43 ?        00:00:00 [ksoftirqd/0]
+root         8     2  0     0     0   0 19:43 ?        00:00:01 [rcu_sched]
+root         9     2  0     0     0   0 19:43 ?        00:00:00 [rcu_bh]
+root        10     2  0     0     0   0 19:43 ?        00:00:00 [migration/0]
+root        11     2  0     0     0   0 19:43 ?        00:00:00 [watchdog/0]
+root        12     2  0     0     0   0 19:43 ?        00:00:00 [cpuhp/0]
+root        13     2  0     0     0   0 19:43 ?        00:00:00 [kdevtmpfs]
+root        14     2  0     0     0   0 19:43 ?        00:00:00 [netns]
+root        15     2  0     0     0   0 19:43 ?        00:00:00 [rcu_tasks_kthre]
+root        16     2  0     0     0   0 19:43 ?        00:00:00 [kauditd]
+root        17     2  0     0     0   0 19:43 ?        00:00:00 [khungtaskd]
+root        18     2  0     0     0   0 19:43 ?        00:00:00 [oom_reaper]
+root        19     2  0     0     0   0 19:43 ?        00:00:00 [writeback]
+root        20     2  0     0     0   0 19:43 ?        00:00:00 [kcompactd0]
+root        21     2  0     0     0   0 19:43 ?        00:00:00 [ksmd]
+root        22     2  0     0     0   0 19:43 ?        00:00:00 [khugepaged]
+root        23     2  0     0     0   0 19:43 ?        00:00:00 [crypto]
+root        24     2  0     0     0   0 19:43 ?        00:00:00 [kintegrityd]
+root        25     2  0     0     0   0 19:43 ?        00:00:00 [kblockd]
+root        26     2  0     0     0   0 19:43 ?        00:00:00 [ata_sff]
+root        27     2  0     0     0   0 19:43 ?        00:00:00 [md]
+root        28     2  0     0     0   0 19:43 ?        00:00:00 [edac-poller]
+root        29     2  0     0     0   0 19:43 ?        00:00:00 [devfreq_wq]
+root        30     2  0     0     0   0 19:43 ?        00:00:00 [watchdogd]
+root        32     2  0     0     0   0 19:43 ?        00:00:01 [kworker/0:1]
+root        34     2  0     0     0   0 19:43 ?        00:00:00 [kswapd0]
+root        35     2  0     0     0   0 19:43 ?        00:00:00 [kworker/u3:0]
+root        36     2  0     0     0   0 19:43 ?        00:00:00 [ecryptfs-kthrea]
+root        78     2  0     0     0   0 19:43 ?        00:00:00 [kthrotld]
+root        79     2  0     0     0   0 19:43 ?        00:00:00 [acpi_thermal_pm]
+root        80     2  0     0     0   0 19:43 ?        00:00:00 [scsi_eh_0]
+root        81     2  0     0     0   0 19:43 ?        00:00:00 [scsi_tmf_0]
+root        82     2  0     0     0   0 19:43 ?        00:00:00 [scsi_eh_1]
+root        83     2  0     0     0   0 19:43 ?        00:00:00 [scsi_tmf_1]
+root        89     2  0     0     0   0 19:43 ?        00:00:00 [ipv6_addrconf]
+root        98     2  0     0     0   0 19:43 ?        00:00:00 [kstrp]
+root       115     2  0     0     0   0 19:43 ?        00:00:00 [charger_manager]
+root       152     2  0     0     0   0 19:43 ?        00:00:00 [kworker/0:2]
+root       165     2  0     0     0   0 19:43 ?        00:00:00 [scsi_eh_2]
+root       166     2  0     0     0   0 19:43 ?        00:00:00 [scsi_tmf_2]
+root       169     2  0     0     0   0 19:43 ?        00:00:00 [kworker/0:1H]
+root       189     2  0     0     0   0 19:43 ?        00:00:00 [jbd2/sda1-8]
+root       190     2  0     0     0   0 19:43 ?        00:00:00 [ext4-rsv-conver]
+root       228     1  0 23716 13452   0 19:43 ?        00:00:00 /lib/systemd/systemd-journald
+root       255     1  0 11640  5216   0 19:43 ?        00:00:00 /lib/systemd/systemd-udevd
+root       286     2  0     0     0   0 19:43 ?        00:00:00 [iprt-VBoxWQueue]
+root       344     2  0     0     0   0 19:43 ?        00:00:00 [ttm_swap]
+root       345     2  0     0     0   0 19:43 ?        00:00:00 [irq/18-vmwgfx]
+root       438     1  0 17651  6220   0 19:43 ?        00:00:00 /lib/systemd/systemd-logind
+root       439     1  0 66336 12440   0 19:43 ?        00:00:00 /usr/sbin/nmbd --foreground --no-process-group
+root       443     1  0  7830  3152   0 19:43 ?        00:00:00 /usr/sbin/cron -f
+root       454     1  0 71908  7000   0 19:43 ?        00:00:00 /usr/lib/accountsservice/accounts-daemon
+root       460     1  0 42609 17548   0 19:43 ?        00:00:00 /usr/bin/python3 /usr/bin/networkd-dispatcher --run-startup-trigg
+root       470     1  0  4045  1992   0 19:43 tty1     00:00:00 /sbin/agetty -o -p -- \u --noclear tty1 linux
+root       474     1  0 72263  7028   0 19:43 ?        00:00:00 /usr/lib/policykit-1/polkitd --no-debug
+root       483     1  0 89169 20668   0 19:43 ?        00:00:00 /usr/sbin/smbd --foreground --no-process-group
+root       487   483  0 86234  5952   0 19:43 ?        00:00:00 /usr/sbin/smbd --foreground --no-process-group
+root       488   483  0 86232  4748   0 19:43 ?        00:00:00 /usr/sbin/smbd --foreground --no-process-group
+root       489   483  0 89169  6820   0 19:43 ?        00:00:00 /usr/sbin/smbd --foreground --no-process-group
+root       559     1  0 32810   384   0 19:43 ?        00:00:00 VBoxClient --vmsvga
+root       560   559  0 32810  2320   0 19:43 ?        00:00:00 VBoxClient --vmsvga
+root       565     1  0 91082  6840   0 19:43 ?        00:00:00 /usr/sbin/lightdm
+root       585     1  0 62092  2688   0 19:43 ?        00:00:00 /usr/sbin/VBoxService --pidfile /var/run/vboxadd-service.sh
+root       594   565  0 92175 89240   0 19:43 tty7     00:00:40 /usr/lib/xorg/Xorg -core :0 -seat seat0 -auth /var/run/lightdm/ro
+root       607   565  0 61599  7212   0 19:43 ?        00:00:00 lightdm --session-child 12 15
+root       936     2  0     0     0   0 21:15 ?        00:00:00 [kworker/u2:0]
+root       941     2  0     0     0   0 21:21 ?        00:00:00 [kworker/u2:2]
+
+Zadanie:
+1.Uruchom wybrany przez Ciebie edytor tekstowy za pomocą menu "start" (menu aplikacji).
+Uruchomiłem Text Editor.
+
+2.Zobacz, jaki ma on PID - przyda się do tego komenda ps
+ps aux
+PID miał wartość 955
+
+3.Wydaj komendę kill w taki sposób, aby ten edytor się wyłączył. Zobacz czy to działa. Uwaga - niektóre programy przechwytują sygnały i mogą je częściowo blokować. Jeśli program nie wyłącza się, to zobacz jaka jest jego reakcja. Zobacz czy możesz wysłać do niego SIGKILL (zerknij do man).
+kill 955
+Program został wyłączony.
+
+4.zobacz działanie komendy killall shell
+killall shell
+shell: no process found
+
+5.Zobacz czy kill zadziała dla dowolnego procesu
+Komenda kill nie zadziała na pewno dla procesów innych użytkowników ze względu na brak uprawnień.
+
+W terminalu jest kilka przydatnych skrótów klawiszowych. Jednym z nich jest Ctrl+C. Niektórzy z Państwa już go mieli okazję przetestować. Jest to sposób na wyłączenie aktywnego programu w terminalu. Proszę go przetestować w taki sposób, że:
+1.Uruchamiamy komendę cat bez parametrów.
+2.Wciśnij Ctrl+C i zobacz co się stanie
+cat
+^C
+Program został wyłączony bez zapisania danych wejściowych.
+
+Kolejnym fajnym (zależy dla kogo ;) ) skrótem klawiszowym jest Ctrl+D - służy on do zakończenia strumienia wejściowego. Działa to trochę inaczej niż poprzednie rozwiązanie, mimo że na pierwszy rzut oka wygląda tak samo. Tym razem nie wysyła sygnału zakończenia, a jedynie zamyka strumień wejściowy. Jest to bardzo przydatne, jeśli chcemy zakończyć działanie jakiegoś programu korzystającego ze standardowego wejścia, ale w sposób możliwie bezpieczny. Zobacz co się stanie, jeśli :
+1.Wydaj komendę cat > wynik1.txt
+2.Wpisz tekst witaj bez wciskania klawisza Enter.
+3.Wciśnij Ctrl+C
+4.Zobacz co się znalazło w pliku wynik1.txt
+Plik jest pusty.
+
+1.Wydaj komendę cat > wynik2.txt
+2.Wpisz tekst witaj bez wciskania klawisza Enter.
+3.Wciśnij Ctrl+D (możliwe że będzie trzeba wcisnąć to dwa razy)
+4.Zobacz co się znalazło w pliku wynik2.txt 
+Plik zawiera tekst "Witaj"
+
+Ctrl+Z służy do zatrzymania bieżącego procesu i przeniesienia go do tła. To znaczy program ciągle jest w pamięci, ale się nie wykonuje. Zobacz co się stanie jeśli:
+1.Wpisz komendę gimp
+2.W terminalu w którym się to uruchomiło wciśnij Ctrl+Z
+3.Spróbuj coś wyklikać w gimpie ;)
+Po wciśnięciu Ctrl+Z program został zatrzymany i przeniesiony do tła. 
+
+Komenda bg służy do uruchomienia zatrzymanego procesu w tle. Zobacz:
+Wpisz komendę bg
+Program wznowiono i zachowano w tle.
+
+Komenda fg służy do przeniesienia procesu na pierwszy plan. Zobacz co się stanie jeśli wpiszesz:
+fg
+Program wznowiono i przeniesiono na pierwszy plan.
+
+W momencie uruchamiania programu, możemy od razu nakazać wykonanie go w tle. Służy do tego znak & umieszczony na końcu instrukcji. Zobacz:
+1.Wykonaj komendę gimp &
+2.Wykonaj komendę gedit &
+3.Wykonaj komendę geany & 
+Programy uruchomiły się w tle, a terminal jest wolny.
+
+Kolejna komenda to jobs. Służy ona do wyświetlenia listy zadań przeniesionych do tła.
+Przywróć program gedit z tła na pierwszy plan. Skorzystaj z jobs aby dowiedzieć się jakie mają numery poszczególne procesy działające w tle.
+fg 2
+Program został przeniesiony na pierwszy plan, a terminal został zablokowany.

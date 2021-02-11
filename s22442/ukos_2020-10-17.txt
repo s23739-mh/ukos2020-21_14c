@@ -17,4 +17,4 @@ tail
 whoami
 su
 
-Jak coś nie działa, to trzeba dopisać na początku "sudo" i już działa.
+sudo programA -uruchomienie programA z uprawnieniami roota

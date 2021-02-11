@@ -1,0 +1,39 @@
+1. Utworzyć we własnym katalogu domowym niedużą strukturę podkatalogów i plików tekstowych. Przydzielić różne prawa dostępu, następnie spróbować wejść do katalogów domowych innych uczestników zajęć i sprawdzić, które z obiektów są tam dla nas dostępne (i w jakim sensie).Spróbować utworzyć włąsny plik w cudzym katalogu ("kukułcze jajo") oraz spróbować usunąć cudzy plik we własnym katalogu (co można zaobserwować?).
+
+Dostępne do odczytu są pliki mające prawo do odczytu 'r', do zapisu mające 'w', a do wykonania mające 'x'.
+Dostępne do zapoznania się z treścią (np. wylistowania plików) katalogi mają prawo 'r', katalogi dostępne do zmiany ich zawartości mają prawo 'w', a katalogi dostępne do wejścia i uczynienia z nich katalogu głównego mają prawo 'x'.
+
+Przy usuwaniu kukułczego jaja pokazuje się komunikat rm: usunąć zabezpieczony przed zapisem zwykły plik 'kukułcze_jajo'? jednak po wpisaniu 'y' można usunąć plik.
+
+2.W utworzonej na swoim koncie strukturze podkatalogów przeprowadzić eksperymenty:
+*usuwając wszelkie prawa dostępu do katalogu bieżącego
+Po usunięciu wszystkich praw dostępu do katalogu bieżącego nie można wejść do żadnych katalogów w katalogu bieżącym, można jedynie wyjść do katalogu nadrzędnego.
+
+*usuwając wszelkie prawa dostępu do katalogu nadrzędnego (nadkatalogu)
+Po usunięciu wszelkich praw dostępu do katalogu nadrzędnego można dowolnie przemieszczać się pomiędzy katalogami w katalogu nadrzędnym, jednak nie można wejść do katalogu nadrzędnego.
+
+W jakich przypadkach możemy wykonać wtedy polecenie cd?
+
+W jakich przypadkach możemy wykonać polecenie chmod?
+
+Czym możemy bezpośrednio przeskoczyć do katalogu ABC/XYZ, jeśli nie mamy prawa dostępu do ABC, ale mamy do XYZ?
+Mimo posiadania praw dostępu do dalszego katalogu, nie można do niego wejść nie posiadając praw do katalogu nadrzędnego.
+
+3.W zespołach 2- lub 3-osobowych wypróbować możliwość komunikacji przez współdzielony plik: na jednym z kont w zespole utworzyć pusty plik i przydzielić odpowiednie prawa dostępu (do pliku i katalogu domowego). Wpisywać i odczytywać komunikaty przy użyciu poleceń:
+*echo treść_komunikatu > plik
+*cat plik
+Sprawdzić, jaki skutek powoduje zmiana operatora > na operator >> w poleceniu echo. Uruchom także drugi terminal i wykonaj w nim komendę tail -f plik i powtórz powyższe ćwiczenie w pierwszym terminalu (komunikacja za pomocą pliku).
+Zmiana operatora spowodowała, że tekst zaczął być dopisywany do pliku, zamiast nadpisywany.
+
+4.Znaleźć w swoim katalogu domowym podkatalog public_html (jeśli go nie ma, to utworzyć). Umieścić w nim plik o nazwie strona.html o następującej zawartości:
+<HTML>
+<BODY>
+<H1>To jest moja strona domowa</H1>
+</BODY>
+</HTML>
+Sprawdzić, jakie są minimalne prawa dotępu, które trzeba przydzielić do:
+*katalogu domowego;
+*katalogu public_html;
+*pliku strona.html, 
+aby zawartość pliku była widoczna w przeglądarce internetowej pod adresem http://szuflandia.pjwstk.edu.pl/~nazwa_konta/strona.html
+

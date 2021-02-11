@@ -1,0 +1,36 @@
+Mój kochany pamiętniczku,
+na dzisiejszych zajęciach odświeżyłem sobie wiedzę w zakresie strumieni i procesów.
+
+
+Przekierowania strumieni:
+> -przekierowanie wyjścia do pliku - zawartość pliku jest nadpisywana
+>> -przekierowanie wyjścia do pliku - przekierowana treść jest dopisywana na końcu pliku
+
+2> -przekierowanie wyjścia błędów do pliku - zawartość pliku jest nadpisywana
+2>> -przekierowanie wyjścia błędów do pliku - przekierowana treść jest dopisywana na końcu pliku
+
+programA | programB - przekierowanie wyjścia z programA jako wejście do programB
+
+programA < plik -przekierowanie treści pliku plik jako wejście do programA
+
+
+Procesy:
+ps -"By default, ps selects all processes with the same effective user ID (euid=EUID) as the current user and associated with the same terminal as the invoker."(man ps)
+ps aux -wyświetla wszystkie procesy w systemie
+
+kill 123 -zakończenie procesu o PID równym 123
+killall firefox -zakończenie procesu o nazwie "firefox" (w tym przypadku wszystkie uruchomione przeglądarki Firefox zostaną zakończone)
+
+ctrl+z -zatrzymanie i przeniesienie programu w tło
+bg -uruchomienie programu zatrzymanego w tle
+fg -przeniesienie procesu na pierwszy plan
+
+programA & -uruchomienie programA w tle
+
+jobs -wyświetla procesy działające w tle
+
+
+Inne polecenia:
+tar -pakowanie/rozpakowywanie archiwów
+
+wget -pobieranie pliku lub strony z internetu

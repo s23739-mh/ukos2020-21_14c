@@ -1,0 +1,98 @@
+1.Uruchom terminal.
+Terminal uruchomiony.
+
+2.Wyświetl zawartość aktualnego katalogu.
+-ls
+Desktop    Downloads  Pictures  repo       testdir
+Documents  Music      Public    Templates  Videos
+
+3.Sprawdź gdzie aktualnie się znajdujesz. Porównaj to z tym co możesz zobaczyć w interfejsie graficznym.
+/home/ubuntu
+
+4.Przejdź do katalogu Pulpit za pomocą ścieżki względnej.
+cd ./Desktop/
+
+5.Sprawdź gdzie jesteś.
+pwd
+/home/ubuntu/Desktop
+
+6.Wyświetl zawartość bieżącego katalogu.
+adding-packages-permanently-info.txt  passwords-info.txt
+
+7.Zobacz, czy przechodząc do tego katalogu w sposób graficzny (wyklikać) otrzymamy to samo?
+To samo.
+
+8.Wyświetl zawartość swojego katalogu domowego bez przechodzenia do niego (ls z odpowiednim parametrem).
+ls ~
+ala  Desktop  Documents  Downloads  kot  Music  Pictures  Public  repo  Templates  Videos
+
+9.Przejdź do katalogu Obrazy w twoim katalogu domowym za pomocą ścieżki względnej.
+cd ../Pictures/
+
+10.Sprawdź gdzie jesteś.
+pwd
+/home/ubuntu/Pictures
+
+11.Zobacz do jakiego katalogu przejdziesz za pomocą ścieżki ././././././
+Zostałem w tym samym katalogu.
+
+12.Przejdź do swojego katalogu domowego za pomocą ścieżki bezwzględnej.
+cd ~
+
+13.Zobacz, co się stanie jak wpiszesz komendę 'cd/root'. Jak to zrobisz, zastanów się co się stało. Proponuję także zapytać prowadzącego.
+bash: cd: /root: Permission denied
+
+14.Zobaczy co się stanie, jeśli wciśniesz kombinację klawiszy: Ctrl+Alt+F1.
+Włączyłem konsolę tekstową. Wyszedłem używając Alt+F7.
+
+Korzystając z komend cd oraz mkdir stwórz następujące drzewo katalogów w swoim katalogu domowym (w dowolnym podkatalogu, albo bezpośrednio w ~):
+ukos
+ |\ katalog
+ |      |\ katalog2
+ |       \ katalog3
+  \ klamka
+
+mkdir -p ukos/{katalog/{katalog2,katalog3},klamka}
+tree ukos
+ukos
+├── katalog
+│   ├── katalog2
+│   └── katalog3
+└── klamka
+
+W katalogu ukos/klamka stwórz pliki zajęcia2.txt zajęcia2.log inny.txt nowy.txt
+touch ukos/klamka/{zajęcia2.txt,zajęcia2.log,inny.txt,nowy.txt}
+tree ukos/klamka/
+ukos/klamka/
+├── inny.txt
+├── nowy.txt
+├── zajęcia2.log
+└── zajęcia2.txt
+
+Za pomocą jednego polecenia mkdir stwórz w katalogu ukos następujący katalog: ukos/to/jest/dluga/nazwa
+mkdir -p ukos/to/jest/dluga/nazwa
+tree ukos/to
+ukos/to
+└── jest
+    └── dluga
+        └── nazwa
+
+następnie umieść w katalogu ukos/to/jest/dluga/nazwa plik dane.txt
+touch ukos/to/jest/dluga/nazwa/dane.txt
+ls ukos/to/jest/dluga/nazwa/
+dane.txt
+
+Usuń z katalogu ukos/klamka wszystkie pliki z rozszerzeniem txt
+rm ukos/klamka/*.txt
+ls ukos/klamka/
+zajęcia2.log
+
+Usuń katalog ukos/katalog/katalog2
+rmdir ukos/katalog/katalog2/
+ls ukos/katalog/
+katalog3
+
+Usuń cały katalog klamka za pomocą jednego polecenia
+rm -r ukos/klamka/
+ls ukos
+katalog  to

@@ -4,3 +4,31 @@ My diary, after today's UKOS lectures (07-11-2020), I've learned:
 -How to get to Szuflandia with terminal and create directories in there
 -About Text Browsers like w3m or links
 I am slowly getting used to linux, but it is still pretty difficult, also lectures today were great!
+
+
+Exercises
+============
+1. Create few directories and files inside of home directory. Give each of them other rights,
+get into home directories of colleagues and check how available are those files for you (and how).
+Try to create a file named "kukułcze jajo.txt" and try to remove some of the files that other left
+in your directory.
+-Done. Because of not having permissions to read some files, some of them are invisible,
+without "x" permission, I can't do anything with a file and without permission to write i am unable
+to write (who would have thought!)
+
+2. In your structure of directories, try to:
+- Remove all permissions to current directory
+- Remove all permissions to parent directory 
+When can you use cd? When can you use chmod? Can you get to XYZ with permissions only to XYZ if ABC/XYZ ?
+
+-After removing all perms to curr dir. I am unable to do much
+After removing all perms to par dir. I can do whatever i want in current directory but i for example i cant get out simply typing cd ../
+I cant use cd when stuck inside of parent directory, i am unable to get to XYZ without perms to ABC
+
+3. Already Done
+
+4. Already Done and not working ://
+
+5. Read about umask in man. Try changing mask, creating some files and checking permissions to files.
+- Okay so default mask for me was 002. After changing it into 004, every created file
+had "773" permissions. So there is a formula (777-umask)=file permissions

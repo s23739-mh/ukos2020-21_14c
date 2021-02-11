@@ -1,0 +1,39 @@
+1.Znajdujesz się w katalogu kota. Katalog ala jest w katalogu /tmp/ukos.
+Jak przejść do katalogu ale za pomocą:
+* ścieżki względnej (relatywnej)
+cd ../../../kot/ma/ale
+* ścieżki bezwzględnej (absolutnej) 
+cd ~/tmp/ukos/kot/ma/ale
+
+2.Masz taki układ katalogów, jak wyżej i ciągle jesteś w katalogu kota. Jak utworzyć poddrzewo katalogów jan/kowalski w katalogu ale za pomocą jednej komendy?
+mkdir -p jan/kowalski
+
+3.Masz taki układ katalogów, jak wyżej i ciągle jesteś w katalogu kota. Jak przenieść katalog ale do katalogu i? 
+mv ~/kot/ma/ale ~/ala/i
+
+4.Jak zamknąć program, który nie odpowiada i nie reaguje na ctrl+c?
+Poprzez wyczytanie PID programu poleceniem ps aux oraz poleceniem kill numer_PID.
+
+5.Jak wypisać wszystkie pliki w bieżącym katalogu, których nazwa zaczyna się od al?
+ls -a . | grep '^al'
+
+6. Nadaj uprawnienia do katalogu <ala> tak, aby:
+* każdy mógł do niego wejść
+* tylko grupa mogła wyświetlić, co wnim jest
+* właściciel ma pełne prawa
+chmod u=rwx g=r o=x ala
+chmod 741 ala
+
+7.Jak utworzyć plik z listą plików w bieżącym katalogu?
+ls > lista.txt
+
+8.Nie możesz utworzyć żadnego pliku na swoim koncie uczelnianym. Co się mogło stać? (wymień co najmniej 2 opcje). Zakłądamy, że możesz zalogować się w konsoli i nie masz zaległości w opłatach.
+* Nie mam uprawnień do zapisu
+* Brak wolnego miejsca na serwerze 
+
+9.Jak przyspieszyć wpisywanie komend w terminalu (jaki klawisz pozwala na uzupełnianie komend?)
+Klawisz <tab>
+
+10.Jak uruchomić program, aby nie blokował on terminala? Są dwa sposoby.
+* Uruchamiamy program normalnie, a następnie zatrzymujemy poprzez CTRL+Z i przenosimy go do do tła poprzez polecenie bg.
+* Uruchamiamy program dopisując na końcu &, co skutkuje, że program od razu uruchomi się w tle.

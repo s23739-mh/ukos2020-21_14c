@@ -1,0 +1,226 @@
+2020/10/24 ZAJĘCIA NR 1
+
+https://szuflandia.pjwstk.edu.pl:9000/, 01 Linux - wstęp do konsoli, zadania:
+
+(Wszystkie pytania oraz fragmenty terminala (wpisywane komendy i rezultaty ich działania) skopiowano zaznaczając odpowiednie fragmenty tekstu oraz wklejając je do niniejszego pliku przy użyciu kombinacji klawiszy SHIFT+INS).
+
+1. Uruchom terminal. 
+
+	Poza możliwością uruchomienia terminala z menu, domyślnym skrótem w Ubuntu jest kombinacja klawiszy CTRL+ALT+T.
+
+2. Wyświetl zawartość aktualnego katalogu. 
+
+	Zawartość aktualnego katalogu można wyświetlić za pomocą komendy ls - poniżej przykładowy rezultat:
+
+	ubuntu@bss-ubu1804:~$ ls
+	Desktop    Downloads  Pictures  repo       ukos
+	Documents  Music      Public    Templates  Videos
+
+3. Sprawdź gdzie aktualnie się znajdujesz. Porównaj to z tym co możesz zobaczyć w interfejsie graficznym.
+
+	Aktualny katalog można wyświetlić za pomocą komendy pwd :
+
+	ubuntu@bss-ubu1804:~$ pwd
+	/home/ubuntu
+
+	Interfejs graficzny w pasku adresu również pokazuje powyższą ścieżkę.
+
+4. Przejdź do katalogu Pulpit za pomocą ścieżki względnej.
+
+	Znajdując się w katalogu /home/ubuntu, przejście do katalogu Pulpit (Desktop) przy użyciu ścieżki względnej jest możliwe stosując komendę cd ./Desktop :
+
+	ubuntu@bss-ubu1804:~$ cd ./Desktop
+	ubuntu@bss-ubu1804:~/Desktop$ 
+
+5. Sprawdź gdzie jesteś. 
+
+	Stosując komendę pwd :
+
+	ubuntu@bss-ubu1804:~/Desktop$ pwd
+	/home/ubuntu/Desktop
+
+6. Wyświetl zawartość bieżącego katalogu.
+
+	Stosując komendę ls :
+
+	ubuntu@bss-ubu1804:~/Desktop$ ls
+	adding-packages-permanently-info.txt  passwords-info.txt
+
+7. Zobacz, czy przechodząc do tego katalogu w sposób graficzny (wyklikać) otrzymamy to samo? 
+
+	Tak, interfejs graficzny pozwala nam wyświetlić pliki znajdujące się w katalogu (terminal może być jednak bardziej przydatny w przypadku, gdy chcielibyśmy zobaczyć np. listę wszystkich plików wraz z informacjami o przypisanych do nich uprawnieniach).
+
+8. Wyświetl zawartość swojego katalogu domowego bez przechodzenia do niego (ls z odpowiednim parametrem).
+
+	Można to osiągnąć za pomocą komendy ls .. (gdy znajdujemy się w katalogu podrzędnym do tego katalogu) lub za pomocą komendy ls ~ :
+
+	ubuntu@bss-ubu1804:~/Desktop$ ls ..
+	Desktop    Downloads  Pictures  repo       ukos
+	Documents  Music      Public    Templates  Videos
+
+9. Przejdź do katalogu Obrazy w twoim katalogu domowym za pomocą ścieżki względnej.
+
+	Można to zrobić przy pomocy komendy cd ../Pictures (lub też cd ./../Pictures):
+
+	ubuntu@bss-ubu1804:~/Desktop$ cd ../Pictures
+	ubuntu@bss-ubu1804:~/Pictures$ 
+
+10. Sprawdź gdzie jesteś.
+
+	Stosując komendę pwd :
+
+	ubuntu@bss-ubu1804:~/Pictures$ pwd
+	/home/ubuntu/Pictures
+
+11. Zobacz do jakiego katalogu przejdziesz za pomocą ścieżki ././././././ 
+
+	Ponieważ "kropka" oznacza bieżący katalog, użycie powyższej ścieżki będzie skutkowało pozostaniem w tym samym katalogu (niezależnie od ilości powtórzeń ./):
+
+	ubuntu@bss-ubu1804:~/Pictures$ cd ././././././././
+	ubuntu@bss-ubu1804:~/Pictures$ pwd
+	/home/ubuntu/Pictures
+
+12. Przejdź do swojego katalogu domowego za pomocą ścieżki bezwzględnej.
+
+	Stosując komendę cd /home/ubuntu :
+
+	ubuntu@bss-ubu1804:~/Pictures$ cd /home/ubuntu
+	ubuntu@bss-ubu1804:~$ pwd
+	/home/ubuntu
+
+13. Zobacz co się stanie jak wpiszesz komendę 'cd /root'. Jak już to zrobisz, zastanów się co się stało. Proponuję także zapytać prowadzącego.
+
+	Wpisanie komendy cd /root skutkuje brakiem wejścia do wskazanego katalogu (root) ze względu na brak uprawnień do wykonania takiej czynności:
+
+	ubuntu@bss-ubu1804:~$ cd /root
+	bash: cd: /root: Permission denied
+
+	ubuntu@bss-ubu1804:/$ ls -la
+	[...]
+	drwx------   5 root   root        4096 Nov 11 18:33 root
+
+	Za uprawnienia użytkownika odpowiadają kolejne znaki po "d" wskazującym, że jest to katalog ("directory") i "rxw", wskazującymi na uprawnienia samego roota; dalsze "kreski" ("---") wskazują na brak przyznania uprawnień użytkownikom, w tym do otwierania (dostępu do) tego katalogu.
+
+14. Zobacz, co się stanie, jeśli wciśniesz kombinację klawiszy: Ctrl+Alt+F1 .
+
+	Kombinacja klawiszy CTRL+ALT+F1...F7 pozwala na przełączania pomiędzy kolejnymi terminalami (F1-F6) oraz interfejsem graficznym (F7). W przypadku uruchomienia maszyny wirtualnej w trybie pełnoekranowym (HOST+F, gdzie HOST to prawy CTRL) jest możliwe takie przełączanie (użycie tej kombinacji klawiszy, z lewym CTRL).
+
+[15]. Korzystając z komend cd oraz mkdir stwórz następujące drzewo katalogów w swoim katalogu domowym (w dowolnym podkatalogu, albo bezpośrednio w ~):
+
+ukos
+ |\ katalog
+ |      |\ katalog2
+ |       \ katalog3
+  \ klamka
+
+	Powyższe drzewo katalogów może zostać utworzone przy pomocy następujących komend:
+
+	ubuntu@bss-ubu1804:~$ mkdir ukos
+	ubuntu@bss-ubu1804:~$ cd ukos
+	ubuntu@bss-ubu1804:~/ukos$ mkdir katalog
+	ubuntu@bss-ubu1804:~/ukos$ cd katalog/
+	ubuntu@bss-ubu1804:~/ukos/katalog$ mkdir katalog2
+	ubuntu@bss-ubu1804:~/ukos/katalog$ mkdir katalog3
+	ubuntu@bss-ubu1804:~/ukos/katalog$ cd ..
+	ubuntu@bss-ubu1804:~/ukos$ mkdir klamka
+	ubuntu@bss-ubu1804:~/ukos$ tree
+	.
+	├── katalog
+	│   ├── katalog2
+	│   └── katalog3
+	└── klamka
+
+	4 directories, 0 files
+
+[16]. W katalogu ukos/klamka stwórz pliki zajęcia2.txt zajęcia2.log inny.txt nowy.txt
+
+	Powyższe pliki można utworzyć przy pomocy jednej komendy touch , wymieniając jako argumenty nazwy poszczególnych plików, które mają zostać utworzone:
+
+	ubuntu@bss-ubu1804:~/ukos$ cd klamka
+	ubuntu@bss-ubu1804:~/ukos/klamka$ touch zajecia2.txt zajecia2.log inny.txt nowy.txt
+	ubuntu@bss-ubu1804:~/ukos/klamka$ ls
+	inny.txt  nowy.txt  zajecia2.log  zajecia2.txt
+
+[17]. Za pomocą jednego polecenia mkdir stwórz w katalogu ukos następujący katalog: ukos/to/jest/dluga/nazwa
+
+	Wpisanie polcenia mkdir ukos/to/jest/dluga/nazwa powoduje wystąpienie błędu - program próbuje bowiem utworzyć katalog "nazwa" w katalogach/podkatalogach (odpowiednio) "ukos/to/jest/dluga/", które nie zostały utworzone (nie istnieją):
+
+	ubuntu@bss-ubu1804:~/ukos$ mkdir ./to/jest/dluga/nazwa
+	mkdir: cannot create directory ‘./to/jest/dluga/nazwa’: No such file or directory
+
+	Aby utworzyć za pomocą jednej komendy mkdir wszystkie katalogi i podkatalogi należy użyć tej komendy z paramterem -p (o czym można się dowiedzieć wpisując komendę mkdir z paramterem --help):
+
+	ubuntu@bss-ubu1804:~/ukos$ mkdir -p ./to/jest/dluga/nazwa
+	ubuntu@bss-ubu1804:~/ukos$ tree
+	.
+	├── katalog
+	│   ├── katalog2
+	│   └── katalog3
+	├── klamka
+	│   ├── inny.txt
+	│   ├── nowy.txt
+	│   ├── zajecia2.log
+	│   └── zajecia2.txt
+	└── to
+	    └── jest
+	        └── dluga
+	            └── nazwa
+
+	8 directories, 4 files
+
+[18]. Następnie umieść w katalogu ukos/to/jest/dluga/nazwa plik dane.txt
+
+	Można to uczynić za pomocą komendy touch , podając odpowiednią ścieżkę pliku:
+
+	ubuntu@bss-ubu1804:~/ukos$ touch ./to/jest/dluga/nazwa/dane.txt
+	ubuntu@bss-ubu1804:~/ukos$ cd to
+	ubuntu@bss-ubu1804:~/ukos/to$ tree
+	.
+	└── jest
+	    └── dluga
+	        └── nazwa
+	            └── dane.txt
+
+	3 directories, 1 file
+
+[19.] Usuń z katalogu ukos/klamka wszystkie pliki z rozszerzeniem txt
+
+	Pliki o określonym rozszerzeniu można usunąć przy pomocy komendy rm oraz przy wykorzystaniu znaku "gwiazdki" * oznaczającego dowolny ciąg znaków:
+
+	ubuntu@bss-ubu1804:~/ukos/klamka$ ls
+	inny.txt  nowy.txt  zajecia2.log  zajecia2.txt
+	ubuntu@bss-ubu1804:~/ukos/klamka$ rm *.txt
+	ubuntu@bss-ubu1804:~/ukos/klamka$ ls
+	zajecia2.log
+
+[20]. Usuń katalog ukos/katalog/katalog2
+
+	Do usuwania katalogów służy polecenie rmdir :
+
+	ubuntu@bss-ubu1804:~/ukos/katalog$ ls
+	katalog2  katalog3
+	ubuntu@bss-ubu1804:~/ukos/katalog$ rmdir katalog2
+	ubuntu@bss-ubu1804:~/ukos/katalog$ ls
+	katalog3
+
+[21]. Usuń cały katalog klamka za pomocą jednego polecenia 
+
+	Ponieważ katalog klamka zawiera plik zajecia2.log , nie jest możliwe jego usunięcie przy pomocy polecenia rmdir :
+
+	ubuntu@bss-ubu1804:~/ukos$ rmdir klamka
+	rmdir: failed to remove 'klamka': Directory not empty
+
+	Ponieważ klamka jest katalogiem, również użycie samego polecenia rm będzie niesktueczne:
+
+	ubuntu@bss-ubu1804:~/ukos$ rm klamka
+	rm: cannot remove 'klamka': Is a directory
+
+	Dlatego, aby wykonać powyższe zadanie, konieczne jest użycie polecenia rm z paramterem -r :
+
+	ubuntu@bss-ubu1804:~/ukos$ ls
+	katalog  klamka  to
+	ubuntu@bss-ubu1804:~/ukos$ rm -r klamka
+	ubuntu@bss-ubu1804:~/ukos$ ls
+	katalog  to
+
+

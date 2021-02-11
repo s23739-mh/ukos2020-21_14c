@@ -1,0 +1,407 @@
+2020/11/07 ZAJĘCIA NR 2
+
+https://szuflandia.pjwstk.edu.pl:9000/, 02 Prawa dostępu, ćwiczenia:
+
+1. Utworzyć we własnym katalogu domowym niedużą strukturę podkatalogów i plików tekstowych. Przydzielić różne prawa dostępu, [...]
+
+	Następujące katalogi i pliki utworzono przy pomocy polecenia mkdir (w tym przy użyciu paramteru -p ) oraz touch (w odniesieniu do plików):
+
+	s23575@szuflandia:~$ mkdir Katalog1
+	s23575@szuflandia:~$ mkdir -p Katalog2/Katalog3
+	s23575@szuflandia:~$ mkdir -p Katalog2/Katalog4
+	s23575@szuflandia:~$ mkdir Katalog5
+	s23575@szuflandia:~$ touch Katalog2/Katalog3/Plik1
+	s23575@szuflandia:~$ touch Katalog2/Katalog3/Plik2
+	s23575@szuflandia:~$ tree
+	s23575@szuflandia:~$ tree
+	.
+	├── Katalog1
+	├── Katalog2
+	│   ├── Katalog3
+	│   │   ├── Plik1
+	│   │   └── Plik2
+	│   └── Katalog4
+	└── Katalog5
+
+	Powyższe katalogi charakteryzują się następującymi uprawnieniami:
+
+	s23575@szuflandia:~$ ls -la
+
+	s23575@szuflandia:~$ ls -la
+	razem 104
+	drwxr-xr-x    5 s23575 pjwstk  4096 lis 13 21:49 .
+	drwxr-xr-x 2858 root   root   69632 lis 14 01:30 ..
+	-rw-------    1 s23575 pjwstk   208 lis 13 21:54 .bash_history
+	-rw-r--r--    1 s23575 pjwstk   220 paź 21 01:30 .bash_logout
+	-rw-r--r--    1 s23575 pjwstk  3392 paź 21 01:30 .bashrc
+	drwxr-xr-x    2 s23575 pjwstk  4096 lis 13 21:48 Katalog1
+	drwxr-xr-x    4 s23575 pjwstk  4096 lis 13 21:49 Katalog2
+	drwxr-xr-x    2 s23575 pjwstk  4096 lis 13 21:49 Katalog5
+	-rw-r--r--    1 s23575 pjwstk   675 paź 21 01:30 .profile
+
+	s23575@szuflandia:~$ ls -la Katalog2/Katalog3
+	razem 8
+	drwxr-xr-x 2 s23575 pjwstk 4096 lis 14 11:11 .
+	drwxr-xr-x 4 s23575 pjwstk 4096 lis 13 21:49 ..
+	-rw-r--r-- 1 s23575 pjwstk    0 lis 14 11:11 Plik1
+	-rw-r--r-- 1 s23575 pjwstk    0 lis 14 11:11 Plik2
+
+	Przykładowe odebranie uprawnień do Katalogu3 (do zapisu) przy pomocy komendy chmod u-w - i sprawdzenie rezultatu poprzez próbę utworzenia w tym katalogu nowego pliku:
+
+	s23575@szuflandia:~$ cd Katalog2
+	s23575@szuflandia:~/Katalog2$ ls -la
+	razem 16
+	drwxr-xr-x 4 s23575 pjwstk 4096 lis 13 21:49 .
+	drwxr-xr-x 5 s23575 pjwstk 4096 lis 13 21:49 ..
+	drwxr-xr-x 2 s23575 pjwstk 4096 lis 14 11:11 Katalog3
+	drwxr-xr-x 2 s23575 pjwstk 4096 lis 13 21:49 Katalog4
+	s23575@szuflandia:~/Katalog2$ chmod u-w Katalog3
+	s23575@szuflandia:~/Katalog2$ ls -la
+	razem 16
+	drwxr-xr-x 4 s23575 pjwstk 4096 lis 13 21:49 .
+	drwxr-xr-x 5 s23575 pjwstk 4096 lis 13 21:49 ..
+	dr-xr-xr-x 2 s23575 pjwstk 4096 lis 14 11:11 Katalog3
+	drwxr-xr-x 2 s23575 pjwstk 4096 lis 13 21:49 Katalog4
+	s23575@szuflandia:~/Katalog2$ touch Katalog3/Plik3
+	touch: nie można dotknąć 'Katalog3/Plik3': Brak dostępu
+
+	Ponowne przyznanie uprawnień do zapisu (write, w), odebranie uprawnień do wykonywania (execute, x) przy pomocy komendy chmod u+w,u-x i sprawdzenie rezultatu poprzez próbę utworzenia w tym katalogu pliku (komenda touch ), sprawdzenia jego zawartości (komenda ls -la ) i wejścia do tego katalogu (komenda cd ):
+
+	s23575@szuflandia:~/Katalog2$ ls -la
+	razem 16
+	drwxr-xr-x 4 s23575 pjwstk 4096 lis 13 21:49 .
+	drwxr-xr-x 5 s23575 pjwstk 4096 lis 14 11:19 ..
+	dr-xr-xr-x 2 s23575 pjwstk 4096 lis 14 11:11 Katalog3
+	drwxr-xr-x 2 s23575 pjwstk 4096 lis 13 21:49 Katalog4
+	s23575@szuflandia:~/Katalog2$ chmod u+w,u-x Katalog3/
+	s23575@szuflandia:~/Katalog2$ ls -la
+	razem 16
+	drwxr-xr-x 4 s23575 pjwstk 4096 lis 13 21:49 .
+	drwxr-xr-x 5 s23575 pjwstk 4096 lis 14 11:19 ..
+	drw-r-xr-x 2 s23575 pjwstk 4096 lis 14 11:11 Katalog3
+	drwxr-xr-x 2 s23575 pjwstk 4096 lis 13 21:49 Katalog4
+	s23575@szuflandia:~/Katalog2$ touch Katalog3/Plik3
+	touch: nie można dotknąć 'Katalog3/Plik3': Brak dostępu
+	s23575@szuflandia:~/Katalog2$ ls -la Katalog3/
+	ls: nie ma dostępu do 'Katalog3/..': Brak dostępu
+	ls: nie ma dostępu do 'Katalog3/Plik1': Brak dostępu
+	ls: nie ma dostępu do 'Katalog3/.': Brak dostępu
+	ls: nie ma dostępu do 'Katalog3/Plik2': Brak dostępu
+	razem 0
+	d????????? ? ? ? ?            ? .
+	d????????? ? ? ? ?            ? ..
+	?????????? ? ? ? ?            ? Plik1
+	?????????? ? ? ? ?            ? Plik2
+	s23575@szuflandia:~/Katalog2$ cd Katalog3
+	-shell: cd: Katalog3: Brak dostępu
+
+	Ponowne przyznanie uprawnień do wykonywania w odniesieniu do Katalogu3, modyfikacja Pliku1, odebranie uprawnień do odczytu (read, r) Katalogu3 - komendy chmod u+x i chmod u-r - nie pozwoli to na odczytanie zawartości katalogu, ale pozwoli na wejście do niego i odczytanie zawartości pliku (przy pomocy komendy cat):
+
+	s23575@szuflandia:~/Katalog2$ ls -la
+	razem 16
+	drwxr-xr-x 4 s23575 pjwstk 4096 lis 13 21:49 .
+	drwxr-xr-x 5 s23575 pjwstk 4096 lis 14 11:31 ..
+	drw-r-xr-x 2 s23575 pjwstk 4096 lis 14 11:11 Katalog3
+	drwxr-xr-x 2 s23575 pjwstk 4096 lis 13 21:49 Katalog4
+	s23575@szuflandia:~/Katalog2$ chmod u+x Katalog3
+	s23575@szuflandia:~/Katalog2$ cd Katalog3
+	s23575@szuflandia:~/Katalog2/Katalog3$ ls
+	Plik1  Plik2
+	s23575@szuflandia:~/Katalog2/Katalog3$ vim Plik1
+	s23575@szuflandia:~/Katalog2/Katalog3$ cd ..
+	s23575@szuflandia:~/Katalog2$ chmod u-r Katalog3
+	s23575@szuflandia:~/Katalog2$ ls -la
+	razem 16
+	drwxr-xr-x 4 s23575 pjwstk 4096 lis 13 21:49 .
+	drwxr-xr-x 5 s23575 pjwstk 4096 lis 14 19:49 ..
+	d-wxr-xr-x 2 s23575 pjwstk 4096 lis 14 19:49 Katalog3
+	drwxr-xr-x 2 s23575 pjwstk 4096 lis 13 21:49 Katalog4
+	s23575@szuflandia:~/Katalog2$ cd Katalog3
+	s23575@szuflandia:~/Katalog2/Katalog3$ ls
+	ls: nie można otworzyć katalogu '.': Brak dostępu
+	s23575@szuflandia:~/Katalog2/Katalog3$ cat Plik1
+	Przykładowy tekst w pliku.
+
+	Odpowiednie uprawnienia można przyznawać również nie tylko właścicielowi katalogu/pliku (user, u), ale również grupie użytkowników (group, g) oraz pozostałym użytkownikom (other, o) - przykładowo, przy pomocy komendy chmod go+w:
+
+	s23575@szuflandia:~/Katalog2$ ls -la
+	razem 16
+	drwxr-xr-x 4 s23575 pjwstk 4096 lis 13 21:49 .
+	drwxr-xr-x 5 s23575 pjwstk 4096 lis 14 19:49 ..
+	d-wxr-xr-x 2 s23575 pjwstk 4096 lis 14 19:49 Katalog3
+	drwxr-xr-x 2 s23575 pjwstk 4096 lis 13 21:49 Katalog4
+	s23575@szuflandia:~/Katalog2$ chmod go+w Katalog3
+	s23575@szuflandia:~/Katalog2$ ls -la
+	razem 16
+	drwxr-xr-x 4 s23575 pjwstk 4096 lis 13 21:49 .
+	drwxr-xr-x 5 s23575 pjwstk 4096 lis 14 19:49 ..
+	d-wxrwxrwx 2 s23575 pjwstk 4096 lis 14 19:49 Katalog3
+	drwxr-xr-x 2 s23575 pjwstk 4096 lis 13 21:49 Katalog4
+
+	To można również osiągnąć przypisująć określając wprost uprawnienia przysługujące określonym kategoriom użytkowników - przy pomocy np. komendy chmod u=rwx,go=rx :
+
+	s23575@szuflandia:~/Katalog2$ ls -la
+	razem 16
+	drwxr-xr-x 4 s23575 pjwstk 4096 lis 13 21:49 .
+	drwxr-xr-x 5 s23575 pjwstk 4096 lis 14 19:49 ..
+	d-wxrwxrwx 2 s23575 pjwstk 4096 lis 14 19:49 Katalog3
+	drwxr-xr-x 2 s23575 pjwstk 4096 lis 13 21:49 Katalog4
+	s23575@szuflandia:~/Katalog2$ chmod u=rwx,go=rx Katalog3
+	s23575@szuflandia:~/Katalog2$ ls -la
+	razem 16
+	drwxr-xr-x 4 s23575 pjwstk 4096 lis 13 21:49 .
+	drwxr-xr-x 5 s23575 pjwstk 4096 lis 14 19:49 ..
+	drwxr-xr-x 2 s23575 pjwstk 4096 lis 14 19:49 Katalog3
+	drwxr-xr-x 2 s23575 pjwstk 4096 lis 13 21:49 Katalog4
+
+	Uprawnienia dla wszystkich grup naraz można również dodać lub usunąć przy pomocy polecenia chmod a= (przy usuwaniu wszystkich uprawnień należy użyć znaku minus - ):
+
+	s23575@szuflandia:~/Katalog2$ chmod a=- Katalog3
+	s23575@szuflandia:~/Katalog2$ ls -la
+	razem 16
+	drwxr-xr-x 4 s23575 pjwstk 4096 lis 13 21:49 .
+	drwxr-xr-x 5 s23575 pjwstk 4096 lis 14 19:49 ..
+	d--------- 2 s23575 pjwstk 4096 lis 14 19:49 Katalog3
+	drwxr-xr-x 2 s23575 pjwstk 4096 lis 13 21:49 Katalog4
+
+	Powyższe oparacje (przyznawania i odbierania uprawnień) można również wykonać stosując system ósemkowym (notacji ósemkowej), np. przy pomocy polecenia chmod 755 :
+
+	s23575@szuflandia:~/Katalog2$ chmod 755 Katalog3
+	s23575@szuflandia:~/Katalog2$ ls -la
+	razem 16
+	drwxr-xr-x 4 s23575 pjwstk 4096 lis 13 21:49 .
+	drwxr-xr-x 5 s23575 pjwstk 4096 lis 14 19:49 ..
+	drwxr-xr-x 2 s23575 pjwstk 4096 lis 14 19:49 Katalog3
+	drwxr-xr-x 2 s23575 pjwstk 4096 lis 13 21:49 Katalog4
+
+1. [...] następnie spróbować wejść do katalogów domowych innych uczestników zajęć i sprawdzić, które z obiektów są tam dla nas dostępne (i w jakim sensie). Spróbować utworzyć własny plik w cudzym katalogu ("kukułcze jajko") oraz spróbować usunąć cudzy plik we własnym katalogu (co można zaobserwować ?). [...]
+
+	Przykładowo, za pomocą komendy cd można wejść do katalogu użytkownika t0meck:
+
+	s23575@szuflandia:/home/PJWSTK$ cd t0meck
+	s23575@szuflandia:/home/PJWSTK/t0meck$ ls -la
+	razem 31976
+	  2013 backup
+	[...]
+	drwxr-xr-x    2 t0meck pjwstk     4096 paź  8  2012 publiczny
+	[...]
+	drwx------    5 t0meck pjwstk     4096 lis  7 08:31 zajecia
+
+	Ponieważ jako użytkownik należący do grupy pjwstk nie mam dostępu do katalogu zajecia, próba wejścia do tego katalogu przy pomocy komendy cd będzie skutkowała informacją o braku dostępu: 
+
+	s23575@szuflandia:/home/PJWSTK/t0meck$ cd zajecia
+	-shell: cd: zajecia: Brak dostępu
+	
+	Możliwe będzie natomiast wejście do katalogu Publiczny, ale już nie utworzenie w nim pliku (ze względu na brak uprawnień do zapisu):
+
+	s23575@szuflandia:/home/PJWSTK/t0meck$ cd Publiczny	
+	s23575@szuflandia:/home/PJWSTK/t0meck/Publiczny$ ls -la
+	razem 8
+	drwxr-xr-x  2 t0meck pjwstk 4096 paź  8  2012 .
+	drwxr-xr-x 65 t0meck pjwstk 4096 lis 13 09:54 ..
+	s23575@szuflandia:/home/PJWSTK/t0meck/Publiczny$ touch Plik_testowy
+	touch: nie można dotknąć 'Plik_testowy': Brak dostępu
+
+1. [...] Wypróbować powyższe operacje:
+- w trybie tekstowym;
+- przy użyciu programu Midnight Commander (mc);
+- przy użyciu graficznego interfejsu użytkownika. 
+
+	W przypadku programu Midnight Commander (nawiązujacego, jak rozumiem, do programu Norton Commander) powyższe uprawnienia można - poza wpisywaniem odpowiednich komend - również "wyklikać"; również w przypadku interfejsu graficznego użytkownika możliwe jest wyklikanie odpowiednich uprawnień.
+
+2. W utworzonej na swoim koncie strukturze podkatalogów przeprowadzić eksperymenty:
+- usuwając wszelkie prawa dostępu do katalogu bieżącego;
+- usuwając wszelkie prawa dostępu do katalogu nadrzędnego (nadkatalogu). 
+W jakich przypadkach możemy wykonać wtedy polecenie cd ? W jakich przypadkach możemy wykonać polecenie chmod ? Czy możemy bezpośrednio przeskoczyć do katalogu ABC/XYZ, jeśli nie mamy prawa wstępu do ABC, ale mamy do XYZ ? 
+
+	Usuniecie wszelki praw dostępu do bieżącego katalogu (Katalog3 w przykładzie poniżej) przy pomocy komendy chmod z parametrem  a=- będzie skutkowało np. brakiem możliwości zobaczenia zawartości tego katalogu:
+
+	s23575@szuflandia:~/Katalog2$ ls -la
+	razem 16
+	drwxr-xr-x 4 s23575 pjwstk 4096 lis 13 21:49 .
+	drwxr-xr-x 5 s23575 pjwstk 4096 lis 14 19:49 ..
+	drwxr-xr-x 2 s23575 pjwstk 4096 lis 14 19:49 Katalog3
+	drwxr-xr-x 2 s23575 pjwstk 4096 lis 13 21:49 Katalog4
+	s23575@szuflandia:~/Katalog2$ cd Katalog3
+	s23575@szuflandia:~/Katalog2/Katalog3$ chmod a=- .
+	s23575@szuflandia:~/Katalog2/Katalog3$ ls -la
+	ls: nie można otworzyć katalogu '.': Brak dostępu
+
+	Nie będzie również możliwości zmiany uprawnień do katalogu nadrzędnego z poziomu tego katalogu bieżącego:
+
+	s23575@szuflandia:~/Katalog2/Katalog3$ chmod a=- ..
+	chmod: nie ma dostępu do '..': Brak dostępu
+
+	Będzie natomiast możliwość przejścia do katalogu nadrzędnego i z jego poziomu zmiana uprawnień w zakresie Katalogu3:
+
+	s23575@szuflandia:~/Katalog2/Katalog3$ cd ..
+	s23575@szuflandia:~/Katalog2$ ls
+	Katalog3  Katalog4
+	s23575@szuflandia:~/Katalog2$ ls -la
+	razem 16
+	drwxr-xr-x 4 s23575 pjwstk 4096 lis 13 21:49 .
+	drwxr-xr-x 5 s23575 pjwstk 4096 lis 14 19:49 ..
+	d--------- 2 s23575 pjwstk 4096 lis 14 19:49 Katalog3
+	drwxr-xr-x 2 s23575 pjwstk 4096 lis 13 21:49 Katalog4
+	s23575@szuflandia:~/Katalog2$ chmod 755 Katalog3
+	s23575@szuflandia:~/Katalog2$ ls -la
+	razem 16
+	drwxr-xr-x 4 s23575 pjwstk 4096 lis 13 21:49 .
+	drwxr-xr-x 5 s23575 pjwstk 4096 lis 14 19:49 ..
+	drwxr-xr-x 2 s23575 pjwstk 4096 lis 14 19:49 Katalog3
+	drwxr-xr-x 2 s23575 pjwstk 4096 lis 13 21:49 Katalog4
+
+	Po ponownym przyznaniu uprawnień do Katalogu3 będzie istniała możliwość (z jego poziomu) zmiany uprawnień do katalogu nadrzędnego (Katalog 2):
+
+	s23575@szuflandia:~/Katalog2/Katalog3$ chmod a=- ..
+	s23575@szuflandia:~/Katalog2/Katalog3$ ls -la
+	razem 12
+	drwxr-xr-x  2 s23575 pjwstk 4096 lis 14 19:49 .
+	d---------  4 s23575 pjwstk 4096 lis 13 21:49 ..
+	-rw-r--r--+ 1 s23575 pjwstk   28 lis 14 19:49 Plik1
+	-rw-r--r--  1 s23575 pjwstk    0 lis 14 11:11 Plik2
+
+	W rezultacie powyższej czynności nie będzie możliwości "przejścia" do katalogu nadrzędnego - ale będzie możliwość przejścia do katalogu jeszcze wyższego rzędu:
+
+	s23575@szuflandia:~/Katalog2/Katalog3$ cd ..
+	-shell: cd: ..: Brak dostępu
+	s23575@szuflandia:~/Katalog2/Katalog3$ cd ~
+	s23575@szuflandia:~$ ls -la
+	razem 108
+	drwxr-xr-x    5 s23575 pjwstk  4096 lis 14 19:49 .
+	drwxr-xr-x 2858 root   root   69632 lis 14 01:30 ..
+	-rw-------    1 s23575 pjwstk   333 lis 14 13:42 .bash_history
+	-rw-r--r--    1 s23575 pjwstk   220 paź 21 01:30 .bash_logout
+	-rw-r--r--    1 s23575 pjwstk  3392 paź 21 01:30 .bashrc
+	drwxr-xr-x    2 s23575 pjwstk  4096 lis 13 21:48 Katalog1
+	d---------    4 s23575 pjwstk  4096 lis 13 21:49 Katalog2
+	drwxr-xr-x    2 s23575 pjwstk  4096 lis 13 21:49 Katalog5
+	-rw-r--r--    1 s23575 pjwstk   675 paź 21 01:30 .profile
+	-rw-------    1 s23575 pjwstk  1402 lis 14 19:49 .viminfo
+
+	Natomiast ponowny powrót do Katalogu3 - jako katalogu podrzędnego względem Katalogu2, do którego uprawnienia zostały odebrane - nie będzie możliwy - właśnie ze względu na brak uprawnień do Katalogu2:
+
+	s23575@szuflandia:~$ ls -la
+	razem 108
+	drwxr-xr-x    5 s23575 pjwstk  4096 lis 14 19:49 .
+	drwxr-xr-x 2858 root   root   69632 lis 14 01:30 ..
+	-rw-------    1 s23575 pjwstk   333 lis 14 13:42 .bash_history
+	-rw-r--r--    1 s23575 pjwstk   220 paź 21 01:30 .bash_logout
+	-rw-r--r--    1 s23575 pjwstk  3392 paź 21 01:30 .bashrc
+	drwxr-xr-x    2 s23575 pjwstk  4096 lis 13 21:48 Katalog1
+	d---------    4 s23575 pjwstk  4096 lis 13 21:49 Katalog2
+	drwxr-xr-x    2 s23575 pjwstk  4096 lis 13 21:49 Katalog5
+	-rw-r--r--    1 s23575 pjwstk   675 paź 21 01:30 .profile
+	-rw-------    1 s23575 pjwstk  1402 lis 14 19:49 .viminfo
+	s23575@szuflandia:~$ cd Katalog2/Katalog3
+	-shell: cd: Katalog2/Katalog3: Brak dostępu
+
+3. W zespołach 2- lub 3-osobowych wypróbować możliwość komunikacji przez współdzielony plik: na jednym z kont w zespole utworzyć pusty plik i przydzielić odpowiednie prawa dostępu (do pliku i do katalogu domowego). Wpisywać i odczytywać komunikaty przy użyciu poleceń:
+- echo treść_komunikatu > plik
+- cat plik [...] 
+
+	Aby umożliwić taką komunikację konieczne jest przyznanie uprawnień do odczytu (read, r) i zapisu pliku (write, w) użytkownikom należącym do grupy (group, g).
+
+
+3. [...] Sprawdzić, jaki skutek powoduje zamiana operatora > na operator >> w poleceniu echo. Uruchom także drugi terminal i wykonaj w nim komendę tail -f plik i powtórz powyższe ćwiczenie w pierwszym terminalu (komunikacja za pomocą pliku). 
+
+	Zastosowanie operatora > w komendzie echo powoduje, że cała zawartość danego pliku zostanie zastąpiona określonym tekstem. Natomiast zastosowanie >> w tym wypadku pozwala na dopisanie dodatkowego tekstu. Komenda tail -f pozwala z kolei na biężące wyświetlanie tekstów dopisywanych do danego pliku.
+
+	s23575@szuflandia:~/Katalog2/Katalog3$ echo Przykladowy_tekst > Plik2
+	s23575@szuflandia:~/Katalog2/Katalog3$ cat Plik2
+	Przykladowy_tekst
+	s23575@szuflandia:~/Katalog2/Katalog3$ echo Przykladowy_tekst_2 >> Plik2
+	s23575@szuflandia:~/Katalog2/Katalog3$ cat Plik2
+	Przykladowy_tekst
+	Przykladowy_tekst_2
+	s23575@szuflandia:~/Katalog2/Katalog3$ echo Przykladowy_tekst_3 >>> Plik2
+	-shell: błąd składni przy nieoczekiwanym znaczniku `>'
+        s23575@szuflandia:~/Katalog2/Katalog3$ echo Przykladowy_tekst_3 >> Plik2
+        s23575@szuflandia:~/Katalog2/Katalog3$ echo Przykladowy_tekst_4 >> Plik2
+
+	Zastosowanie komendy tail z parametrem -f w drugim terminalu:
+
+	s23575@szuflandia:~/Katalog2/Katalog3$ tail -f Plik2
+	Przykladowy_tekst
+	Przykladowy_tekst_2
+	Przykladowy_tekst_3
+	Przykladowy_tekst_4
+
+4. Znaleźć w swoim katalogu domowym podkatalog public_html (jeśli go nie ma, to utworzyć). Umieścić w nim plik o nazwie strona.html i następującej zawartości:
+        <HTML>
+        <BODY>
+        <H1>To jest moja strona domowa</H1>
+        </BODY>
+	</HTML> 
+Sprawdzić, jakie są minimalne prawa dostępu, które trzeba przydzielić do:
+- katalogu domowego;
+- katalogu public_html;
+- pliku strona.html, aby zawartość pliku była widoczna w przeglądarce internetowej pod adresem http://szuflandia.pjwstk.edu.pl/~nazwa_konta/strona.html 
+
+	Taka przykładowa strona internetowa może zostać utworzona przy użyciu następujących komend:
+
+	s23575@szuflandia:~$ mkdir public_html
+	s23575@szuflandia:~$ touch strona.html
+	s23575@szuflandia:~$ echo '<HTML>' >> strona.html
+	s23575@szuflandia:~$ echo '<BODY>' >> strona.html
+	s23575@szuflandia:~$ echo '<H1>To jest moja strona domowa</H1>' >> strona.html
+	s23575@szuflandia:~$ echo '</BODY>' >> strona.html
+	s23575@szuflandia:~$ echo '</HTML>' >> strona.html
+	s23575@szuflandia:~$ cat strona.html
+	<HTML>
+	<BODY>
+	<H1>To jest moja strona domowa</H1>
+	</BODY>
+	</HTML>
+
+	Aby powyższa strona była dostępna dla zewnętrznych użytkowników, grupa other, o, musi posiadać uprawnienia read, r - w przypadku odebrania tych uprawnień pojawia się informacja o braku dostępu do strony:
+
+	s23575@szuflandia:~/public_html$ ls -la
+	razem 12
+	drwxr-xr-x 2 s23575 pjwstk 4096 lis 14 20:33 .
+	drwxr-xr-x 6 s23575 pjwstk 4096 lis 14 20:34 ..
+	-rw-r--r-- 1 s23575 pjwstk   66 lis 14 20:33 strona.html
+	s23575@szuflandia:~/public_html$ chmod o=- strona.html
+	s23575@szuflandia:~/public_html$ ls -la
+	razem 12
+	drwxr-xr-x 2 s23575 pjwstk 4096 lis 14 20:33 .
+	drwxr-xr-x 6 s23575 pjwstk 4096 lis 14 20:34 ..
+	-rw-r----- 1 s23575 pjwstk   66 lis 14 20:33 strona.html
+
+	Forbidden
+
+	You don't have permission to access /~s23575/strona.html on this server.
+
+[5]. W opisie bash'a (man) przeczytać opis polecenia wewnętrznego umask i wypróbować jego działanie sprawdzając, a następnie zmieniając swoją maskę trybu pliku i tworząc za każdym razem nowe pliki (przy użyciu polecenia touch plik), a później sprawdzając uzyskane prawa dostępu do nich (polecenie ls -l). Jaka operacja logiczna na bitach domyślnych praw dostępu oraz maski jest wykonywana ? 
+
+	Polecenie umask pozwala określić, jakie wartości będą odejmowane od wartości wynikających z prezentacji uprawnień do plików i katalogów w systemie ósemkowym (notacji ósemkowej). Przykładowo, w przypadku umask 022 oznacza, że określony katalog zostanie utworzony z uprawnieniami o wartościach 755 (7-0, 7-2=5, 7-2=5). Poniżej przedstawiono przykłady zastoowania polecenia umask z różnymi wartościami i ich wpływu na uprawnienia do tworzonych plików:
+
+	ubuntu@bss-ubu1804:~/ukos$ touch plik1
+	ubuntu@bss-ubu1804:~/ukos$ ls -la
+	total 16
+	drwxrwxr-x  4 ubuntu ubuntu 4096 Nov 14 20:43 .
+	drwxr-xr-x 28 ubuntu ubuntu 4096 Nov 14 19:47 ..
+	[...]
+	-rw-r--r--  1 ubuntu ubuntu    0 Nov 14 20:43 plik1
+	[...]
+	ubuntu@bss-ubu1804:~/ukos$ umask 777
+	ubuntu@bss-ubu1804:~/ukos$ touch plik2
+	ubuntu@bss-ubu1804:~/ukos$ ls -la
+	total 16
+	drwxrwxr-x  4 ubuntu ubuntu 4096 Nov 14 20:43 .
+	drwxr-xr-x 28 ubuntu ubuntu 4096 Nov 14 19:47 ..
+	[...]
+	-rw-r--r--  1 ubuntu ubuntu    0 Nov 14 20:43 plik1
+	----------  1 ubuntu ubuntu    0 Nov 14 20:43 plik2
+	[...]
+	ubuntu@bss-ubu1804:~/ukos$ umask 022
+	ubuntu@bss-ubu1804:~/ukos$ touch plik3
+	ubuntu@bss-ubu1804:~/ukos$ ls -la
+	total 16
+	drwxrwxr-x  4 ubuntu ubuntu 4096 Nov 14 20:43 .
+	drwxr-xr-x 28 ubuntu ubuntu 4096 Nov 14 19:47 ..
+	[...]
+	-rw-r--r--  1 ubuntu ubuntu    0 Nov 14 20:43 plik1
+	----------  1 ubuntu ubuntu    0 Nov 14 20:43 plik2
+	-rw-r--r--  1 ubuntu ubuntu    0 Nov 14 20:43 plik3
+	[...]

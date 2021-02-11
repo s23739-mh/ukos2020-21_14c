@@ -1,0 +1,309 @@
+1. Po ustawieniu Execution Policy (polecenie Set-ExecutionPolicy Bypass w trybie administratora), sprawdzenie ustawionej Policy za pomocą polecenia Get-ExecutionPolicy:
+
+	PS C:\> Get-ExecutionPolicy
+	Bypass
+
+2. Zwrócenie wszystkich dostępnych w danej chwili modułów, których wersja jest większa lub równa 3.0 przy pomocy polecenia: Get-Module -ListAvailable | ? {$_.Version -ge "3.0.0.0"}:
+
+	PS C:\> Get-Module -ListAvailable | ? {$_.Version -ge "3.0.0.0"}
+
+
+		Directory: C:\Program Files\WindowsPowerShell\Modules
+
+
+	ModuleType Version    Name                                ExportedCommands
+	---------- -------    ----                                ----------------
+	Script     3.4.0      Pester                              {Describe, Context, It, Should...}
+
+
+		Directory: C:\WINDOWS\system32\WindowsPowerShell\v1.0\Modules
+
+
+	ModuleType Version    Name                                ExportedCommands
+	---------- -------    ----                                ----------------
+	Manifest   3.0.0.0    Microsoft.PowerShell.Diagnostics    {Get-WinEvent, Get-Counter, Import-Counter, Export-Counter...}
+	Manifest   3.0.0.0    Microsoft.PowerShell.Host           {Start-Transcript, Stop-Transcript}
+	Manifest   3.1.0.0    Microsoft.PowerShell.Management     {Add-Content, Clear-Content, Clear-ItemProperty, Join-Path...}
+	Manifest   3.0.0.0    Microsoft.PowerShell.Security       {Get-Acl, Set-Acl, Get-PfxCertificate, Get-Credential...}
+	Manifest   3.1.0.0    Microsoft.PowerShell.Utility        {Format-List, Format-Custom, Format-Table, Format-Wide...}
+	Manifest   3.0.0.0    Microsoft.WSMan.Management          {Disable-WSManCredSSP, Enable-WSManCredSSP, Get-WSManCredSSP, Set-WSManQuickConfig...}
+
+3. Wylistowanie wszystkich poleceń w modułach po przefiltrowaniu wersji powyżej – po wcześniejszym zapisaniu poprzedniej listy do zmiennej $lm:
+
+	PS C:\> $lm | % {Get-Command -Module $_.Name}
+
+	CommandType     Name                                               Version    Source
+	-----------     ----                                               -------    ------
+	Function        AfterAll                                           3.4.0      Pester
+	Function        AfterEach                                          3.4.0      Pester
+	Function        Assert-MockCalled                                  3.4.0      Pester
+	Function        Assert-VerifiableMocks                             3.4.0      Pester
+	Function        BeforeAll                                          3.4.0      Pester
+	[…]
+
+	Powyższe polecenie przy jednoczesnym nadpisaniu zmiennej $lm :
+
+	PS C:\> $lm = $lm | % {Get-Command -Module $_.Name}
+	PS C:\> $lm
+
+	CommandType     Name                                               Version    Source
+	-----------     ----                                               -------    ------
+	Function        AfterAll                                           3.4.0      Pester
+	Function        AfterEach                                          3.4.0      Pester
+	Function        Assert-MockCalled                                  3.4.0      Pester
+	Function        Assert-VerifiableMocks                             3.4.0      Pester
+	Function        BeforeAll                                          3.4.0      Pester
+	[…]
+
+4. Po powyższym przefiltrowaniu, wylistowanie wszystkich poleceń, które mają w nazwie „Set-” – i nadpisanie ich do zmiennej $lm:
+
+	PS C:\> $lm = $lm | ? {($_.Name -like "Set-*")}
+	PS C:\> $lm
+
+	CommandType     Name                                               Version    Source
+	-----------     ----                                               -------    ------
+	Function        Set-DynamicParameterVariables                      3.4.0      Pester
+	Function        Set-TestInconclusive                               3.4.0      Pester
+	Cmdlet          Set-Clipboard                                      3.1.0.0    Microsoft.PowerShell.Management
+	Cmdlet          Set-Content                                        3.1.0.0    Microsoft.PowerShell.Management
+	Cmdlet          Set-Item                                           3.1.0.0    Microsoft.PowerShell.Management
+	Cmdlet          Set-ItemProperty                                   3.1.0.0    Microsoft.PowerShell.Management
+	Cmdlet          Set-Location                                       3.1.0.0    Microsoft.PowerShell.Management
+	Cmdlet          Set-Service                                        3.1.0.0    Microsoft.PowerShell.Management
+	Cmdlet          Set-TimeZone                                       3.1.0.0    Microsoft.PowerShell.Management
+	Cmdlet          Set-WmiInstance                                    3.1.0.0    Microsoft.PowerShell.Management
+	Cmdlet          Set-Acl                                            3.0.0.0    Microsoft.PowerShell.Security
+	Cmdlet          Set-AuthenticodeSignature                          3.0.0.0    Microsoft.PowerShell.Security
+	Cmdlet          Set-ExecutionPolicy                                3.0.0.0    Microsoft.PowerShell.Security
+	Cmdlet          Set-Alias                                          3.1.0.0    Microsoft.PowerShell.Utility
+	Cmdlet          Set-Date                                           3.1.0.0    Microsoft.PowerShell.Utility
+	Cmdlet          Set-PSBreakpoint                                   3.1.0.0    Microsoft.PowerShell.Utility
+	Cmdlet          Set-TraceSource                                    3.1.0.0    Microsoft.PowerShell.Utility
+	Cmdlet          Set-Variable                                       3.1.0.0    Microsoft.PowerShell.Utility
+	Cmdlet          Set-WSManInstance                                  3.0.0.0    Microsoft.WSMan.Management
+	Cmdlet          Set-WSManQuickConfig                               3.0.0.0    Microsoft.WSMan.Management
+
+5. Wyświetlenie powyżej zmiennej w postaci tabelki graficznej otworzonej w nowym oknie (Out-GridView) lub w nowym pliku (Out-File C:\Users\Maciek\nowy_plik.txt):
+
+	PS C:\> $lm | Out-GridView
+	PS C:\> $lm | Out-File C:\Users\Maciek\nowy_plik.txt
+
+6. Załadowanie moduł BitsTransfer za pomocą polecenia Import-Module BitsTransfer (alias: ipmo BitsTransfer) i sprawdzenie, czy widnieje na liście zaimportowanych modułów (przy pomocy polecenia Get-Module i odpowiednich filtrów):
+
+	PS C:\> Import-Module BitsTransfer
+	PS C:\> Get-Module -ListAvailable | ? {($_.Name -like "Bits*")}
+
+
+		Directory: C:\WINDOWS\system32\WindowsPowerShell\v1.0\Modules
+
+
+	ModuleType Version    Name                                ExportedCommands
+	---------- -------    ----                                ----------------
+	Manifest   2.0.0.0    BitsTransfer                        {Add-BitsFile, Complete-BitsTransfer, Get-BitsTransfer, Remove-BitsTransfer...}
+
+7. Wylistowanie wszystkich komend w tym module przy pomocy polecenia Get-Command :
+
+	PS C:\> Get-Command -Module BitsTransfer
+
+	CommandType     Name                                               Version    Source
+	-----------     ----                                               -------    ------
+	Cmdlet          Add-BitsFile                                       2.0.0.0    BitsTransfer
+	Cmdlet          Complete-BitsTransfer                              2.0.0.0    BitsTransfer
+	Cmdlet          Get-BitsTransfer                                   2.0.0.0    BitsTransfer
+	Cmdlet          Remove-BitsTransfer                                2.0.0.0    BitsTransfer
+	Cmdlet          Resume-BitsTransfer                                2.0.0.0    BitsTransfer
+	Cmdlet          Set-BitsTransfer                                   2.0.0.0    BitsTransfer
+	Cmdlet          Start-BitsTransfer                                 2.0.0.0    BitsTransfer
+	Cmdlet          Suspend-BitsTransfer                               2.0.0.0    BitsTransfer
+
+8. Zapisanie loginu i hasła do zmiennej przy pomocy polecenia Get-Credential i próba ich odczytania przy pomocy poleceń $zmienna.UserName i $zmienna.Password :
+
+	PS C:\> $cred = Get-Credential
+
+	cmdlet Get-Credential at command pipeline position 1
+	Supply values for the following parameters:
+	Credential
+	PS C:\> $cred.UserName
+	s23575@szuflandia.pjwstk.edu.pl
+	PS C:\> $cred.Password
+	System.Security.SecureString
+
+	9. Uruchomienie przesyłania pliku w sposób asynchroniczny, nieblokujący konsoli i sprawdzenie stanu transferu („Transferring”):
+
+	PS C:\> $job = Start-BitsTransfer -Source http://szuflandia.pjwstk.edu.pl/pub/repo/java/lubuntu_13_04_v02.zip -Destination D:\ -Credential $cred -Authentication Negotiate -Asynchronous -DisplayName "Moj Bits Transfer"
+	PS C:\> Get-BitsTransfer
+
+	JobId                                DisplayName                                                             TransferType JobState     OwnerAccount
+	-----                                -----------                                                             ------------ --------     ------------
+	28b0f47e-eed1-4ebb-bcdc-7c732cb72388 Microsoft Outlook Offline Address Book 6003f1d0fc9f994bb187fb6677e200ba Download     Transferred  LAPTOP-G9ADC3HM\Maciek
+	0151bf03-08df-4fa2-a854-aa52ff596813 Microsoft Outlook Offline Address Book 359cd6a1680e6d4eb17e2ea33da1beb0 Download     Transferred  LAPTOP-G9ADC3HM\Maciek
+	9ada8b76-3956-4172-bdb4-22d3518bd63f Microsoft Outlook Offline Address Book 83165eaba245a54f92927db4d8b83362 Download     Transferred  LAPTOP-G9ADC3HM\Maciek
+	16bec202-82d6-4a66-bfe0-3759e31987a5 Moj Bits Transfer                                                       Download     Transferring LAPTOP-G9ADC3HM\Maciek
+
+9. Wylistowanie tylko wybranego transferu („Moj Bits Transfer”), zatrzymanie go i usunięcie:
+
+	PS C:\> Get-BitsTransfer | ? {$_.DisplayName -ge "Moj"}
+
+	JobId                                DisplayName       TransferType JobState     OwnerAccount
+	-----                                -----------       ------------ --------     ------------
+	16bec202-82d6-4a66-bfe0-3759e31987a5 Moj Bits Transfer Download     Transferring LAPTOP-G9ADC3HM\Maciek
+
+
+	PS C:\> Get-BitsTransfer | ? {$_.DisplayName -ge "Moj"} | Suspend-BitsTransfer
+
+	JobId                                DisplayName       TransferType JobState  OwnerAccount
+	-----                                -----------       ------------ --------  ------------
+	16bec202-82d6-4a66-bfe0-3759e31987a5 Moj Bits Transfer Download     Suspended LAPTOP-G9ADC3HM\Maciek
+
+
+	PS C:\> Get-BitsTransfer | ? {$_.DisplayName -ge "Moj"} | Remove-BitsTransfer
+	PS C:\> Get-BitsTransfer
+
+	JobId                                DisplayName                                                             TransferType JobState    OwnerAccount
+	-----                                -----------                                                             ------------ --------    ------------
+	28b0f47e-eed1-4ebb-bcdc-7c732cb72388 Microsoft Outlook Offline Address Book 6003f1d0fc9f994bb187fb6677e200ba Download     Transferred LAPTOP-G9ADC3HM\Maciek
+	0151bf03-08df-4fa2-a854-aa52ff596813 Microsoft Outlook Offline Address Book 359cd6a1680e6d4eb17e2ea33da1beb0 Download     Transferred LAPTOP-G9ADC3HM\Maciek
+	9ada8b76-3956-4172-bdb4-22d3518bd63f Microsoft Outlook Offline Address Book 83165eaba245a54f92927db4d8b83362 Download     Transferred LAPTOP-G9ADC3HM\Maciek
+
+10. Zmierzenie czasu wykonania polecenia Get-ChildItem przy pomocy polecenia Measure-Command :
+
+	PS C:\> Measure-Command {Get-ChildItem -Path C:\Windows}
+
+
+	Days              : 0
+	Hours             : 0
+	Minutes           : 0
+	Seconds           : 0
+	Milliseconds      : 7
+	Ticks             : 78629
+	TotalDays         : 9,1005787037037E-08
+	TotalHours        : 2,18413888888889E-06
+	TotalMinutes      : 0,000131048333333333
+	TotalSeconds      : 0,0078629
+	TotalMilliseconds : 7,8629
+
+	Aliasy polecenia Get-ChildItem można uzyskać przy pomocy polecenia Get-Alias i odpowiedniego przefiltrowania wyników:
+
+	PS C:\> Get-Alias | ? {$_.Definition -like "Get-ChildItem"}
+
+	CommandType     Name                                               Version    Source
+	-----------     ----                                               -------    ------
+	Alias           dir -> Get-ChildItem
+	Alias           gci -> Get-ChildItem
+	Alias           ls -> Get-ChildItem
+
+	To oznacza, że polecenie Measure-Command {Get-ChildItem -Path C:\Windows} można zapisać również przy pomocy aliasu np. ls :
+
+	PS C:\> Measure-Command {ls C:\Windows}
+
+
+	Days              : 0
+	Hours             : 0
+	Minutes           : 0
+	Seconds           : 0
+	Milliseconds      : 11
+	Ticks             : 118488
+	TotalDays         : 1,37138888888889E-07
+	TotalHours        : 3,29133333333333E-06
+	TotalMinutes      : 0,00019748
+	TotalSeconds      : 0,0118488
+	TotalMilliseconds : 11,8488
+
+11. Wylistowanie z odstępem czasowym (stopniowo) listy (odpowiednio) plików i katalogów w katalogu głównym, zaimportowanych modułów oraz przefiltrowanej listy poleceń przypisanej do zmiennej $lm :
+
+	PS C:\> ls C:\ | %{Sleep -Milliseconds 250; return $_} | Format-Table
+	PS C:\> Get-Module | %{Sleep -Milliseconds 250; return $_} | Format-Table
+	PS C:\> $lm | %{Sleep -Milliseconds 250; return $_} | Format-Table
+
+12. Uruchomienia za pomocą konsoli – przy pomocy operatora wołania („call”) & :
+
+	PS C:\> & C:\Windows\explorer.exe
+	PS C:\> & C:\Windows\notepad.exe
+	PS C:\> & "C:\Program Files\Mozilla Firefox\firefox.exe"
+
+	W ostatnim przypadku zastosowanie cudzysłowów było konieczne ze względu na spacje w nazwie folderów.
+
+13. Wylistowanie zainstalowanych aplikacji/programów przy pomocy rejestru – sprawdzenie, jakie „dyski” są dostępne – przy pomocy polecenia Get-PSDrive – i wejścia do rejestru tak jakby to był dysk:
+
+	PS C:\> Get-PSDrive
+	PS C:\> cd HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall
+
+	Wyświetlenie rezultatów polecenia ls w postaci tabeli:
+
+	PS HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall> ls | %{Get-ItemProperty $_.pspath | Select-Object DisplayName, InstallDate, UninstallString} | Format-Table -AutoSize
+
+	DisplayName                                                    InstallDate UninstallString
+	-----------                                                    ----------- ---------------
+	7-Zip 19.00 (x64)                                                          C:\Program Files\7-Zip\Uninstall.exe
+	[…]
+
+14. Wylistowanie zainstalowanych aplikacji/programów przy pomocy WMI (Windows Management Instrumentation):
+
+	PS C:\> Get-WmiObject -Class Win32_Product | Format-Table -AutoSize
+
+	IdentifyingNumber                      Name                                                           Vendor                     Version          Caption
+	-----------------                      ----                                                           ------                     -------          -------
+	[…]
+
+	Ograniczenie wyświetlonej tabeli do wybranych kolumn (Vendor, Name), przy pomocy polecenia Select :
+
+	PS C:\> Get-WmiObject -Class Win32_Product | Select-Object Vendor, Name | Format-Table -AutoSize
+
+	Vendor                     Name
+	------                     ----
+	[…]
+
+15. Wylistowanie aliasów oraz zmiennych funkcjonujących w danej sesji (utworzonych i „domyślnych”) – przy pomocy polecenia Get-PSDrive i cd – bo w PS aliasy i zmienne są traktowane jak „dyski”:
+
+	PS C:\> Get-PSDrive
+
+	Name           Used (GB)     Free (GB) Provider      Root                                                                                                                                                                    CurrentLocation
+	----           ---------     --------- --------      ----                                                                                                                                                                    ---------------
+	Alias                                  Alias
+	C                 201,35         35,87 FileSystem    C:\
+	Cert                                   Certificate   \
+	D                  93,83        371,92 FileSystem    D:\
+	Env                                    Environment
+	Function                               Function
+	HKCU                                   Registry      HKEY_CURRENT_USER
+	HKLM                                   Registry      HKEY_LOCAL_MACHINE                                                                                                                  SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall
+	Variable                               Variable
+	WSMan                                  WSMan
+
+
+	PS C:\> cd Alias:\
+	PS Alias:\> ls
+
+	CommandType     Name                                               Version    Source
+	-----------     ----                                               -------    ------
+	Alias           % -> ForEach-Object
+	Alias           ? -> Where-Object
+	Alias           ac -> Add-Content
+	[…]
+
+	PS Alias:\> Get-PSDrive
+
+	Name           Used (GB)     Free (GB) Provider      Root                                                                                                                                                                    CurrentLocation
+	----           ---------     --------- --------      ----                                                                                                                                                                    ---------------
+	Alias                                  Alias
+	C                 201,37         35,86 FileSystem    C:\
+	Cert                                   Certificate   \
+	D                  93,83        371,92 FileSystem    D:\
+	Env                                    Environment
+	Function                               Function
+	HKCU                                   Registry      HKEY_CURRENT_USER
+	HKLM                                   Registry      HKEY_LOCAL_MACHINE                                                                                                                  SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall
+	Variable                               Variable
+	WSMan                                  WSMan
+
+	PS Alias:\> cd Variable:\
+	PS Variable:\> ls
+
+	Name                           Value
+	----                           -----
+	$                              Variable:\
+	?                              True
+	^                              cd
+	[…]
+
+< - - Powyższe obejmuje zakres materiału do 269 wiersza skryptu - - >
