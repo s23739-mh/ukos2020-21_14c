@@ -1,0 +1,183 @@
+1.
+Sprawdzanie aktualnego ExecutionPolicy
+PS C:\> Get-ExecutionPolicy
+Restricted
+
+2.
+Wypisywanie dostepnych modulow z wersja powyzej lub rowna 2.1.0.0
+PS C:\> Get-Module -ListAvailable | ? {$_.Version -ge "2.1.0.0"}
+
+
+    Directory: C:\Program Files\WindowsPowerShell\Modules
+
+
+ModuleType Version    Name                                ExportedCommands                                                                                               
+---------- -------    ----                                ----------------                                                                                               
+Script     3.4.0      Pester                              {Describe, Context, It, Should...}                                                                             
+
+
+    Directory: C:\WINDOWS\system32\WindowsPowerShell\v1.0\Modules
+
+
+ModuleType Version    Name                                ExportedCommands                                                                                               
+---------- -------    ----                                ----------------                                                                                               
+Script     3.0        Dism                                {Add-AppxProvisionedPackage, Add-WindowsDriver, Add-WindowsCapability, Add-WindowsImage...}                    
+Manifest   3.0.0.0    Microsoft.PowerShell.Diagnostics    {Get-WinEvent, Get-Counter, Import-Counter, Export-Counter...}                                                 
+Manifest   3.0.0.0    Microsoft.PowerShell.Host           {Start-Transcript, Stop-Transcript}                                                                            
+Manifest   3.1.0.0    Microsoft.PowerShell.Management     {Add-Content, Clear-Content, Clear-ItemProperty, Join-Path...}                                                 
+Manifest   3.0.0.0    Microsoft.PowerShell.Security       {Get-Acl, Set-Acl, Get-PfxCertificate, Get-Credential...}                                                      
+Manifest   3.1.0.0    Microsoft.PowerShell.Utility        {Format-List, Format-Custom, Format-Table, Format-Wide...}                                                     
+Manifest   3.0.0.0    Microsoft.WSMan.Management          {Disable-WSManCredSSP, Enable-WSManCredSSP, Get-WSManCredSSP, Set-WSManQuickConfig...}                         
+Script     3.0        Provisioning                        {Install-ProvisioningPackage, Export-ProvisioningPackage, Install-TrustedProvisioningCertificate, Export-Tra...
+Binary     2.1.639.0  UEV                                 {Clear-UevConfiguration, Clear-UevAppxPackage, Restore-UevBackup, Set-UevTemplateProfile...}       
+
+3.
+Wyswietlanie informacji na temat komendy Get-Help
+PS C:\> Get-Help
+
+4.
+Wyswietlanie przykladow uzycia polecenia Get-ExecutionPolicy
+PS C:\> Get-Help Get-ExecutionPolicy -Examples
+
+NAME
+    Get-ExecutionPolicy
+
+ALIASES
+    None
+    
+
+REMARKS
+    Get-Help cannot find the Help files for this cmdlet on this computer. It is displaying only partial help.
+        -- To download and install Help files for the module that includes this cmdlet, use Update-Help.
+        -- To view the Help topic for this cmdlet online, type: "Get-Help Get-ExecutionPolicy -Online" or 
+           go to https://go.microsoft.com/fwlink/?LinkID=113315.
+
+5.
+Pobieranie historii wpisywanych komend
+
+PS C:\> Get-History
+
+  Id CommandLine                                                                                                                                                         
+  -- -----------                                                                                                                                                         
+   1 Get-Module -ListAvailable | ? {$_.Version -ge "2.1.0.0"}                                                                                                            
+   2 Get-ExecutionPolicy                                                                                                                                                 
+   3 cd C:                                                                                                                                                               
+   4 cd C:\                                                                                                                                                              
+   5 ls                                                                                                                                                                  
+   6 Get-ExecutionPolicy                                                                                                                                                 
+   7 Get-Module -ListAvailable | ? {$_.Version -ge "2.0.0.0"}                                                                                                            
+   8 Get-Module -ListAvailable | ? {$_.Version -ge "3.0.0.0"}                                                                                                            
+   9 Get-Help
+   
+6.
+Wyswietlenie wszystkich komend w dostepnych modulach dla wersji >= 2.1.0.0 dodatkowo, ktore maja w nazwie Add lub Get
+PS C:\> PS C:\> Get-Module -ListAvailable | ? {$_.Version -ge "2.1.0.0"} | % {Get-Command -Module $_.Name} | ? {($_.Name -like "Add-*") -or ($_.Name -like "Get-*")}
+
+7.
+To samo polecenie co wyzej, ale wyswietla je w postaci graficznej tabelki w osobnym oknie
+PS C:\> Get-Module -ListAvailable | ? {$_.Version -ge "2.1.0.0"} | % {Get-Command -Module $_.Name} | ? {($_.Name -like "Add-*") -or ($_.Name -like "Get-*")} | Out-GridView
+
+8.
+To samo polecenie co wyzej, ale zapisuje wynik do pliku
+PS C:\> Get-Module -ListAvailable | ? {$_.Version -ge "2.1.0.0"} | % {Get-Command -Module $_.Name} | ? {($_.Name -like "Add-*") -or ($_.Name -like "Get-*")} | Out-File $env:TEMP\$file
+
+9.
+To samo polecenia co wyzej, ale nic nie wypisuje
+PS C:\> Get-Module -ListAvailable | ? {$_.Version -ge "2.1.0.0"} | % {Get-Command -Module $_.Name} | ? {($_.Name -like "Add-*") -or ($_.Name -like "Get-*")} | Out-Null
+
+10.
+Import modulu BitsTransfer
+PS C:\> Import-Module BitsTransfer
+
+11.
+Listowanie wszystkich komend BitsTransfer
+PS C:\> Get-Command -Module BitsTransfer
+
+CommandType     Name                                               Version    Source                                                                                     
+-----------     ----                                               -------    ------                                                                                     
+Cmdlet          Add-BitsFile                                       2.0.0.0    BitsTransfer                                                                               
+Cmdlet          Complete-BitsTransfer                              2.0.0.0    BitsTransfer                                                                               
+Cmdlet          Get-BitsTransfer                                   2.0.0.0    BitsTransfer                                                                               
+Cmdlet          Remove-BitsTransfer                                2.0.0.0    BitsTransfer                                                                               
+Cmdlet          Resume-BitsTransfer                                2.0.0.0    BitsTransfer                                                                               
+Cmdlet          Set-BitsTransfer                                   2.0.0.0    BitsTransfer                                                                               
+Cmdlet          Start-BitsTransfer                                 2.0.0.0    BitsTransfer                                                                               
+Cmdlet          Suspend-BitsTransfer                               2.0.0.0    BitsTransfer   
+
+12.
+Pobieranie mojego repozytorium z githuba
+PS C:\> Start-BitsTransfer -Source https://github.com/s22446/ukos2020-21_14c/archive/master.zip -Destination F:\
+
+13.
+Pobieranie zdjecia kremowek papieskich
+PS C:\> Start-BitsTransfer -Source https://www.mojegotowanie.pl/uploads/media/recipe/0001/94/kremowki-tradycyjna-kremowka-papieska.jpeg -Destination F:\
+
+14.
+Pobieranie zdjecia kremowek papieskich tylko, ze bez blokowania konsoli (dwie korzysci)
+PS C:\> Start-BitsTransfer -Source https://www.mojegotowanie.pl/uploads/media/recipe/0001/94/kremowki-tradycyjna-kremowka-papieska.jpeg -Destination F:\ -Asynchronous -DisplayName "My Bits Transfer"
+
+15.
+Wlaczanie notatnika
+PS C:\> C:\Windows\notepad.exe
+
+16.
+Pobieranie wszystkich pakietow Microsoftu
+PS C:\> Get-WmiObject -Class Win32_Product | ?{$_.Vendor.toLower() -like "*microsoft*"} | Select-Object Name, Vendor | Format-Table -AutoSize
+
+17.
+Wylistowanie dyskow PowerShella
+PS C:\> Get-PSDrive
+
+Name           Used (GB)     Free (GB) Provider      Root                                                                                                 CurrentLocation
+----           ---------     --------- --------      ----                                                                                                 ---------------
+Alias                                  Alias                                                                                                                             
+C                 368.34         96.82 FileSystem    C:\                                                                                                                 
+Cert                                   Certificate   \                                                                                                                   
+D                   0.03          0.01 FileSystem    D:\                                                                                                                 
+E                 156.50         81.37 FileSystem    E:\                                                                                                                 
+Env                                    Environment                                                                                                                       
+F                1219.99        177.23 FileSystem    F:\                                                                                                                 
+Function                               Function                                                                                                                          
+HKCU                                   Registry      HKEY_CURRENT_USER                                                                                                   
+HKLM                                   Registry      HKEY_LOCAL_MACHINE                                                                                                  
+Variable                               Variable                                                                                                                          
+WSMan                                  WSMan   
+
+18.
+Zabawy powiadomieniami z pliku:
+PS C:\> function GiveMePopup {
+    param(
+        [Parameter(Mandatory=$true)]
+        $Text,
+   
+        [Parameter(Mandatory=$true)]
+        $Title,
+   
+        [ValidateSet('None', 'Info', 'Warning', 'Error')]
+        $Icon = 'Info',
+
+        $Timeout = 10000
+    )
+    [void] [System.Reflection.Assembly]::LoadWithPartialName("System.Windows.Forms")
+    $icoPath = Get-Process -id $pid | Select-Object -ExpandProperty Path
+    $myNotification = New-Object System.Windows.Forms.NotifyIcon
+    $myNotification.Icon = [System.Drawing.Icon]::ExtractAssociatedIcon($icoPath)
+    $myNotification.BalloonTipIcon = $Icon
+    $myNotification.BalloonTipText = $Text 
+    $myNotification.BalloonTipTitle = $Title
+    $myNotification.Visible = $True 
+    $myNotification.ShowBalloonTip(1000)
+}
+
+PS C:\> GiveMePopup -Text "Your cat has meowed!" -Title "Cat Error" -Icon Error
+
+PS C:\> For($i = 1; $i -le 3; $i++) {
+    GiveMePopup -Text "WTF-second passed!" -Title "WTF Notification" -Icon Info
+}
+
+PS C:\> GiveMePopup -Text "Pierwszy wiersz`nDrugi wiersz`nTrzeci wiersz`nCzwarty wiersz" -Title "Długa informacja" -Icon Info
+
+19. Odpowiedz na ostatnio linie pliku: # I co? Fajne co nie? :-D
+Fajne, bardzo fajne.
+
+Material z calego skryptu
