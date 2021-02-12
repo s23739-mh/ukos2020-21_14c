@@ -1,0 +1,71 @@
+5.01.2021
+
+Przypomnienie zagadnien przed kolokwium. 
+
+
+1. Jest takie drzewo katalogów:
+
+.
+├── ala
+│   ├── i
+│   │   └── as
+│   └── ma
+│       └── kota
+└── kot
+    └── ma
+        └── ale
+Znajdujesz się w katalogu kota. Katalog ala, jest w katalogu /tmp/ukos.
+
+Jak przejść do katalogu ale za pomocą:
+
+ścieżki względnej (relatywnej) - cd ../../../kot/ma/ale
+ścieżki bezwzględnej (absolutnej) - cd /tmp/ukos/kot/ma/ale
+
+2. Masz taki układ katalogów, jak wyżej i ciągle jesteś w katalogu kota. Jak utworzyć poddrzewo katalogów jan/kowalski w katalogu ale za pomocą jednej komendy?
+
+ mkdir -p ../../../kot/ma/ale/jan/kowalski
+
+
+
+
+3. Masz taki układ katalogów, jak wyżej i ciągle jesteś w katalogu kota.
+Jak przenieść katalog ale do katalogu i?
+
+mv ../../../kot/ma/ale ../../i
+
+4. Jak zamknąć program, który nie odpowiada i nie reaguje na ctrl+c?
+
+Uzywajac komendy kill, lub kill -9
+
+5. Jak wypisać wszystkie pliki w bieżącym katalogu, których nazwa zaczyna się od al? (tu będzie trochę opisu ode mnie - http://www.robelle.com/smugbook/regexpr.html
+
+Za pomoca ls -ap przekierowanego potokiem do komendy grep.
+
+
+6. Nadaj uprawnienia do katalogu <ala> tak, aby:
+
+każdy mógł do niego wejść
+tylko grupa mogła wyświetlić co w nim jest
+właściciel ma pełne prawa
+Skorzystaj raz z notacji ósemkowej, a raz symbolicznej
+
+chmod 751 ala
+chmod a=x,g+r,u+rw ala
+
+7. Jak utworzyć plik z listą plików w bieżącym katalogu?
+
+ls -ap | grep -v / > listaplikow
+
+8. Nie możesz utworzyć żadnego pliku na swoim koncie uczelnianym. Co się mogło stać? (wymień co najmniej 2 opcje). Zakładamy że możesz zalogować się w konsoli i nie masz zaległości w opłatach.
+
+Moge nie miec uprawnien do danego katalogu lub moglo skonczyc mi sie miejsce na dysku. 
+
+9. Jak przyśpieszyć wpisywanie komend w terminalu (jaki klawisz pozwala na uzupełnianie komend?)
+TAB do podpowiedzi lub strzalka w gore do powrotu do poprzednich komend.
+
+10. Jak uruchomić program, aby nie blokował on terminala? Są dwa sposoby.
+
+Program mozna wlaczyc w tle (&). Polecenie jobs sluzy do wyswietlenia procesow dzialajacych w tle.
+
+
+
