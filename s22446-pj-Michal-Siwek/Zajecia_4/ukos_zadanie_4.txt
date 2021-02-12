@@ -1,0 +1,39 @@
+UKOS ćwiczenia 4 - robione 12.02.2021
+Moj kozacki pliczku tekstowy, ty jestes jak zdrowie,
+ile cie trzeba cenic ten tylko sie dowie kto E.12 zadawa, tak jak ja.
+Powtorka do kolokwium, wazne rzeczy. Notka zrobiona juz po, ale na szczescie kolokwium zdane.
+
+1.
+cd ../../../kot/ma/ale - relatywna
+cd /tmp/ukos/kot/ma/ale - absolutna
+
+2.
+mkdir -p /tmp/ukos/kot/ma/ale/jan/kowalski
+
+3.
+mv /tmp/ukos/kot/ma/ale /tmp/ukos/ala/i
+
+4.
+Poleceniem kill PID lub kill -all 'nazwa_programu' (np. kill -all firefox
+
+5.
+ls -ap | grep -v / | grep -i ^al
+
+6.
+chmod 751 ala - osemkowa
+chmod u=rwx,a=x,g=rx - symboliczna
+
+7.
+ls -ap | grep -v / > file_list.txt
+
+8.
+Nie mam prawa do zapisu (write) do katalogu (miejsca zapisu pliku)
+Moze nie byc miejsca przydzialowego (quota)
+
+9.
+Klawisz TAB uzupelnia nazwy plikow i katalogow, strzalki w gore i dol pozwalaja na uzycie komend uzytych wczesniej w "sesji" terminala
+
+10.
+Mozna program zawiesic przez kombinacje klawiszy ctrl+z
+Program mozna rownniez uruchomic w tle dodajac znak ampersand(&) po poleceniu
+Aby wyswietlic programy w tle mozna uzyc polecenia jobs
