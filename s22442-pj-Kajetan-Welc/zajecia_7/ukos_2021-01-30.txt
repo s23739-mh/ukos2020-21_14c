@@ -70,3 +70,61 @@ Start-BitsTransfer -Source https://github.com/s22442/ukos2020-21_14c/archive/mas
 
 polecenie mierzące czas wykonywania się jakiegoś polecenia:
 Measure-Command
+
+polecenie uruchamiające notatnik
+& C:\Windows\notepad.exe
+
+informacje o zainstalowanych aplikacjach są przechowywane w:
+HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall
+
+polecenie wyświetlające dostępne dyski:
+Get-PSDrive
+
+wejście do rejestru systemu:
+cd hklm:\
+cd hklm:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall
+
+"WMI – zestaw protokołów i rozszerzeń systemu Windows umożliwiających zarządzanie i dostęp do zasobów komputera, takich jak adaptery sieciowe, aktualnie otwarte programy, lista procesów, odczyty z wbudowanych czujników temperatury, odczytów woltomierzy itp."
+źródło: Wikipedia
+
+Get-WmiObject -Class Win32_Product | Format-Table -AutoSize
+
+wyświetlanie tylko pól Name oraz Vendor:
+Get-WmiObject -Class Win32_Product | Select-Object Name, Vendor | Format-Table -AutoSize
+
+tylko pakiety od Microsoftu:
+Get-WmiObject -Class Win32_Product | ?{$_.Vendor.toLower() -like "*microsoft*"} | Select-Object Name, Vendor | Format-Table -AutoSize
+
+funkcja wyświetlająca notyfikacje w Windowsie:
+function GiveMePopup {
+    param(
+        [Parameter(Mandatory=$true)]
+        $Text,
+   
+        [Parameter(Mandatory=$true)]
+        $Title,
+   
+        [ValidateSet('None', 'Info', 'Warning', 'Error')]
+        $Icon = 'Info',
+
+        $Timeout = 10000
+    )
+    [void] [System.Reflection.Assembly]::LoadWithPartialName("System.Windows.Forms")
+    $icoPath = Get-Process -id $pid | Select-Object -ExpandProperty Path
+    $myNotification = New-Object System.Windows.Forms.NotifyIcon
+    $myNotification.Icon = [System.Drawing.Icon]::ExtractAssociatedIcon($icoPath)
+    $myNotification.BalloonTipIcon = $Icon
+    $myNotification.BalloonTipText = $Text 
+    $myNotification.BalloonTipTitle = $Title
+    $myNotification.Visible = $True 
+    $myNotification.ShowBalloonTip(1000)
+}
+
+wywołanie powyższej funkcji:
+GiveMePopup -Text "Go to Windows Update to install the updates now." -Title "Updates are available" -Icon Info
+GiveMePopup -Text "Go to Windows Update to install the updates now.`nNew line" -Title "Updates are available" -Icon Info
+
+wywołanie w pętli:
+For($i = 1; $i -le 10; $i++) {
+    GiveMePopup -Text "Go to Windows Update to install the updates now." -Title "Updates are available" -Icon Info
+}
