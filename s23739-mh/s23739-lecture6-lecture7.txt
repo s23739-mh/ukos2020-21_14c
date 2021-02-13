@@ -1,0 +1,37 @@
+- Po u¿yciu polecenia Get-Help Get-ExecutionPolicy -Examples, otrzyma³em pomoc z wyt³umaczeniem dzia³ania polecenia wraz z przyk³adami.
+ Warto zapamiêtaæ to Get-Help oraz -Examples
+
+- $_ jest zmienn¹ pomocnicz¹ któr¹ PowerShell tworzy by dzia³aæ na elementach tablic
+
+- Sk³adnia pisania poleceñ jest dosyæ podobna do Linuxowych, szczególnie gdy u¿ywa siê aliasów
+ np ls | ? {$_.Name -like "z*"} to to samo co linuxowe ls | grep z
+
+- Get-Module -ListAvailable | Where-Object {$_.Version -le "3.0.0.0"} - Wylistowa³o wszystkie modu³y maj¹ce wersjê ni¿sz¹/równ¹ od 3
+- Polecenia/operacje mo¿na zapisywaæ do zmiennych u¿ywaj¹c dolara. np. $hlp = Get-Module -ListAvailable | ? {$_.Version -ge "2.0.0.0"} | % {Get-Command -Module $_.Name} | ? {($_.Name -like "Add-*") -or ($_.Name -like "Get-*")} | Out-GridView
+ i nie trzeba przepisywaæ tej d³ugiej komendy tylko mo¿na wpisaæ $hlp, a PowerShell w tabelce wylistuje wszystkie polecenia rozpoczynajace sie od add i get
+
+-¯eby tekst siê nie wypisywa³, nale¿y podaæ polecenie Out-Null po pipelinie
+
+-U¿ywaj¹c ipmo mo¿na rozpocz¹æ importowanie modu³u (po ludzku to znaczy pobieraæ coœ), uda³o mi siê pobraæ stronê facebooka (zuckerberg i co teraz? facebook nale¿y do mnie)
+
+-ls | %{Sleep -Milliseconds 250; return $_} | Format-Table -Wykona³em t¹ komendê i od razu tego po¿a³owa³em. Mo¿e nie od razu, ale
+po którychœ 250 milisekundach które musia³em czekaæ na wypisanie linijki. Dlaczego ja na to nie wpad³em
+
+-Polecenie Get-Alias pozwala na sprawdzenie aliasów konkretnych komend. Przydatne!
+
+-Polecenie call pozwala na uruchomienia programu. Wow. call me crazy, jednak nie chce mi to zadzia³aæ :/
+
+-ls | %{Get-ItemProperty $_.pspath | Select-Object DisplayName, InstallDate, UninstallString} | Format-Table -AutoSize
+Po wpisaniu tego bêd¹c w hklm:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall
+jestem w stanie zobaczyæ wylistowane w ³adny sposób wszystkie moje programy dziêki 
+
+-Dzisiaj znowu czekam, komenda Get-WmiObject -Class Win32_Product | Format-Table -AutoSize zajmuje bardzo du¿o czasu, jednak równie¿ wypisuje moje programy
+tylko tutaj u¿ywany jest Windows Management Instrumentation
+
+-U¿ywaj¹c New-PSDrive próbowa³em wgraæ nowy dysk GitHub jednak sprawia mi to zbyt du¿o problemów, po przeczytaniu pomocy z przyk³adami,
+trudno wci¹¿ nic nie rozumiem.
+-Get-PSDrive listuje dostêpne dla PowerShella dyski.
+
+-Po w³¹czeniu danego skryptu nic siê nie dzieje :// Ale z tego co zrozumia³em z kodu, ma wyœwietliæ customowe windowsowe okienko z b³êdem i wygl¹da
+
+
