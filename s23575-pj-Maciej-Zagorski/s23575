@@ -336,3 +336,209 @@ Do whatever the fuck you want to public license.
 (ls -lp | grep -v / | cat > nowy_plik 
 
 Bash najpierw interpretuje a później wykonuje – więc widzi przekierowanie do nowego pliku). 
+
+* * *
+
+2021/01/16 ZAJĘCIA NR 6
+
+PowerShell 
+
+Dwa typy: 
+- poniżej v. 6.0 (od 1.0 do 5.0) bazuje na .NET Framework, 
+- powyżej v. 6.0 bazuje na .NET Core – PowerShell core. 
+
+Jeżeli coś jest na .NET, to jest to na PowerShellu. 
+
+Dużo bardziej zaawansowany od Basha, daje więcej możliwość, pozwala wiele zautomatyzować. 
+
+Uruchomienie: 
+- p-click na „Start” i „PowerShell”, 
+- powershell w „Uruchom”, 
+- powershell w „cmd”, 
+- „ISE” w wyszukiwaniu, 
+- „powershell” w Powershellu.
+
+Edytor skryptów: ISE 
+
+Rozszerzenie skryptów: 
+- ps1 – rozszerzenie nie odnosi się do wersji PowerShella, chociaż taka była pierwotna idea; 
+- psm – definicje modułów PowerShellowych. 
+
+Aby uruchomić skrypty – domyślnie wyłączona opcja uruchamiania skryptów – „Get-ExecutionPolicy” – Restricted – przy każdym uruchomieniu skryptu będzie się pytał o zgodę. 
+
+Aby to zmienić: Set-ExecutionPolicy Bypass (z uprawnieniami administratora) 
+
+Pomoc: get-help Set-ExecutionPolicy 
+
+Aktualizacja pomocy: Update-Help 
+
+Get-Help […] -Examples – przykłady 
+
+Parametry: jeden minus i pełna nazwa (-Examples).
+
+Konwencja nazewnicza: 
+
+Czasownik-NaCzymMaOperować 
+
+Get-ExecutionPolicy 
+
+Polecenia w PS są udostępniane przez moduły – gdy moduł polecenia nie udostępnia, to go nie ma. 
+
+Aby pobrać listę załadowanych modułów: Get-Module 
+
+Lista dostępnych do załadowania: Get-Module -ListAvailable 
+
+Zwracana lista jest listą obiektów; filtrowanie – moduły w wersji 2.0 i wyższej. 
+
+Zapisanie do zmiennej: $m = Get-Module -ListAvailable 
+
+Filtrowanie: 
+
+$m | Where-Object { $_.Version -ge "2.0" } 
+
+$_	– bieżący wiersz, 
+-ge	– greater or equal 
+?	– alias dla “Where-Object” 
+%	– alias dla “ForEach-Object” 
+
+$m | ? { $_.Version -ge "2.0" } | ForEach-Object { Get-Command -Module $_.Name } 
+
+Przy drugim potoku – to ciągle praca na obiektach, nie na tekście wynikającym z pierwszego filtrowania (potoku).
+
+PS ma dostęp do .NETa – można pisać skrypty PowerShella, to można skompilować do pliku binarnego (modułu) w VS.
+
+$m | ? { $_.Version -ge "2.0" } | % { Get-Command -Module $_.Name } | ? { ($_.Name -like "Add-*") -or ($_.Name -like "Get-*") } 
+
+$m | ? { $_.Version -ge "2.0" } | % { Get-Command -Module $_.Name } | ? { ($_.Name -like "Add-*") -or ($_.Name -like "Get-*") } | Out-GridView 
+
+Out-File – przekierowanie do pliku 
+Out-Null – przekierowanie do dev/null 
+
+Przesyłanie plików:
+ipmo BitsTransfer 
+Get-Command -Module BitsTransfer 
+
+Ściąganie w trybie asynchronicznym, żeby nie blokowało terminala: 
+-Asychronous -DisplayName „[nazwa]” 
+
+Complete-BitsTransfer [wskazanie określonego] – konieczne zakończenie procesu robionego w trybie asynchronicznym 
+
+BIT – Background Inteligent Transfer Service 
+
+Get-Credential – możliwość zapisania nazwy użytkownika i hasła, żeby nie było konieczności każdorazowego wpisywania 
+
+-Credential Get-Credential 
+
+Measure-Command { [polecenie do zmierzenia czasy wykonywania] } 
+
+Get-Alias – lista aliasów poleceń 
+
+Get-Alias | ? { $_.Definition -like "Get-ChildItem" } – lista aliasów do polecenia Get-ChildItem 
+
+ls | % { Sleep -Milliseconds 250; return $_ } – wydruk poszczególnych wierszy z opóźnieniem 
+
+& – operator wołania. 
+
+Lista zainstalowanych programów: 
+
+Get-PSDrive 
+
+Cd HKLM:\ 
+
+I to można przeglądać tak jak katalogi.
+
+To co zaczyna się w pierwszej kolumnie to całość, aż do kolejnego wiersza w pierwszej kolumnie. 
+
+UAC – User Account Control 
+
+Widnows Management 
+
+(Funkcja w obiekcie to metoda). 
+
+Dyski w Powershell 
+
+Notyfikacje. 
+
+* * *
+
+2021/01/30 ZAJĘCIA NR 7
+
+PowerShell (cd.) 
+
+W PS uruchomionym jako administrator: 
+
+Set-ExecutionPolicy – i „Y” (Yes) 
+Update-Help 
+
+Tryb select – wchodzi się przez kliknięcie, a wychodzi przez „esc” 
+
+Get-ChildItem 
+(Get-ChildItem)[4] 
+$(Get-ChildItem)[4] 
+
+Zapisywanie do zmiennej: $z = [polecenie] 
+
+$z | Format-Table 
+$z | Format-List 
+
+Get-Member -InputObject 
+
+Opcja get – tylko odczyt; set – możliwość przypisania wartości do pola 
+
+Metody – struktura z polami wraz z funkcjami, bez konieczności przekazywania do funkcji struktury 
+
+$z.name + spacja + ctrl – przejście do wyboru funkcji w obiekcie – czyli do wyboru metody 
+
+To działa również przy np. wpisaniu stringu w cudzysłowach, dodaniu po nim kropki i spacja + ctrl 
+
+PS C:\> "ala ma kota".ToUpper() 
+ALA MA KOTA 
+
+History – polecenia od początku działania sesji. 
+
+Ściągnięcie pliku: 
+
+Start-BitsTransfer -Source „[adres]” 
+
+% - ForEach-Object, nie While-Object 
+
+Out-GridView – wyświetla listę/tabelkę w nowym okienku, np. 
+
+ls | Out-GridView 
+
+Zapisywanie hasła do zmiennej w bezpieczny sposób: 
+
+PS C:\> $cred = Get-Credential 
+
+cmdlet Get-Credential at command pipeline position 1 
+Supply values for the following parameters: 
+Credential 
+
+PS C:\> $cred.UserName 
+
+s23575@pjwstk.edu.pl 
+
+PS C:\> $cred.Password 
+
+System.Security.SecureString 
+
+Uruchamianie programów: „call” & : 
+
+& C:\Windows\explorer.exe 
+
+W przypadku spacji w ścieżce/nazwie: 
+
+& "C:\Program Files\Mozilla Firefox\firefox.exe" 
+
+Lista aliasów: 
+
+PS C:\> cd Alias:\ 
+
+PS Alias:\> ls 
+
+Lista zmiennych w danej sesji (utworzonych i „domyślnych”): 
+
+PS C:\> cd Variable:\ 
+
+PS Variable:\> ls 
+ 

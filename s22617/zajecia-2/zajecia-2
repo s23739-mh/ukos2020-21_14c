@@ -1,5 +1,0 @@
-1,2. Tylko właściciel i root mogą zmieniać uprawnienia do pliku, edytować go (chyba że zmienimy to komendą chmod)
-3. Po dodaniu bitu zapisu do pliku dla grupy pozostali studenci mogą go również edytować.
-	'>' z poleceniem echo nadpisuje/tworzy plik ze wskazaną w poleceniu zawartością
-	'>>' dopisuje do pliku określoną przez nas w poleceniu zawartość
-4. Na maszynie wirtualnej działało, na mojej głównej przeglądarce witryna była nieosiągalna :( 

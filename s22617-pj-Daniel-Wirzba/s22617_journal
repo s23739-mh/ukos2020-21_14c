@@ -1,0 +1,30 @@
+2020-10-23
+Narazie wiedza którą wyniosłem m.in. z technikum pokryła się z dzisiejszym wykładem. Nowością była jednak sama praca z gitem na Linuxie, do tej pory działałem z repozytoriami tylko za pomocą Windowsowego cmd :)
+
+2020-11-07
+Przypomniałem sobie komendę umask, popracowałem chwilę na szuflandii podczas sesji ssh, wszystko super, nie mam więcej uwag.
+
+2020-11-21
+Dowiedziałem się więcej szczegółów na temat sposobów pakowania i rozpakowywania archiwów oraz metod kompresji. Podobała mi się obszerna i szczegółowa analiza strumieni wejścia i wyjścia oraz manewrów procesami (fg, bg, &), pozwoliło mi to powtórzyć i ustabilizować zdobytą do tej pory wiedzę na wykładach, ćwiczeniach i w szkole.
+
+2020-12-05
+Powtórzenie jak to powtórzenie, nie dowiem się czego nie wiem albo nie rozumiem dopóki nie natrafię na takie pytanie/zagadnienie :)
+Wyczerpujące omówienie poruszanych kwestii na wykładzie.
++
+grep -v, awk, cut - w pełni opanować/zapamiętać
+
+2020-12-19
+Dzień kolokwium. Dowiedziałem się o Richardzie Stallmanie, licencjach, jądrach systemu (jądra monolityczne - sprawdź), historii GNU/GPL
+- (Terminologia) W przypadku Linuxa (Linux złożony jest z modułów, które mogą być dynamicznie dodawane i usuwane z jądra) mówimy o modułach, zaś w przypadku Windowsa odpowiednikiem są sterowniki
+- Linux From Scratch - własna dystrybucja Linuxa, która pozwala na kreowaniu sobie systemu dokładnie jakiego chcemy
+- Copyleft - rodzaj systemu licencjonowania praw autorski, zezwalający na kopiowanie poszczególne części jakiegoś kodu
+- licencja MIT - jedna z najbardziej liberalnych licencji otwartego oprogramowania (nieograniczone prawo do używania, kopiowania, modyfikowania i rozpowszechniania oryginalnego lub zmodyfikowanego programu)
+
+2021-01-16
+Powershell. Dowiedziałem się tylu rzeczy, że nie ma sensu ich tu wypisywać. Większość rzeczy, które pojawiają się w pliku zajecia-6.md są dla mnie nowe, więc jakby co proszę się tam kierować. Ponadto bardzo doceniam podejście Pana, który prowadził ćwiczenia, gdyż nie skupiał się tylko na oczywistościach, ale prezentował też inne, ciekawsze rozwiązania np. pobieranie pliku za pomocą modułu BitsTransfer.
+
+2021-01-30
+Przerabianie ćwiczeń i poleceń z Powershella cz. 1. Dowiedziałem się m.in. jak wyświetlić zawartość pliku do którego zapisaliśmy wynik polecenia ("Get-Content $env:TEMP\$plik"), notyfikacje i wykorzystywanie funkcji do ich wyświetlania.
+
+2021-02-13
+Ostatnie zajęcia z UKOSu, kontynuacja poprzednich zajęć. Ćwiczenia przerobiłem wcześniej, więc żadna nowość mnie nie spotkała.
